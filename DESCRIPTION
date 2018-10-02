@@ -1,0 +1,11 @@
+Package: daDoctoR
+Title: Research toolbox
+Version: 1.0.0
+Authors@R: c(person("Andreas", "Gammelgaard Damsbo",, email = "agdamsbo@protonmail.com", role = c("aut","cre", "cph")))
+Description: A collection of functions to ease my work. I'll try to keep it updated for others to use as well.
+Depends: R (>= 3.4.4)
+Imports: broom
+License: GPL (>= 2)
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.0.9000
