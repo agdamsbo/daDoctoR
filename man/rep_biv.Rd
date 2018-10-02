@@ -2,7 +2,7 @@
 % Please edit documentation in R/rep_biv.R
 \name{rep_biv}
 \alias{rep_biv}
-\title{A repeated function}
+\title{A repeated function for bivariate analyses}
 \usage{
 rep_biv(y, v1, string, data, method = "pval", logistic = FALSE,
   ci = FALSE, cut = 0.1, v2 = NULL, v3 = NULL)
@@ -11,6 +11,10 @@ rep_biv(y, v1, string, data, method = "pval", logistic = FALSE,
 \item{y}{Effect meassure.}
 
 \item{v1}{Main variable in model}
+
+\item{string}{String of columnnames to include. Obtained with dput(). Input as c().}
+
+\item{data}{dataframe of data to analyse}
 }
 \description{
 For bivariate analyses, for gating by p-value or change-in-estimate.

@@ -1,8 +1,10 @@
-#' A repeated function 
+#' A repeated function for bivariate analyses
 #'
 #' For bivariate analyses, for gating by p-value or change-in-estimate.
 #' @param y Effect meassure.
 #' @param v1 Main variable in model
+#' @param string String of columnnames to include. Obtained with dput(). Input as c().
+#' @param data dataframe of data to analyse
 #' @keywords logistic regression
 #' @export
 #' @examples
@@ -13,7 +15,7 @@ rep_biv<-function(y,v1,string,data,method="pval",logistic=FALSE,ci=FALSE,cut=0.1
 require(rep_lm)
   require(rep_glm)
   require(cie_test)
-  
+
 if (method=="pval"&logistic==FALSE){
 rep_lm(y=y,v1=v1,string=string,data=data,ci=ci)
 }
