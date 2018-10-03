@@ -1,6 +1,6 @@
 Package: daDoctoR
 Title: daDoctoR
-Version: 1.0.0
+Version: 0.0.0.9000
 Authors@R: c(
     person("Andreas", "Gammelgaard Damsbo", email = "agdamsbo@pm.me", role = c("cre", "aut")))
 Description: Tools for Danish health research. A collection of 
@@ -10,5 +10,5 @@ Depends: R (>= 3.4.4)
 Imports: broom
 License: GPL (>= 2)
 Encoding: UTF-8
-LazyData: false
+LazyData: true
 RoxygenNote: 6.1.0.9000
