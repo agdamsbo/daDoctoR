@@ -5,6 +5,7 @@
 #' @param v1 Main variable in model
 #' @param string String of columnnames to include. Obtained with dput(). Input as c().
 #' @param data dataframe of data to analyse
+#' @param method method of gating analysis. Can be "pval" for a simple analysis of p-values below or equal to 0.1 or "cie" for change in estimate to asses the change of the estimate when a second variable is added to the model.
 #' @keywords logistic regression
 #' @export
 #' @examples

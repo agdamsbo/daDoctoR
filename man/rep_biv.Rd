@@ -15,6 +15,8 @@ rep_biv(y, v1, string, data, method = "pval", logistic = FALSE,
 \item{string}{String of columnnames to include. Obtained with dput(). Input as c().}
 
 \item{data}{dataframe of data to analyse}
+
+\item{method}{method of gating analysis. Can be "pval" for a simple analysis of p-values below or equal to 0.1 or "cie" for change in estimate to asses the change of the estimate when a second variable is added to the model.}
 }
 \description{
 For bivariate analyses, for gating by p-value or change-in-estimate.
