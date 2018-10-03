@@ -34,5 +34,5 @@ if (me=="pval"&log==TRUE){
 if (method=="cie"){
   daDoctoR::cie_test(y=a,v1=b,string=s,data=dat,logistic=log,cut=ct)
 }
-return(df)
+return(result)
 }

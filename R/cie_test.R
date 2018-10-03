@@ -160,6 +160,6 @@ df<-cbind(df,t)
        t<-c(NA,ifelse(abs(e-as.numeric(df[-1,2]))>=(e*cut),"include","drop"))
 df<-cbind(df,t)
 }}
-
+result<-df
     return(df)
 }
