@@ -1,7 +1,7 @@
 Package: daDoctoR
 Title: daDoctoR
 Version: 1.0.0
-Authors@R: c(person("Andreas", "Gammelgaard Damsbo", email = "agdamsbo@protonmail.com", role = c("aut","cre")))
+Authors@R: c(person("Andreas", "Gammelgaard Damsbo", email="agdamsbo@protonmail.com", role = c("aut","cre")))
 Description: Tools for Danish health research. A collection of 
     functions to ease my work. I'll try to keep it updated for 
     others to use as well.
