@@ -14,18 +14,23 @@
 
 rep_biv<-function(y,v1,string,data,method="pval",logistic=FALSE,ci=FALSE,cut=0.1,v2=NULL,v3=NULL){
 
-require(rep_lm)
-  require(rep_glm)
-  require(cie_test)
+  a<-y
+  b<-v1
+  s<-string
+  dat<-data
+  me<-method
+  log<-logistic
+  CI<-ci
+  ct<-cut
 
-if (method=="pval"&logistic==FALSE){
-rep_lm(y=y,v1=v1,string=string,data=data,ci=ci)
+if (me=="pval"&log==FALSE){
+daDoctoR::rep_lm(y=a,v1=b,string=s,data=dat,ci=CI)
 }
-if (method=="pval"&logistic==TRUE){
-rep_lm(y=y,v1=v1,string=string,data=data,ci=ci)
+if (me=="pval"&log==TRUE){
+  daDoctoR::rep_lm(y=a,v1=b,string=s,data=dat,ci=CI)
 }
 if (method=="cie"){
-cie_test(y=y,v1=v1,string=string,data=data,logistic=logistic,cut=cut,v2=v2,v3=v3)
+  daDoctoR::cie_test(y=a,v1=b,string=s,data=dat,logistic=log,cut=ct)
 }
 return(df)
 }
