@@ -14,6 +14,8 @@
 
 rep_biv<-function(y,v1,string,data,method="pval",logistic=FALSE,ci=FALSE,cut=0.1,v2=NULL,v3=NULL){
 
+  require(daDoctoR)
+
   a<-y
   b<-v1
   s<-string
