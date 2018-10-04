@@ -7,7 +7,9 @@ Description: Tools for Danish health research. A collection of
     functions to ease my work. I'll try to keep it updated for 
     others to use as well.
 Depends: R (>= 3.4.4)
-Imports: broom
+Imports: broom,
+  dplyr,
+  epiR
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
