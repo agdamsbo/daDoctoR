@@ -1,165 +1,82 @@
 #' A repeated regression function for change-in-estimate analysis
 #'
-#' For bivariate analyses.
+#' For bivariate analyses. From "Modeling and variable selection in epidemiologic analysis." - S. Greenland, 1989.
 #' @param y Effect meassure.
 #' @param v1 Main variable in model
 #' @param string String of columnnames from dataframe to include. Use dput().
 #' @keywords change-in-estimate
-#' @export
+#'
 #' @examples
-#' cie_test()
+#' l<-5
+#' y<-factor(rep(c("a","b"),l))
+#' x<-rnorm(length(y), mean=50, sd=10)
+#' v1<-factor(rep(c("r","s"),length(y)/2))
+#' v2<-as.numeric(sample(1:100, length(y), replace=FALSE))
+#' v3<-as.numeric(1:length(y))
+#' d<-data.frame(y,x,v1,v2,v3)
+#' preds<-dput(names(d)[3:ncol(d)])
+#' cie_test(meas="y",vars="x",string=preds,data=d,logistic = TRUE,cut = 0.1)
+#'
+#' @export
+#'
 
-cie_test<-function(y,v1,string,data,logistic=FALSE,cut=0.1,v2=NULL,v3=NULL){
-## Calculating variables, that should be included for a change in estimate analysis.
-## v1-3 are possible locked variables, y is the outcome vector.
-## String defines variables to test, and is provided as vector of variable names. Use dput().
-## From "Modeling and variable selection in epidemiologic analysis." - S. Greenland, 1989.
+cie_test<-function(meas,vars,string,data,logistic=FALSE,cut=0.1){
 
   require(broom)
 
   d<-data
-  x<-select(d,one_of(c(string)))
+  x<-data.frame(d[,c(string)])
+  v<-data.frame(d[,c(vars)])
+  names(v)<-c(vars)
+  y<-d[,c(meas)]
+  dt<-cbind(y,v)
+
+  c<-as.numeric(cut)
+
   if(logistic==FALSE){
-if (is.factor(y)){stop("Some kind of error message would be nice, but y should not be a factor!")}
 
-if (is.null(v2)&is.null(v3)){
+if (is.factor(y)){stop("Logistic is flagged as FALSE, but the provided meassure is formatted as a factor!")}
 
-  e<-as.numeric(round(coef(lm(y~v1)),3))[1]
-
-
+  e<-as.numeric(round(coef(lm(y~.,data = dt)),3))[1]
        df<-data.frame(pred="base",b=e)
 
   for(i in 1:ncol(x)){
-
-     m<-lm(y~v1+x[,i])
-
-     b<-as.numeric(round(coef(m),3))[1]
-
-     v<-x[,i]
-
-   pred<-paste(names(x)[i])
-
-     df<-rbind(df,cbind(pred,b))
-  }
-       t<-c(NA,ifelse(abs(e-as.numeric(df[-1,2]))>=(e*cut),"include","drop"))
-df<-cbind(df,t)
-       }
-
-       if (!is.null(v2)&is.null(v3)){
-
-           e<-as.numeric(round(coef(lm(y~v1+v2)),3))[1]
-
-       df<-data.frame(pred="base",b=e)
-
-  for(i in 1:ncol(x)){
-
-     m<-lm(y~v1+v2+x[,i])
+    dat<-cbind(dt,x[,i])
+    m<-lm(y~.,data=dat)
 
      b<-as.numeric(round(coef(m),3))[1]
 
-     v<-x[,i]
+     pred<-paste(names(x)[i])
 
-       pred<-paste(names(x)[i])
+     df<-rbind(df,cbind(pred,b)) }
 
-     df<-rbind(df,cbind(pred,b))
-  }
-       t<-c(NA,ifelse(abs(e-as.numeric(df[-1,2]))>=(e*cut),"include","drop"))
-df<-cbind(df,t)
-       }
-
-       if (!is.null(v2)&!is.null(v3)){
-
-           e<-as.numeric(round(coef(lm(y~v1+v2+v3)),3))[1]
-
-       df<-data.frame(pred="base",b=e)
-
-  for(i in 1:ncol(x)){
-
-     m<-lm(y~v1+v2+v3+x[,i])
-
-     b<-as.numeric(round(coef(m),3))[1]
-
-     v<-x[,i]
-
-       pred<-paste(names(x)[i])
-
-     df<-rbind(df,cbind(pred,b))
-
-  }
-       t<-c(NA,ifelse(abs(e-as.numeric(df[-1,2]))>=(e*cut),"include","drop"))
-df<-cbind(df,t)
-}}
+       di<-as.vector(abs(e-as.numeric(df[-1,2]))/e)
+       dif<-c(NA,di)
+       t<-c(NA,ifelse(di>=c,"include","drop"))
+       r<-cbind(df,dif,t) }
 
 if(logistic==TRUE){
 
-if (!is.factor(y)){stop("Some kind of error message would be nice, but y should be a factor!")}
+if (!is.factor(y)){stop("Logistic is flagged as TRUE, but the provided meassure is NOT formatted as a factor!")}
 
-if (is.null(v2)&is.null(v3)){
-
-  e<-as.numeric(round(exp(coef(glm(y~v1,family=binomial()))),3))[1]
+  e<-as.numeric(round(exp(coef(glm(y~.,family=binomial(),data=dt))),3))[1]
 
        df<-data.frame(pred="base",b=e)
 
   for(i in 1:ncol(x)){
-
-     m<-glm(y~v1+x[,i],family=binomial())
-
-     b<-as.numeric(round(exp(coef(m)),3))[1]
-
-     v<-x[,i]
-
-   pred<-paste(names(x)[i])
-
-     df<-rbind(df,cbind(pred,b))
-  }
-       t<-c(NA,ifelse(abs(e-as.numeric(df[-1,2]))>=(e*cut),"include","drop"))
-df<-cbind(df,t)
-       }
-
-       if (!is.null(v2)&is.null(v3)){
-
-           e<-as.numeric(round(exp(coef(glm(y~v1+v2,family=binomial()))),3))[1]
-
-       df<-data.frame(pred="base",b=e)
-
-  for(i in 1:ncol(x)){
-
-     m<-glm(y~v1+v2+x[,i],family=binomial())
+    dat<-cbind(dt,x[,i])
+    m<-glm(y~.,family=binomial(),data=dat)
 
      b<-as.numeric(round(exp(coef(m)),3))[1]
 
-     v<-x[,i]
+     pred<-paste(names(x)[i])
 
-       pred<-paste(names(x)[i])
+     df<-rbind(df,cbind(pred,b)) }
 
-     df<-rbind(df,cbind(pred,b))
-  }
-       t<-c(NA,ifelse(abs(e-as.numeric(df[-1,2]))>=(e*cut),"include","drop"))
-df<-cbind(df,t)
-       }
-
-       if (!is.null(v2)&!is.null(v3)){
-
-           e<-as.numeric(round(exp(coef(glm(y~v1+v2+v3,family=binomial()))),3))[1]
-
-       df<-data.frame(pred="base",b=e)
-
-  for(i in 1:ncol(x)){
-
-     m<-glm(y~v1+v2+v3+x[,i],family=binomial())
-
-     b<-as.numeric(round(exp(coef(m)),3))[1]
-
-     v<-x[,i]
-
-       pred<-paste(names(x)[i])
-
-     df<-rbind(df,cbind(pred,b))
-
-  }
-       t<-c(NA,ifelse(abs(e-as.numeric(df[-1,2]))>=(e*cut),"include","drop"))
-df<-cbind(df,t)
-}}
-result<-df
-    return(df)
+       di<-as.vector(abs(e-as.numeric(df[-1,2]))/e)
+       dif<-c(NA,di)
+       t<-c(NA,ifelse(di>=c,"include","drop"))
+       r<-cbind(df,dif,t)
+}
+    return(r)
 }

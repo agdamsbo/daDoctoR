@@ -4,20 +4,28 @@
 \alias{cie_test}
 \title{A repeated regression function for change-in-estimate analysis}
 \usage{
-cie_test(y, v1, string, data, logistic = FALSE, cut = 0.1, v2 = NULL,
-  v3 = NULL)
+cie_test(meas, vars, string, data, logistic = FALSE, cut = 0.1)
 }
 \arguments{
+\item{string}{String of columnnames from dataframe to include. Use dput().}
+
 \item{y}{Effect meassure.}
 
 \item{v1}{Main variable in model}
-
-\item{string}{String of columnnames from dataframe to include. Use dput().}
 }
 \description{
-For bivariate analyses.
+For bivariate analyses. From "Modeling and variable selection in epidemiologic analysis." - S. Greenland, 1989.
 }
 \examples{
-cie_test()
+l<-5
+y<-factor(rep(c("a","b"),l))
+x<-rnorm(length(y), mean=50, sd=10)
+v1<-factor(rep(c("r","s"),length(y)/2))
+v2<-as.numeric(sample(1:100, length(y), replace=FALSE))
+v3<-as.numeric(1:length(y))
+d<-data.frame(y,x,v1,v2,v3)
+preds<-dput(names(d)[3:ncol(d)])
+cie_test(meas="y",vars="x",string=preds,data=d,logistic = TRUE,cut = 0.1)
+
 }
 \keyword{change-in-estimate}
