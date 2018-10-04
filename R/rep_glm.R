@@ -72,7 +72,7 @@ rep_glm<-function(y,vars,string,ci=FALSE,data){
       x1<-x[,i]
 
       if (is.factor(x1)){
-        pred<-paste(names(x1)[i],levels(x1)[-1],sep = "_")
+        pred<-paste(names(x)[i],levels(x1)[-1],sep = "_")
       }
 
       else {pred<-names(x)[i]}
