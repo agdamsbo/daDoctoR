@@ -30,7 +30,6 @@ v3<-as.numeric(1:length(y))
 d<-data.frame(y,x,v1,v2,v3)
 preds<-dput(names(d)[3:ncol(d)])
 rep_glm(meas="y",vars="x",string=preds,ci=FALSE,data=df)
-
 }
 \keyword{logistic}
 \keyword{regression}

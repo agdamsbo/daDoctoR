@@ -26,6 +26,5 @@ v3<-as.numeric(1:length(y))
 d<-data.frame(y,x,v1,v2,v3)
 preds<-dput(names(d)[3:ncol(d)])
 cie_test(meas="y",vars="x",string=preds,data=d,logistic = TRUE,cut = 0.1)
-
 }
 \keyword{change-in-estimate}
