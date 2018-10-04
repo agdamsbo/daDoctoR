@@ -9,7 +9,15 @@
 #' @keywords logistic regression
 #' @export
 #' @examples
-#' rep_glm()
+#' l<-5
+#' y<-factor(rep(c("a","b"),l))
+#' x<-rnorm(length(y), mean=50, sd=10)
+#' v1<-factor(rep(c("r","s"),length(y)/2))
+#' v2<-sample(1:100, length(y), replace=FALSE)
+#' v3<-as.numeric(1:length(y))
+#' d<-data.frame(y,x,v1,v2,v3)
+#' preds<-dput(names(d)[3:ncol(d)])
+#' rep_glm(meas="y",vars="x",string=preds,ci=FALSE,data=df)
 
 rep_glm<-function(meas,vars,string,ci=FALSE,data){
   ## x is data.frame of predictors, y is vector of an aoutcome as a factor
@@ -88,3 +96,4 @@ rep_glm<-function(meas,vars,string,ci=FALSE,data){
 
   return(r)
 }
+

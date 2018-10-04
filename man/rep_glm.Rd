@@ -21,7 +21,15 @@ rep_glm(meas, vars, string, ci = FALSE, data)
 For bivariate analyses. The confint() function is rather slow, causing the whole function to hang when including many predictors and calculating the ORs with CI.
 }
 \examples{
-rep_glm()
+l<-5
+y<-factor(rep(c("a","b"),l))
+x<-rnorm(length(y), mean=50, sd=10)
+v1<-factor(rep(c("r","s"),length(y)/2))
+v2<-sample(1:100, length(y), replace=FALSE)
+v3<-as.numeric(1:length(y))
+d<-data.frame(y,x,v1,v2,v3)
+preds<-dput(names(d)[3:ncol(d)])
+rep_glm(meas="y",vars="x",string=preds,ci=FALSE,data=df)
 }
 \keyword{logistic}
 \keyword{regression}
