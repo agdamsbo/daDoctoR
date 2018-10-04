@@ -2,6 +2,10 @@
 
 I try my best to share my basic workarounds in R to more effectively do statistical research. Feel free to be inspired or comment.
 
+AS all functions have been collected in the package daDoctoR, please refer to the documentation there.
+Install the package with the following command: devtools::install_github('agdamsbo/daDoctoR')
+
+
 ## Further research
 
 In need of a suitable function to perform the chi-squared test of Hardy-Weinberg-equillibrium in my study poppulation, I ended up writing my own. It also contains a few summarise functions. This is actually the function I am most proud of, as it represents an actual universal test for both bi- and triallelic sustems in non-sexcromosome genes.
@@ -22,12 +26,7 @@ In need of a suitable function to perform the chi-squared test of Hardy-Weinberg
 
 ## Research year
 
-This is my first attempt at creating something usefull for openly sharing. In my work as a research year student through Aarhus University, Denmark at Aarhus University Hospital, Denmark, I've been introduced to working in the programming language R.
-During this work I've come accross a few problems apparently unique for the work with data from the Danish medical databases. To analyse the data in R I've had to rewrite some commands and to write my own, so I thought that I should share them here for others to take advantage of. Nothing fancy, but hopefully you can skip af few steps on your way through data analysis.
-These functions are forked from my original uploads as drgammelgaard.
-
-
-For a start I've uploaded five commands for extracting data from cpr-numbers:
+Commands for extracting data from cpr-numbers:
 - age_calc_function.R
 - cpr_check_function.R
 - cpr_sex_function.R
