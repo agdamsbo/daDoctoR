@@ -4,15 +4,21 @@
 \alias{rep_lm}
 \title{A repeated linear regression function}
 \usage{
-rep_lm(y, v1, string, ci = FALSE, data, v2 = NULL, v3 = NULL)
+rep_lm(meas, vars, string, ci = FALSE, data)
 }
 \arguments{
-\item{y}{Effect meassure.}
+\item{meas}{Effect meassure. Input as c() of columnnames, use dput().}
 
-\item{v1}{Main variable in model}
+\item{vars}{variables in model. Input as c() of columnnames, use dput().}
+
+\item{string}{variables to test. Input as c() of columnnames, use dput().}
+
+\item{ci}{flag to get results as OR with 95% confidence interval.}
+
+\item{data}{data frame to pull variables from.}
 }
 \description{
-For bivariate analyses.
+For bivariate analyses, to determine which variables to include in adjusted model.
 }
 \examples{
 rep_lm()
