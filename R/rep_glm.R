@@ -19,8 +19,8 @@ rep_glm<-function(meas,vars,string,ci=FALSE,data){
   require(broom)
 
   d<-data
-  x<-data.frame(d[,c(string)])
-  v<-data.frame(d[,c(vars)])
+  x<-d[,c(string)]
+  v<-d[,c(vars)]
   y<-d[,c(meas)]
   dt<-cbind(y,v)
   m1<-length(coef(glm(y~.,family = binomial(),data = dt)))
