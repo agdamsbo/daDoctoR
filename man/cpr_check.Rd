@@ -13,6 +13,6 @@ cpr_check(x)
 Checking validity of cpr number
 }
 \examples{
-cpr_check()
+cpr_check("231045-0637")
 }
 \keyword{cpr}

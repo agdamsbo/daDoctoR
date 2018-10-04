@@ -13,6 +13,6 @@ cpr_sex(x)
 Format "ddmmyy-xxxx"
 }
 \examples{
-cpr_sex()
+cpr_sex("231045-0637")
 }
 \keyword{cpr}

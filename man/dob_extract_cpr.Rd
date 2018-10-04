@@ -13,6 +13,6 @@ dob_extract_cpr(cpr)
 For easy calculation.
 }
 \examples{
-dob_extract_cpr()
+dob_extract_cpr("231045-0637")
 }
 \keyword{cpr}
