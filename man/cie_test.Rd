@@ -7,11 +7,17 @@
 cie_test(meas, vars, string, data, logistic = FALSE, cut = 0.1)
 }
 \arguments{
-\item{string}{String of columnnames from dataframe to include. Use dput().}
+\item{meas}{Effect meassure. Input as c() of columnnames, use dput().}
 
-\item{y}{Effect meassure.}
+\item{vars}{variables in model. Input as c() of columnnames, use dput().}
 
-\item{v1}{Main variable in model}
+\item{string}{variables to test. Input as c() of columnnames, use dput().}
+
+\item{data}{data frame to pull variables from.}
+
+\item{logistic}{flag to set logistic (TRUE) or linear (FALSE,standard) analysis.}
+
+\item{cut}{cut value for gating if including or dropping the tested variable. As suggested bu S. Greenland (1989).}
 }
 \description{
 For bivariate analyses. From "Modeling and variable selection in epidemiologic analysis." - S. Greenland, 1989.

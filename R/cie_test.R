@@ -1,9 +1,12 @@
 #' A repeated regression function for change-in-estimate analysis
 #'
 #' For bivariate analyses. From "Modeling and variable selection in epidemiologic analysis." - S. Greenland, 1989.
-#' @param y Effect meassure.
-#' @param v1 Main variable in model
-#' @param string String of columnnames from dataframe to include. Use dput().
+#' @param meas Effect meassure. Input as c() of columnnames, use dput().
+#' @param vars variables in model. Input as c() of columnnames, use dput().
+#' @param string variables to test. Input as c() of columnnames, use dput().
+#' @param data data frame to pull variables from.
+#' @param logistic flag to set logistic (TRUE) or linear (FALSE,standard) analysis.
+#' @param cut cut value for gating if including or dropping the tested variable. As suggested bu S. Greenland (1989).
 #' @keywords change-in-estimate
 #' @export
 #' @examples
