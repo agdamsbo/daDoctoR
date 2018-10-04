@@ -16,7 +16,7 @@ rep_glm<-function(meas,vars,string,ci=FALSE,data){
   ## output is returned as coefficient, or if or=TRUE as OR with 95 % CI.
   ##
 
-  require(dplyr)
+  require(broom)
 
   d<-data
   x<-data.frame(d[,c(string)])
