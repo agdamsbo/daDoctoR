@@ -4,15 +4,17 @@
 \alias{rep_glm}
 \title{A repeated logistic regression function}
 \usage{
-rep_glm(y, v1, string, ci = FALSE, data, v2 = NULL, v3 = NULL)
+rep_glm(y, vars, string, ci = FALSE, data)
 }
 \arguments{
 \item{y}{Effect meassure.}
 
-\item{v1}{Main variable in model}
+\item{vars}{variables in model. Input as c() of columnnames, use dput().}
+
+\item{string}{variables to test. Input as c() of columnnames, use dput().}
 }
 \description{
-For bivariate analyses.
+For bivariate analyses. The confint() function is rather slow, causing the whole function to hang when including many predictors and calculating the ORs with CI.
 }
 \examples{
 rep_glm()
