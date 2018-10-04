@@ -10,9 +10,9 @@
 #' @keywords change-in-estimate
 #' @export
 #' @examples
-#' cie_test()
+#' rep_reg_cie()
 
-cie_test<-function(meas,vars,string,data,logistic=FALSE,cut=0.1){
+rep_reg_cie<-function(meas,vars,string,data,logistic=FALSE,cut=0.1){
 
   require(broom)
 

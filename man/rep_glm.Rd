@@ -11,17 +11,25 @@ rep_glm(meas, vars, string, ci = FALSE, data)
 
 \item{vars}{variables in model. Input as c() of columnnames, use dput().}
 
-\item{string}{variables to test. Input as c() of columnnames, use dput().}
-
 \item{ci}{flag to get results as OR with 95% confidence interval.}
 
-\item{data}{data frame to pull variables from.}
+\item{str}{variables to test. Input as c() of columnnames, use dput().}
+
+\item{dta}{data frame to pull variables from.}
 }
 \description{
 For bivariate analyses. The confint() function is rather slow, causing the whole function to hang when including many predictors and calculating the ORs with CI.
 }
 \examples{
-rep_glm()
+  l<-50
+  y<-factor(rep(c("a","b"),l))
+  x<-rnorm(length(y), mean=50, sd=10)
+  v1<-factor(rep(c("r","s"),length(y)/2))
+  v2<-sample(1:100, length(y), replace=FALSE)
+  v3<-as.numeric(1:length(y))
+  d<-data.frame(y,x,v1,v2,v3)
+  preds<-c("v1","v2","x")
+  rep_glm(meas="y",vars="v3",string=preds,ci=F,data=d)
 }
 \keyword{logistic}
 \keyword{regression}

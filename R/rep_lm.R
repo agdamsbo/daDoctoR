@@ -9,7 +9,15 @@
 #' @keywords linear regression
 #' @export
 #' @examples
-#' rep_lm()
+#'   l<-50
+#'   y<-factor(rep(c("a","b"),l))
+#'   x<-rnorm(length(y), mean=50, sd=10)
+#'   v1<-factor(rep(c("r","s"),length(y)/2))
+#'   v2<-sample(1:100, length(y), replace=FALSE)
+#'   v3<-as.numeric(1:length(y))
+#'   d<-data.frame(y,x,v1,v2,v3)
+#'   preds<-c("v1","v2","v3")
+#'   rep_lm(meas="x",vars="y",string=preds,ci=F,data=d)
 
 rep_lm<-function(meas,vars,string,ci=FALSE,data){
 
@@ -18,6 +26,7 @@ rep_lm<-function(meas,vars,string,ci=FALSE,data){
   d<-data
   x<-data.frame(d[,c(string)])
   v<-data.frame(d[,c(vars)])
+  names(v)<-c(vars)
   y<-d[,c(meas)]
   dt<-cbind(y,v)
   m1<-length(coef(lm(y~.,data = dt)))
@@ -26,7 +35,7 @@ rep_lm<-function(meas,vars,string,ci=FALSE,data){
 
   if (ci==TRUE){
 
-    df<-data.frame(matrix(ncol = 3))
+    df<-data.frame(matrix(NA,ncol = 3))
     names(df)<-c("pred","or_ci","pv")
 
     for(i in 1:ncol(x)){
@@ -49,7 +58,7 @@ rep_lm<-function(meas,vars,string,ci=FALSE,data){
 
   if (ci==FALSE){
 
-    df<-data.frame(matrix(ncol = 3))
+    df<-data.frame(matrix(NA,ncol = 3))
     names(df)<-c("pred","b","pv")
 
     for(i in 1:ncol(x)){
@@ -85,3 +94,14 @@ rep_lm<-function(meas,vars,string,ci=FALSE,data){
 
   return(r)
 }
+
+
+l<-50
+y<-factor(rep(c("a","b"),l))
+x<-rnorm(length(y), mean=50, sd=10)
+v1<-factor(rep(c("r","s"),length(y)/2))
+v2<-sample(1:100, length(y), replace=FALSE)
+v3<-as.numeric(1:length(y))
+d<-data.frame(y,x,v1,v2,v3)
+preds<-c("v1","v2","v3")
+rep_lm(meas="x",vars="y",string=preds,ci=F,data=d)
