@@ -5,6 +5,7 @@
 #' @param v1 Main variable in model
 #' @param string String of columnnames from dataframe to include. Use dput().
 #' @keywords change-in-estimate
+#' @export
 #' @examples
 #' l<-5
 #' y<-factor(rep(c("a","b"),l))
@@ -15,7 +16,6 @@
 #' d<-data.frame(y,x,v1,v2,v3)
 #' preds<-dput(names(d)[3:ncol(d)])
 #' cie_test(meas="y",vars="x",string=preds,data=d,logistic = TRUE,cut = 0.1)
-#' @export
 
 cie_test<-function(meas,vars,string,data,logistic=FALSE,cut=0.1){
 

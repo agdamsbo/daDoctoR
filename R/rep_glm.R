@@ -7,6 +7,7 @@
 #' @param ci flag to get results as OR with 95% confidence interval.
 #' @param data data frame to pull variables from.
 #' @keywords logistic regression
+#' @export
 #' @examples
 #' l<-5
 #' y<-factor(rep(c("a","b"),l))
@@ -17,7 +18,6 @@
 #' d<-data.frame(y,x,v1,v2,v3)
 #' preds<-dput(names(d)[3:ncol(d)])
 #' rep_glm(meas="y",vars="x",string=preds,ci=FALSE,data=df)
-#' @export
 
 rep_glm<-function(meas,vars,string,ci=FALSE,data){
   ## x is data.frame of predictors, y is vector of an aoutcome as a factor
