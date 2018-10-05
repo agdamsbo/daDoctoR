@@ -81,8 +81,8 @@ strobe_print<-function(meas,var,group,adj,data,dec=2){
 
       amod<-glm(m~.,family=binomial(),data=di)
       aco<-round(exp(coef(amod)[2]),dec)
-      alo<-round(exp(confint(amod)[2,1]),dec)
-      aup<-round(exp(confint(amod)[2,2]),dec)
+      alo<-suppressMessages(round(exp(confint(amod)[2,1]),dec))
+      aup<-suppressMessages(round(exp(confint(amod)[2,2]),dec))
 
       aci<-paste0(aco," (",alo," to ",aup,")")
 
