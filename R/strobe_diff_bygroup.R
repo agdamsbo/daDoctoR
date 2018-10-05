@@ -1,6 +1,6 @@
 #' Print regression results according to STROBE
 #'
-#' Printable table of linear regression analysis of group vs var for meas.
+#' Printable table of linear regression analysis of group vs var for meas. By group.
 #' @param meas outcome meassure variable name in data-data.frame as a string. Can be numeric or factor. Result is calculated accordingly.
 #' @param var exposure variable to compare against (active vs placebo). As string.
 #' @param groups groups to compare, as string.
@@ -10,9 +10,9 @@
 #' @keywords cpr
 #' @export
 #' @examples
-#' strobe_diff1()
+#' strobe_diff_bygroup()
 
-strobe_diff1<-function(meas,var,group,adj,data,dec=2){
+strobe_diff_bygroup<-function(meas,var,group,adj,data,dec=2){
   ## meas: sdmt
   ## var: rtreat
   ## group: genotype
