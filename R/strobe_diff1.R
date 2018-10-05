@@ -10,9 +10,9 @@
 #' @keywords cpr
 #' @export
 #' @examples
-#' strobe_print()
+#' strobe_diff1()
 
-strobe_print<-function(meas,var,group,adj,data,dec=2){
+strobe_diff1<-function(meas,var,group,adj,data,dec=2){
   ## meas: sdmt
   ## var: rtreat
   ## group: genotype
