@@ -7,7 +7,7 @@
 strobe_print(meas, var, group, adj, data, dec = 2)
 }
 \arguments{
-\item{meas}{outcome meassure variable name in data-data.frame as a string.}
+\item{meas}{outcome meassure variable name in data-data.frame as a string. Can be numeric or factor. Result is calculated accordingly.}
 
 \item{var}{exposure variable to compare against (active vs placebo). As string.}
 
