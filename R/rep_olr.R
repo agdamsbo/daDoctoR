@@ -1,4 +1,4 @@
-#' A repeated logistic regression function
+#' A repeated ordinal logistic regression function
 #'
 #' @description For bivariate analyses. The confint() function is rather slow, causing the whole function to hang when including many predictors and calculating the ORs with CI.
 #' @param meas Effect meassure. Input as c() of columnnames, use dput().
@@ -6,23 +6,16 @@
 #' @param str variables to test. Input as c() of columnnames, use dput().
 #' @param ci flag to get results as OR with 95% confidence interval.
 #' @param dta data frame to pull variables from.
-#' @keywords logistic regression
+#' @keywords olr ordinal logistic regression
 #' @export
 #' @examples
-#'   l<-50
-#'   y<-factor(rep(c("a","b"),l))
-#'   x<-rnorm(length(y), mean=50, sd=10)
-#'   v1<-factor(rep(c("r","s"),length(y)/2))
-#'   v2<-sample(1:100, length(y), replace=FALSE)
-#'   v3<-as.numeric(1:length(y))
-#'   d<-data.frame(y,x,v1,v2,v3)
-#'   preds<-c("v1","v2","x")
-#'   rep_glm(meas="y",vars="v3",string=preds,ci=F,data=d)
+#'   rep_olr()
 
 
-rep_glm<-function(meas,vars,string,ci=FALSE,data){
+rep_olr<-function(meas,vars,string,ci=FALSE,data){
 
   require(broom)
+  require(MASS)
 
   d<-data
   x<-data.frame(d[,c(string)])
@@ -30,9 +23,9 @@ rep_glm<-function(meas,vars,string,ci=FALSE,data){
   names(v)<-c(vars)
   y<-d[,c(meas)]
   dt<-cbind(y,v)
-  m1<-length(coef(glm(y~.,family = binomial(),data = dt)))
+  m1<-length(coef(polr(y~.,data = dt,Hess=TRUE)))
 
-  if (!is.factor(y)){stop("Some kind of error message would be nice, but y should be a factor!")}
+  if (!is.factor(y)){stop("y should be a factor!")}
 
   if (ci==TRUE){
 
@@ -41,13 +34,19 @@ rep_glm<-function(meas,vars,string,ci=FALSE,data){
 
     for(i in 1:ncol(x)){
       dat<-cbind(dt,x[,i])
-      m<-glm(y~.,family = binomial(),data=dat)
+      m<-polr(y~.,data=dat,Hess=TRUE)
+
+      ctable <- coef(summary(m))
 
       l<-suppressMessages(round(exp(confint(m))[-c(1:m1),1],2))
       u<-suppressMessages(round(exp(confint(m))[-c(1:m1),2],2))
       or<-round(exp(coef(m))[-c(1:m1)],2)
       or_ci<-paste0(or," (",l," to ",u,")")
-      pv<-round(tidy(m)$p.value[-c(1:m1)],3)
+
+      p <- (pnorm(abs(ctable[, "t value"]), lower.tail = FALSE) * 2)[1:length(coef(m))]
+      pv<-round(p[-c(1:m1)],3)
+
+
       x1<-x[,i]
 
       if (is.factor(x1)){
@@ -55,7 +54,8 @@ rep_glm<-function(meas,vars,string,ci=FALSE,data){
 
       else {pred<-names(x)[i]}
 
-      df<-rbind(df,cbind(pred,or_ci,pv))}}
+      df<-rbind(df,cbind(pred,or_ci,pv))
+    }}
 
   if (ci==FALSE){
 
@@ -64,10 +64,12 @@ rep_glm<-function(meas,vars,string,ci=FALSE,data){
 
     for(i in 1:ncol(x)){
       dat<-cbind(dt,x[,i])
-      m<-glm(y~.,family = binomial(),data=dat)
+      m<-polr(y~.,data=dat,Hess=TRUE)
 
-      b<-round(coef(m)[-c(1:m1)],3)
-      pv<-round(tidy(m)$p.value[-c(1:m1)],3)
+      b<-round(coef(m)[-c(1:m1)],2)
+
+      p <- (pnorm(abs(ctable[, "t value"]), lower.tail = FALSE) * 2)[1:length(coef(m))]
+      pv<-round(p[-c(1:m1)],3)
 
       x1<-x[,i]
 
@@ -81,9 +83,8 @@ rep_glm<-function(meas,vars,string,ci=FALSE,data){
 
     }}
 
-  pa<-as.numeric(df[,"pv"])
+  pa<-as.numeric(df[,c("pv")])
   t <- ifelse(pa<=0.1,"include","drop")
-
   pa<-ifelse(pa<0.001,"<0.001",pa)
   pa <- ifelse(pa<=0.05|pa=="<0.001",paste0("*",pa),
                ifelse(pa>0.05&pa<=0.1,paste0(".",pa),pa))
