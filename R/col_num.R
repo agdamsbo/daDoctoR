@@ -15,11 +15,11 @@ col_num<-function(string,data){
   d<-data
   s<-string
   n<-c()
-  
+
   for(i in 1:length(s)){
-  n<-c(n,names(select(d,contains(s[i]))))
+  n<-c(n,names(dplyr::select(d,dplyr::contains(s[i]))))
   }
-  
+
   for(i in 1:length(n)) {
     d[,n[i]]<-as.numeric(d[,n[i]])
   }
