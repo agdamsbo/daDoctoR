@@ -19,7 +19,7 @@ plot_ord_odds<-function(x, title = NULL,dec=3,lbls=NULL){
   rodds<-round(odds,digits = dec)
 
   if (!is.null(lbls)){
-    odds$vars<-paste0(v.names," \n",paste0(rodds$or," [",rodds$lo,":",rodds$up,"]"))
+    odds$vars<-paste0(lbls," \n",paste0(rodds$or," [",rodds$lo,":",rodds$up,"]"))
   }
   else {
     odds$vars<-paste0(row.names(odds)," \n",paste0(rodds$or," [",rodds$lo,":",rodds$up,"]"))
