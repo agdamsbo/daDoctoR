@@ -66,6 +66,8 @@ rep_olr<-function(meas,vars,string,ci=FALSE,data){
       dat<-cbind(dt,x[,i])
       m<-polr(y~.,data=dat,Hess=TRUE)
 
+      ctable <- coef(summary(m))
+
       b<-round(coef(m)[-c(1:m1)],2)
 
       p <- (pnorm(abs(ctable[, "t value"]), lower.tail = FALSE) * 2)[1:length(coef(m))]
