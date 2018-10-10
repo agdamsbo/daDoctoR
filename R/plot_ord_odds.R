@@ -26,7 +26,7 @@ plot_ord_odds<-function(x, title = NULL,dec=3,lbls=NULL,short=FALSE){
     odds$vars<-paste0(row.names(odds)," \n",paste0(rodds$or," [",rodds$lo,":",rodds$up,"]"))
   }
 
-  ticks<-c(seq(0, 1, by =.1), seq(0, 10, by =1), seq(10, 100, by =10))
+  ticks<-c(seq(0, 1, by =.1), seq(1, 10, by =1), seq(10, 100, by =10))
 
   if (short==TRUE){
     ticks<-ticks[seq(1, length(ticks), 2)]
