@@ -9,7 +9,7 @@ strobe_diff_byvar(meas, var, group, adj, data, dec = 2)
 \arguments{
 \item{meas}{outcome meassure variable name in data-data.frame as a string. Can be numeric or factor. Result is calculated accordingly.}
 
-\item{var}{exposure variable to compare against (active vs placebo). As string.}
+\item{var}{binary exposure variable to compare against (active vs placebo). As string.}
 
 \item{adj}{variables to adjust for, as string.}
 
@@ -20,7 +20,7 @@ strobe_diff_byvar(meas, var, group, adj, data, dec = 2)
 \item{groups}{groups to compare, as string.}
 }
 \description{
-Printable table of linear regression analysis of group vs var for meas. By var.
+Printable table of three dimensional regression analysis of group vs var for meas. By var.
 }
 \examples{
 strobe_diff_byvar()
