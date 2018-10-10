@@ -12,11 +12,11 @@
 #' strobe_olr()
 
 strobe_olr<-function(meas,var,adj,data,dec=2){
-  #' Ønskeliste:
-  #'
-  #' - Sum af alle, der indgår (Overall N)
-  #' - Ryd op i kode, der der er overflødig %-regning, alternativt, så fiks at NA'er ikke skal regnes med.
-  #'
+  ## Ønskeliste:
+  ##
+  ## - Sum af alle, der indgår (Overall N)
+  ## - Ryd op i kode, der der er overflødig %-regning, alternativt, så fiks at NA'er ikke skal regnes med.
+  ##
   require(MASS)
   require(dplyr)
 

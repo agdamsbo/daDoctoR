@@ -21,15 +21,7 @@ rep_lm(meas, vars, string, ci = FALSE, data)
 For bivariate analyses, to determine which variables to include in adjusted model.
 }
 \examples{
-  l<-50
-  y<-factor(rep(c("a","b"),l))
-  x<-rnorm(length(y), mean=50, sd=10)
-  v1<-factor(rep(c("r","s"),length(y)/2))
-  v2<-sample(1:100, length(y), replace=FALSE)
-  v3<-as.numeric(1:length(y))
-  d<-data.frame(y,x,v1,v2,v3)
-  preds<-c("v1","v2","v3")
-  rep_lm(meas="x",vars="y",string=preds,ci=F,data=d)
+rep_lm()
 }
 \keyword{linear}
 \keyword{regression}
