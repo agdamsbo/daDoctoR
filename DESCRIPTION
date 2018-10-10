@@ -1,6 +1,6 @@
 Package: daDoctoR
 Title: daDoctoR
-Version: 0.0.0.9000
+Version: 0.0.0.9003
 Authors@R: c(
     person("Andreas", "Gammelgaard Damsbo", email = "agdamsbo@pm.me", role = c("cre", "aut")))
 Description: Tools for Danish health research. A collection of 
