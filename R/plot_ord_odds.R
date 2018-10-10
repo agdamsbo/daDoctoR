@@ -5,12 +5,13 @@
 #' @param title plot title
 #' @param dec decimals for labels
 #' @param lbls labels for variable names. Carefull, as the right order is not checked automatically!
+#' @param short flag to half number of ticks on horizontal axis.
 #' @keywords forestplot
 #' @export
 #' @examples
 #' plot_ord_odds()
 
-plot_ord_odds<-function(x, title = NULL,dec=3,lbls=NULL){
+plot_ord_odds<-function(x, title = NULL,dec=3,lbls=NULL,short=FALSE){
 
   require(ggplot2)
 
@@ -26,6 +27,12 @@ plot_ord_odds<-function(x, title = NULL,dec=3,lbls=NULL){
   }
 
   ticks<-c(seq(.1, 1, by =.1), seq(0, 10, by =1), seq(10, 100, by =10))
+
+  if (short==TRUE){
+    ticks<-ticks[seq(1, length(ticks), 2)]
+  }
+  else {ticks<-ticks}
+
   odds$ord<-c(nrow(odds):1)
 
   ggplot(odds, aes(y= or, x = reorder(vars,ord))) +
