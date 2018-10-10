@@ -20,4 +20,5 @@ strobe_olr(meas, var, adj, data, dec = 2)
 \description{
 Printable table of linear regression analysis of group vs var for meas. By group.
 }
-\keyword{cpr}
+\keyword{olr}
+\keyword{strobe}

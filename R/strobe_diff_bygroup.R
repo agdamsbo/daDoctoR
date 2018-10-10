@@ -7,7 +7,7 @@
 #' @param adj variables to adjust for, as string.
 #' @param data dataframe of data.
 #' @param dec decimals for results, standard is set to 2. Mean and sd is dec-1.
-#' @keywords cpr
+#' @keywords strobe
 #' @export
 #' @examples
 #' strobe_diff_bygroup()

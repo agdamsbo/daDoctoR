@@ -25,4 +25,4 @@ Printable table of linear regression analysis of group vs var for meas. By var.
 \examples{
 strobe_diff_byvar()
 }
-\keyword{cpr}
+\keyword{strobe}

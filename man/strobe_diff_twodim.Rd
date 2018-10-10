@@ -23,4 +23,4 @@ Printable table of regression analysis by group for meas. Detects wether to perf
 \examples{
 strobe_diff_twodim()
 }
-\keyword{cpr}
+\keyword{strobe}
