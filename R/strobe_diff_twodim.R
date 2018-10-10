@@ -100,6 +100,6 @@ strobe_diff_twodim<-function(meas,group,adj,data,dec=2){
     ls<-list(logistic.regression=df)
   }
 
-  ls$adjustments<-dput(names(ads))
+  invisible(ls$adjustments<-dput(names(ads)))
   return(ls)
 }
