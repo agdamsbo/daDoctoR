@@ -25,4 +25,4 @@ For bivariate analyses. From "Modeling and variable selection in epidemiologic a
 \examples{
 rep_reg_cie()
 }
-\keyword{change-in-estimate}
+\keyword{estimate-in-estimate}

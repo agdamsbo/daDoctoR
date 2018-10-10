@@ -7,7 +7,7 @@
 #' @param data data frame to pull variables from.
 #' @param logistic flag to set logistic (TRUE) or linear (FALSE,standard) analysis.
 #' @param cut cut value for gating if including or dropping the tested variable. As suggested bu S. Greenland (1989).
-#' @keywords change-in-estimate
+#' @keywords estimate-in-estimate
 #' @export
 #' @examples
 #' rep_reg_cie()

@@ -32,4 +32,3 @@ For bivariate analyses. The confint() function is rather slow, causing the whole
   rep_glm(meas="y",vars="v3",string=preds,ci=F,data=d)
 }
 \keyword{logistic}
-\keyword{regression}

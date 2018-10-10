@@ -24,4 +24,3 @@ For bivariate analyses, to determine which variables to include in adjusted mode
 rep_lm()
 }
 \keyword{linear}
-\keyword{regression}
