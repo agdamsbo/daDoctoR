@@ -9,7 +9,7 @@
 #' @keywords cpr
 #' @export
 #' @examples
-#' strobe_diff_byvar()
+#' strobe_diff_twodim()
 
 strobe_diff_twodim<-function(meas,group,adj,data,dec=2){
   ## meas: sdmt

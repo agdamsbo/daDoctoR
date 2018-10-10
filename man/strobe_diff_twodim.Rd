@@ -21,6 +21,6 @@ strobe_diff_twodim(meas, group, adj, data, dec = 2)
 Printable table of regression analysis by group for meas. Detects wether to perform logistic or linear regression.
 }
 \examples{
-strobe_diff_byvar()
+strobe_diff_twodim()
 }
 \keyword{cpr}
