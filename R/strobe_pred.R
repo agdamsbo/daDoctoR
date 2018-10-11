@@ -84,20 +84,20 @@ strobe_pred<-function(meas,adj,data,dec=2){
       ns<-names(dat2)[i]
       for (r in 1:length(levels(vec))){
         vr<-levels(vec)[r]
-        dr<-vec[vec==vr]
+        dr<-vec[vec==vr&!is.na(vec)]
         n<-as.numeric(length(dr))
         nall<-as.numeric(nrow(dat[!is.na(dat2[,c(ns)]),]))
         nl<-paste0(ns,levels(vec)[r])
         pro<-round(n/nall*100,0)
         rt<-paste0(n," (",pro,"%)")
-        nq<-rbind(nq,cbind(nl,n))
+        nq<-rbind(nq,cbind(nl,rt))
       }
     }
     if (!is.factor(dat2[,i])){
       num<-dat2[,i]
-      ns<-names(dat2)[i]
-      nall<-as.numeric(nrow(dat[!is.na(dat2[,c(ns)]),]))
-      nq<-rbind(nq,cbind(ns,nall))
+      nl<-names(dat2)[i]
+      rt<-as.numeric(nrow(dat[!is.na(dat2[,c(nl)]),]))
+      nq<-rbind(nq,cbind(nl,rt))
     }
   }
 
@@ -114,7 +114,7 @@ strobe_pred<-function(meas,adj,data,dec=2){
   res<-cbind(aor_ci,apv)
   rest<-data.frame(names=row.names(res),res,stringsAsFactors = F)
 
-  numb<-data.frame(names=nq[,c("nl")],N=nq[,c("n")],stringsAsFactors = F)
+  numb<-data.frame(names=nq[,c("nl")],N=nq[,c("rt")],stringsAsFactors = F)
   namt<-data.frame(names=rnames,stringsAsFactors = F)
 
   coll<-left_join(left_join(namt,numb,by="names"),rest,by="names")
