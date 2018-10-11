@@ -1,4 +1,6 @@
 updatePackageVersion <- function(packageLocation ="."){
+  ## Seen at: https://www.mango-solutions.com/blog/how-to-auto-update-a-package-version-number
+
   ## Read DESCRIPTION file
   desc <- readLines(file.path(packageLocation, "DESCRIPTION"))
 

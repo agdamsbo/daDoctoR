@@ -25,10 +25,12 @@ strobe_olr<-function(meas,var,adj,data,dec=2){
   v<-d[,c(var)]
 
   ads<-d[,c(adj)]
-  dat<-data.frame(m,v,ads)
+  dat<-data.frame(m,v)
   df<-data.frame(matrix(ncol=4))
 
-  mn <- polr(m ~ v, data = dat, Hess=TRUE)
+  mn <- polr(m ~ ., data = dat, Hess=TRUE)
+
+  dat<-data.frame(dat,ads)
   ma <- polr(m ~ ., data = dat, Hess=TRUE)
 
   ctable <- coef(summary(mn))
