@@ -4,7 +4,7 @@
 \alias{rep_glm}
 \title{A repeated logistic regression function}
 \usage{
-rep_glm(meas, vars, string, ci = FALSE, data)
+rep_glm(meas, vars, string, ci = FALSE, data, fixed.var = FALSE)
 }
 \arguments{
 \item{meas}{Effect meassure. Input as c() of columnnames, use dput().}
@@ -12,6 +12,8 @@ rep_glm(meas, vars, string, ci = FALSE, data)
 \item{vars}{variables in model. Input as c() of columnnames, use dput().}
 
 \item{ci}{flag to get results as OR with 95% confidence interval.}
+
+\item{fixed.var}{flag to set "vars" as fixed in the model. When FALSE, then true bivariate logistic regression is performed.}
 
 \item{str}{variables to test. Input as c() of columnnames, use dput().}
 

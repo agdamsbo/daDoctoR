@@ -4,7 +4,7 @@
 \alias{rep_lm}
 \title{A repeated linear regression function}
 \usage{
-rep_lm(meas, vars, string, ci = FALSE, data)
+rep_lm(meas, vars, string, ci = FALSE, data, fixed.var = FALSE)
 }
 \arguments{
 \item{meas}{Effect meassure. Input as c() of columnnames, use dput().}
@@ -16,6 +16,8 @@ rep_lm(meas, vars, string, ci = FALSE, data)
 \item{ci}{flag to get results as OR with 95% confidence interval.}
 
 \item{data}{data frame to pull variables from.}
+
+\item{fixed.var}{flag to set "vars" as fixed in the model. When FALSE, then true bivariate linear regression is performed.}
 }
 \description{
 For bivariate analyses, to determine which variables to include in adjusted model.

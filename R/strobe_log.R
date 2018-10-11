@@ -1,23 +1,23 @@
 #' Print regression results according to STROBE
 #'
-#' Printable table of logistic regression analysis oaccording to STROBE.
+#' Printable table of logistic regression analysis according to STROBE.
 #' @param meas outcome meassure variable name in data-data.frame as a string. Can be numeric or factor. Result is calculated accordingly.
 #' @param var exposure variable to compare against (active vs placebo). As string.
 #' @param adj variables to adjust for, as string.
 #' @param data dataframe of data.
 #' @param dec decimals for results, standard is set to 2. Mean and sd is dec-1.
-#' @keywords olr
+#' @keywords logistic
 #' @export
 #' @examples
-#' strobe_olr()
+#' strobe_log()
 
-strobe_olr<-function(meas,var,adj,data,dec=2){
+strobe_log<-function(meas,var,adj,data,dec=2){
   ## Ønskeliste:
   ##
   ## - Sum af alle, der indgår (Overall N)
   ## - Ryd op i kode, der der er overflødig %-regning, alternativt, så fiks at NA'er ikke skal regnes med.
   ##
-  require(MASS)
+
   require(dplyr)
 
   d<-data
@@ -28,22 +28,22 @@ strobe_olr<-function(meas,var,adj,data,dec=2){
   dat<-data.frame(m,v)
   df<-data.frame(matrix(ncol=4))
 
-  mn <- polr(m ~ ., data = dat, Hess=TRUE)
+  mn <- glm(m ~ .,family = binomial(), data = dat)
 
   dat<-data.frame(dat,ads)
-  ma <- polr(m ~ ., data = dat, Hess=TRUE)
+  ma <- glm(m ~ .,family = binomial(), data = dat)
 
   ctable <- coef(summary(mn))
-  pa <- pnorm(abs(ctable[, "t value"]), lower.tail = FALSE) * 2
+  pa <- ctable[, 4]
   pa<-ifelse(pa<0.001,"<0.001",round(pa,3))
   pa <- ifelse(pa<=0.05|pa=="<0.001",paste0("*",pa),
                ifelse(pa>0.05&pa<=0.1,paste0(".",pa),pa))
-  pv<-c("REF",pa[1:length(coef(mn))])
+  pv<-c("REF",pa[2:length(coef(mn))])
 
-  co<-round(exp(coef(mn)),dec)
-  ci<-confint(mn)
-  lo<-round(exp(ci[,1]),dec)
-  up<-round(exp(ci[,2]),dec)
+  co<-round(exp(coef(mn)),dec)[-1]
+  ci<-round(exp(confint(mn)),dec)[-1,]
+  lo<-ci[,1]
+  up<-ci[,2]
 
   or_ci<-c("REF",paste0(co," (",lo," to ",up,")"))
 
@@ -69,7 +69,7 @@ strobe_olr<-function(meas,var,adj,data,dec=2){
   ls<-list(unadjusted=data.frame(rbind(header,mms)))
 
   actable <- coef(summary(ma))
-  pa <- pnorm(abs(actable[, "t value"]), lower.tail = FALSE) * 2
+  pa <- actable[,4]
   pa<-ifelse(pa<0.001,"<0.001",round(pa,3))
   pa <- ifelse(pa<=0.05|pa=="<0.001",paste0("*",pa),
                ifelse(pa>0.05&pa<=0.1,paste0(".",pa),pa))
