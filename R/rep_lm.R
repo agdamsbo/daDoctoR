@@ -24,7 +24,7 @@ rep_lm<-function(meas,vars,string,ci=FALSE,data,fixed.var=FALSE){
     x<-data.frame(d[,c(vars,string)])
 
     y<-d[,c(meas)]
-    dt<-cbind(y=y,v)
+
     names(x)<-c(vars,string)
 
     if (ci==TRUE){
