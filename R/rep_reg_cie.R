@@ -1,6 +1,6 @@
 #' A repeated regression function for change-in-estimate analysis
 #'
-#' For bivariate analyses. From "Modeling and variable selection in epidemiologic analysis." - S. Greenland, 1989.
+#' For bivariate analyses, binary logistic or linear regression. From "Modeling and variable selection in epidemiologic analysis." - S. Greenland, 1989.
 #' @param meas Effect meassure. Input as c() of columnnames, use dput().
 #' @param vars variables in model. Input as c() of columnnames, use dput().
 #' @param string variables to test. Input as c() of columnnames, use dput().
@@ -12,7 +12,7 @@
 #' @examples
 #' rep_reg_cie()
 
-rep_reg_cie<-function(meas,vars,string,data,logistic=FALSE,cut=0.1){
+rep_reg_cie<-function(meas,vars,string,data,cut=0.1){
 
   require(broom)
 
@@ -25,9 +25,9 @@ rep_reg_cie<-function(meas,vars,string,data,logistic=FALSE,cut=0.1){
 
   c<-as.numeric(cut)
 
-  if(logistic==FALSE){
+  if(!is.factor(y)){
 
-if (is.factor(y)){stop("Logistic is flagged as FALSE, but the provided meassure is formatted as a factor!")}
+    meth<-"linear regression"
 
   e<-as.numeric(round(coef(lm(y~.,data = dt)),3))[1]
        df<-data.frame(pred="base",b=e)
@@ -42,14 +42,13 @@ if (is.factor(y)){stop("Logistic is flagged as FALSE, but the provided meassure 
 
      df<-rbind(df,cbind(pred,b)) }
 
-       di<-as.vector(abs(e-as.numeric(df[-1,2]))/e)
+       di<-as.vector(round(abs(e-as.numeric(df[-1,2]))/e,3))
        dif<-c(NA,di)
        t<-c(NA,ifelse(di>=c,"include","drop"))
        r<-cbind(df,dif,t) }
 
-if(logistic==TRUE){
-
-if (!is.factor(y)){stop("Logistic is flagged as TRUE, but the provided meassure is NOT formatted as a factor!")}
+if(is.factor(y)){
+  meth="logistic regression"
 
   e<-as.numeric(round(exp(coef(glm(y~.,family=binomial(),data=dt))),3))[1]
 
@@ -65,10 +64,10 @@ if (!is.factor(y)){stop("Logistic is flagged as TRUE, but the provided meassure 
 
      df<-rbind(df,cbind(pred,b)) }
 
-       di<-as.vector(abs(e-as.numeric(df[-1,2]))/e)
+       di<-as.vector(round(abs(e-as.numeric(df[-1,2]))/e,3))
        dif<-c(NA,di)
        t<-c(NA,ifelse(di>=c,"include","drop"))
        r<-cbind(df,dif,t)
 }
-    return(r)
+    return(list("method"=meth,"analyses"=r))
 }

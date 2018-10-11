@@ -4,7 +4,7 @@
 \alias{rep_reg_cie}
 \title{A repeated regression function for change-in-estimate analysis}
 \usage{
-rep_reg_cie(meas, vars, string, data, logistic = FALSE, cut = 0.1)
+rep_reg_cie(meas, vars, string, data, cut = 0.1)
 }
 \arguments{
 \item{meas}{Effect meassure. Input as c() of columnnames, use dput().}
@@ -15,12 +15,12 @@ rep_reg_cie(meas, vars, string, data, logistic = FALSE, cut = 0.1)
 
 \item{data}{data frame to pull variables from.}
 
-\item{logistic}{flag to set logistic (TRUE) or linear (FALSE,standard) analysis.}
-
 \item{cut}{cut value for gating if including or dropping the tested variable. As suggested bu S. Greenland (1989).}
+
+\item{logistic}{flag to set logistic (TRUE) or linear (FALSE,standard) analysis.}
 }
 \description{
-For bivariate analyses. From "Modeling and variable selection in epidemiologic analysis." - S. Greenland, 1989.
+For bivariate analyses, binary logistic or linear regression. From "Modeling and variable selection in epidemiologic analysis." - S. Greenland, 1989.
 }
 \examples{
 rep_reg_cie()
