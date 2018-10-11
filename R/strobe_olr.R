@@ -51,14 +51,14 @@ strobe_olr<-function(meas,var,adj,data,dec=2){
 
   for (r in 1:length(levels(dat[,2]))){
     vr<-levels(dat[,2])[r]
-    dr<-dat[dat[,2]==vr,]
+    dr<-dat[dat[,2]==vr&!is.na(dat[,2]),]
     n<-as.numeric(nrow(dr))
 
     ## Af en eller anden grund bliver der talt for mange med.
-    # nall<-as.numeric(nrow(dat[!is.na(dat[,2]),]))
+    nall<-as.numeric(nrow(dat[!is.na(dat[,2]),]))
     nl<-levels(m)[r]
-    # pro<-round(n/nall*100,0)
-    # rt<-paste0(n," (",pro,"%)")
+    pro<-round(n/nall*100,0)
+    n<-paste0(n," (",pro,"%)")
     nr<-rbind(nr,cbind(nl,n))
   }
 
