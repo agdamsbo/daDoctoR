@@ -1,8 +1,6 @@
 library(roxygen2)
 library(devtools)
 
-# Packing for publication
-
 source("/Users/andreas/Documents/GitHub/daDoctoR/updatePackageVersion.R")
 
 setwd("/Users/andreas/Documents/GitHub/daDoctoR")

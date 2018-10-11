@@ -1,17 +1,17 @@
 Package: daDoctoR
-Title: daDoctoR
-Version: 0.0.0.9004
-Authors@R: c(
-    person("Andreas", "Gammelgaard Damsbo", email = "agdamsbo@pm.me", role = c("cre", "aut")))
-Description: Tools for Danish health research. A collection of 
-    functions to ease my work. I'll try to keep it updated for 
-    others to use as well.
-Depends: R (>= 3.4.4)
+Type: Package
+Title: FUNCTIONS FOR HEALTH RESEARCH
+Version: 0.1.0.9001
+Author@R: c(person("Andreas", "Gammelgaard Damsbo", email = "agdamsbo@pm.me", role = c("cre", "aut")))
+Maintainer: Andreas Gammelgaard Damsbo <agdamsbo@pm.me>
+Description: I am a Danish medical doctor involved in neuropsychiatric research. 
+   Here I have collected functions I use for my data analysis. You are very 
+   welcome to get inspired or to use my work.
 Imports: broom,
-  dplyr,
-  epiR,
-  ggplot2,
-  MASS
+   dplyr,
+   epiR,
+   ggplot2,
+   MASS
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
