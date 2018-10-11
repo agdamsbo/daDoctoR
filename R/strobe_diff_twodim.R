@@ -64,6 +64,7 @@ strobe_diff_twodim<-function(meas,group,adj,data,dec=2){
   }
 
   if(is.factor(m)){
+    di<-dat
 
     mod<-glm(m~g,family=binomial(),data=di)
     ci<-confint(mod)

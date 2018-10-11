@@ -30,7 +30,7 @@ rep_lm<-function(meas,vars,string,ci=FALSE,data){
   if (ci==TRUE){
 
     df<-data.frame(matrix(NA,ncol = 3))
-    names(df)<-c("pred","or_ci","pv")
+    names(df)<-c("pred","coef_ci","pv")
 
     for(i in 1:ncol(x)){
       dat<-cbind(dt,x[,i])
@@ -40,7 +40,7 @@ rep_lm<-function(meas,vars,string,ci=FALSE,data){
       l<-round(ci[-c(1:m1),1],2)
       u<-round(ci[-c(1:m1),2],2)
       or<-round(coef(m)[-c(1:m1)],2)
-      or_ci<-paste0(or," (",l," to ",u,")")
+      coef_ci<-paste0(or," (",l," to ",u,")")
       pv<-round(tidy(m)$p.value[-c(1:m1)],3)
       x1<-x[,i]
 
@@ -49,7 +49,7 @@ rep_lm<-function(meas,vars,string,ci=FALSE,data){
 
       else {pred<-names(x)[i]}
 
-      df<-rbind(df,cbind(pred,or_ci,pv))}}
+      df<-rbind(df,cbind(pred,coef_ci,pv))}}
 
   else {
 
