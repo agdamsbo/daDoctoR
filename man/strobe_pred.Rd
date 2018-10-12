@@ -4,7 +4,7 @@
 \alias{strobe_pred}
 \title{Logistic regression of predictors according to STROBE}
 \usage{
-strobe_pred(meas, adj, data, dec = 2)
+strobe_pred(meas, adj, data, dec = 2, n.by.adj = FALSE)
 }
 \arguments{
 \item{meas}{binary outcome meassure variable, column name in data.frame as a string. Can be numeric or factor. Result is calculated accordingly.}
@@ -14,6 +14,8 @@ strobe_pred(meas, adj, data, dec = 2)
 \item{data}{dataframe of data.}
 
 \item{dec}{decimals for results, standard is set to 2. Mean and sd is dec-1.}
+
+\item{n.by.adj}{flag to indicate wether to count number of patients in adjusted model or overall.}
 }
 \description{
 Printable table of logistic regression analysis according to STROBE.

@@ -5,12 +5,13 @@
 #' @param adj variables to adjust for, as string.
 #' @param data dataframe of data.
 #' @param dec decimals for results, standard is set to 2. Mean and sd is dec-1.
+#' @param n.by.adj flag to indicate wether to count number of patients in adjusted model or overall.
 #' @keywords logistic
 #' @export
 #' @examples
 #' strobe_pred()
 
-strobe_pred<-function(meas,adj,data,dec=2){
+strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE){
   ## Ønskeliste:
   ##
   ## - Sum af alle, der indgår (Overall N)
@@ -58,7 +59,7 @@ strobe_pred<-function(meas,adj,data,dec=2){
 
   dat<-data.frame(m=m,ads)
   ma <- glm(m ~ .,family = binomial(), data = dat)
-
+  miss<-length(ma$na.action)
 
   actable <- coef(summary(ma))
   pa <- actable[,4]
@@ -74,32 +75,54 @@ strobe_pred<-function(meas,adj,data,dec=2){
   aup<-aci[,2]
   aor_ci<-paste0(aco," (",alo," to ",aup,")")
 
-  dat2<-dat[,-1]
   # names(dat2)<-c(var,names(ads))
+
   nq<-c()
 
-  for (i in 1:ncol(dat2)){
-    if (is.factor(dat2[,i])){
-      vec<-dat2[,i]
-      ns<-names(dat2)[i]
-      for (r in 1:length(levels(vec))){
-        vr<-levels(vec)[r]
-        dr<-vec[vec==vr&!is.na(vec)]
-        n<-as.numeric(length(dr))
-        nall<-as.numeric(nrow(dat[!is.na(dat2[,c(ns)]),]))
-        nl<-paste0(ns,levels(vec)[r])
-        pro<-round(n/nall*100,0)
-        rt<-paste0(n," (",pro,"%)")
+  if (n.by.adj==TRUE){
+    dat2<-ma$model[,-1]
+    for (i in 1:ncol(dat2)){
+      if (is.factor(dat2[,i])){
+        vec<-dat2[,i]
+        ns<-names(dat2)[i]
+        for (r in 1:length(levels(vec))){
+          vr<-levels(vec)[r]
+          n<-as.numeric(length(vec[vec==vr&!is.na(vec)]))
+          nall<-as.numeric(length(dat2[,c(ns)]))
+          nl<-paste0(ns,levels(vec)[r])
+          pro<-round(n/nall*100,0)
+          rt<-paste0(n," (",pro,"%)")
+          nq<-rbind(nq,cbind(nl,rt))
+        }}
+      if (!is.factor(dat2[,i])){
+        num<-dat2[,i]
+        nl<-names(dat2)[i]
+        rt<-as.numeric(length(dat2[,c(nl)]))
         nq<-rbind(nq,cbind(nl,rt))
-      }
-    }
-    if (!is.factor(dat2[,i])){
-      num<-dat2[,i]
-      nl<-names(dat2)[i]
-      rt<-as.numeric(nrow(dat[!is.na(dat2[,c(nl)]),]))
-      nq<-rbind(nq,cbind(nl,rt))
-    }
-  }
+      }}}
+
+  else {
+    dat2<-dat[,-1]
+    for (i in 1:ncol(dat2)){
+      if (is.factor(dat2[,i])){
+        vec<-dat2[,i]
+        ns<-names(dat2)[i]
+        for (r in 1:length(levels(vec))){
+          vr<-levels(vec)[r]
+          n<-as.numeric(length(vec[vec==vr&!is.na(vec)]))
+          nall<-as.numeric(length(dat[,c(ns)]))
+          nl<-paste0(ns,levels(vec)[r])
+          pro<-round(n/nall*100,0)
+          rt<-paste0(n," (",pro,"%)")
+          nq<-rbind(nq,cbind(nl,rt))
+        }}
+      if (!is.factor(dat2[,i])){
+        num<-dat2[,i]
+        nl<-names(dat2)[i]
+        rt<-as.numeric(length(dat[,c(nl)]))
+        nq<-rbind(nq,cbind(nl,rt))
+      }}}
+
 
   rnames<-c()
 
@@ -132,5 +155,8 @@ strobe_pred<-function(meas,adj,data,dec=2){
 
   names(ref)<-c("Variable","N","Crude OR (95 % CI)","Mutually adjusted OR (95 % CI)")
 
-  return(ref)
+  ls<-list(tbl=ref,miss)
+  names(ls)<-c("Printable table","Deleted due to missingness")
+
+  return(ls)
 }
