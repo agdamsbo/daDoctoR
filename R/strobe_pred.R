@@ -14,9 +14,7 @@
 strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE){
   ## Ønskeliste:
   ##
-  ## - Sum af alle, der indgår (Overall N)
-  ## - Ryd op i kode, der der er overflødig %-regning, alternativt, så fiks at NA'er ikke skal regnes med.
-  ##
+  ## - Tæl selv antal a NA'er
 
   require(dplyr)
 
