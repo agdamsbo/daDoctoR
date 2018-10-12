@@ -5,7 +5,7 @@
 #' @param adj variables to adjust for, as string.
 #' @param data dataframe of data.
 #' @param dec decimals for results, standard is set to 2. Mean and sd is dec-1.
-#' @param n.by.adj flag to indicate wether to count number of patients in adjusted model or overall.
+#' @param n.by.adj flag to indicate wether to count number of patients in adjusted model or overall for outcome meassure not NA.
 #' @keywords logistic
 #' @export
 #' @examples
@@ -102,7 +102,7 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE){
       }}}
 
   else {
-    dat2<-dat[,-1]
+    dat2<-dat[!is.na(dat[,c(meas)]),][,-c(meas)]
     for (i in 1:ncol(dat2)){
       if (is.factor(dat2[,i])){
         vec<-dat2[,i]

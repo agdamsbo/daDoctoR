@@ -15,7 +15,7 @@ strobe_pred(meas, adj, data, dec = 2, n.by.adj = FALSE)
 
 \item{dec}{decimals for results, standard is set to 2. Mean and sd is dec-1.}
 
-\item{n.by.adj}{flag to indicate wether to count number of patients in adjusted model or overall.}
+\item{n.by.adj}{flag to indicate wether to count number of patients in adjusted model or overall for outcome meassure not NA.}
 }
 \description{
 Printable table of logistic regression analysis according to STROBE.
