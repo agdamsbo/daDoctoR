@@ -29,11 +29,13 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE){
 
   dfcr<-data.frame(matrix(NA,ncol = 3))
   names(dfcr)<-c("pred","or_ci","pv")
+  n.mn<-c()
 
   for(i in 1:ncol(ads)){
     dat<-data.frame(m=m,ads[,i])
     names(dat)<-c("m",names(ads)[i])
     mn<-glm(m~.,family = binomial(),data=dat)
+    n.mn<-c(n.mn,nrow(mn$model))
 
     suppressMessages(ci<-exp(confint(mn)))
     l<-round(ci[-1,1],2)
@@ -97,12 +99,16 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE){
       if (!is.factor(dat2[,i])){
         num<-dat2[,i]
         nl<-names(dat2)[i]
-        rt<-as.numeric(length(dat2[,c(nl)]))
+        n<-as.numeric(length(num[!is.na(num)]))
+        nall<-as.numeric(nrow(dat2))
+        pro<-round(n/nall*100,0)
+        rt<-paste0(n," (",pro,"%)")
         nq<-rbind(nq,cbind(nl,rt))
       }}}
 
   else {
-    dat2<-dat[!is.na(dat[,c(meas)]),][,-c(meas)]
+    dat2<-dat[!is.na(dat[,1]),][,-1]
+    n.meas<-nrow(dat2)
     for (i in 1:ncol(dat2)){
       if (is.factor(dat2[,i])){
         vec<-dat2[,i]
@@ -110,7 +116,7 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE){
         for (r in 1:length(levels(vec))){
           vr<-levels(vec)[r]
           n<-as.numeric(length(vec[vec==vr&!is.na(vec)]))
-          nall<-as.numeric(length(dat[,c(ns)]))
+          nall<-as.numeric(n.mn[i])
           nl<-paste0(ns,levels(vec)[r])
           pro<-round(n/nall*100,0)
           rt<-paste0(n," (",pro,"%)")
@@ -119,7 +125,10 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE){
       if (!is.factor(dat2[,i])){
         num<-dat2[,i]
         nl<-names(dat2)[i]
-        rt<-as.numeric(length(dat[,c(nl)]))
+        n<-as.numeric(length(num[!is.na(num)]))
+        nall<-as.numeric(n.meas)
+        pro<-round(n/nall*100,0)
+        rt<-paste0(n," (",pro,"%)")
         nq<-rbind(nq,cbind(nl,rt))
       }}}
 
@@ -155,8 +164,8 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE){
 
   names(ref)<-c("Variable","N","Crude OR (95 % CI)","Mutually adjusted OR (95 % CI)")
 
-  ls<-list(tbl=ref,miss)
-  names(ls)<-c("Printable table","Deleted due to missingness")
+  ls<-list(tbl=ref,miss,n.meas,nrow(d))
+  names(ls)<-c("Printable table","Deleted due to missingness in adjusted analysis","Number of outcome observations","Length of dataframe")
 
   return(ls)
 }
