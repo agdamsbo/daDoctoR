@@ -29,6 +29,8 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE){
   names(dfcr)<-c("pred","or_ci","pv")
   n.mn<-c()
 
+  nref<-c()
+
   for(i in 1:ncol(ads)){
     dat<-data.frame(m=m,ads[,i])
     names(dat)<-c("m",names(ads)[i])
@@ -160,7 +162,7 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE){
 
   ref<-data.frame(re[,1],re[,2],re[,5],re[,3])
 
-  names(ref)<-c("Variable","N","Crude OR (95 % CI)","Mutually adjusted OR (95 % CI)")
+  names(ref)<-c("Variable",paste0("N=",nall),"Crude OR (95 % CI)","Mutually adjusted OR (95 % CI)")
 
   ls<-list(tbl=ref,miss,n.meas,nrow(d))
   names(ls)<-c("Printable table","Deleted due to missingness in adjusted analysis","Number of outcome observations","Length of dataframe")
