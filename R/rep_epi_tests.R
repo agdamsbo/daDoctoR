@@ -15,22 +15,22 @@ rep_epi_tests<-function(gold,test,data){
   require(epiR)
 
   d<-data
-  test<-d[,c(test)]
+  tst<-d[,c(test)]
 
   gs<-d[,c(gold)]
 
   ls<-list()
 
 if (length(gold)==1){
-  for (i in 1:ncol(test)){
-    t<-table(test[,i],gs)
+  for (i in 1:ncol(tst)){
+    t<-table(tst[,i],gs)
     rval <- epi.tests(t, conf.level = 0.95)
-    n<-names(test)[i]
+    n<-names(tst)[i]
     ls[[i]]<-list(n,rval)
   }}
 else {
   for (i in 1:ncol(gs)){
-    t<-table(test,gs[,i])
+    t<-table(tst,gs[,i])
     rval <- epi.gss(t, conf.level = 0.95)
     n<-names(gs)[i]
     ls[[i]]<-list(n,rval)
