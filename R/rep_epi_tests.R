@@ -31,7 +31,7 @@ if (length(gold)==1){
 else {
   for (i in 1:ncol(gs)){
     t<-table(tst,gs[,i])
-    rval <- epi.gss(t, conf.level = 0.95)
+    rval <- epi.tests(t, conf.level = 0.95)
     n<-names(gs)[i]
     ls[[i]]<-list(n,rval)
   }
