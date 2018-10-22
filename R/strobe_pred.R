@@ -91,6 +91,7 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE){
           vr<-levels(vec)[r]
           n<-as.numeric(length(vec[vec==vr&!is.na(vec)]))
           nall<-as.numeric(length(dat2[,c(ns)]))
+          n.meas<-nall
           nl<-paste0(ns,levels(vec)[r])
           pro<-round(n/nall*100,0)
           rt<-paste0(n," (",pro,"%)")
@@ -101,6 +102,7 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE){
         nl<-names(dat2)[i]
         n<-as.numeric(length(num[!is.na(num)]))
         nall<-as.numeric(nrow(dat2))
+        n.meas<-nall
         pro<-round(n/nall*100,0)
         rt<-paste0(n," (",pro,"%)")
         nq<-rbind(nq,cbind(nl,rt))
@@ -162,7 +164,7 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE){
 
   ref<-data.frame(re[,1],re[,2],re[,5],re[,3])
 
-  names(ref)<-c("Variable",paste0("N=",nall),"Crude OR (95 % CI)","Mutually adjusted OR (95 % CI)")
+  names(ref)<-c("Variable",paste0("N=",n.meas),"Crude OR (95 % CI)","Mutually adjusted OR (95 % CI)")
 
   ls<-list(tbl=ref,miss,n.meas,nrow(d))
   names(ls)<-c("Printable table","Deleted due to missingness in adjusted analysis","Number of outcome observations","Length of dataframe")
