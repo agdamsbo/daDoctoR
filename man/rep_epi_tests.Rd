@@ -4,18 +4,20 @@
 \alias{rep_epi_tests}
 \title{A repeated epi.tests function}
 \usage{
-rep_epi_tests(gs, test)
+rep_epi_tests(gold, test, data)
 }
 \arguments{
-\item{gs}{the test or meassure used as "golden standard". Format as dichotomised factor.}
+\item{gold}{the test or meassure used as "golden standard". Format as dichotomised factor.}
 
 \item{test}{possible predictive tests to evaluate. Format as dichotomised factor.}
+
+\item{data}{dataframe to draw variables from.}
 }
 \description{
 For bivariate analyses. The confint() function is rather slow, causing the whole function to hang when including many predictors and calculating the ORs with CI.
 }
 \details{
-Repeats the epi.tests from the epiR package.
+Repeats the epi.tests from the epiR package. Either gs or test should be of length 1.
 }
 \examples{
 rep_epi_tests()
