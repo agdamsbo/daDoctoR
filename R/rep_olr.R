@@ -3,7 +3,7 @@
 #' For bivariate analyses. The confint() function is rather slow, causing the whole function to hang when including many predictors and calculating the ORs with CI.
 #' @param meas Effect meassure. Input as c() of columnnames, use dput().
 #' @param vars variables in model. Input as c() of columnnames, use dput().
-#' @param str variables to test. Input as c() of columnnames, use dput().
+#' @param string variables to test. Input as c() of columnnames, use dput().
 #' @param ci flag to get results as OR with 95% confidence interval.
 #' @param dta data frame to pull variables from.
 #' @keywords olr
