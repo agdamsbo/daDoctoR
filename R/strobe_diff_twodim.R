@@ -72,7 +72,7 @@ strobe_diff_twodim<-function(meas,group,adj,data,dec=2){
     lo<-round(ci[-1,1],dec)
     up<-round(ci[-1,2],dec)
 
-    or_ci<-c("0",paste0(co," (",lo," to ",up,")"))
+    or_ci<-c("REF",paste0(co," (",lo," to ",up,")"))
 
     amod<-glm(m~.,family=binomial(),data=di)
     aci<-confint(amod)
@@ -80,7 +80,7 @@ strobe_diff_twodim<-function(meas,group,adj,data,dec=2){
     alo<-round(aci[2:length(levels(g)),1],dec)
     aup<-round(aci[2:length(levels(g)),2],dec)
 
-    aor_ci<-c("0",paste0(aco," (",alo," to ",aup,")"))
+    aor_ci<-c("REF",paste0(aco," (",alo," to ",aup,")"))
 
     nr<-c()
 
