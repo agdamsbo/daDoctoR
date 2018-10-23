@@ -4,20 +4,21 @@
 \alias{rep_glm}
 \title{A repeated logistic regression function}
 \usage{
-rep_glm(meas, vars, string, ci = FALSE, data, fixed.var = FALSE)
+rep_glm(meas, vars = NULL, string, ci = FALSE, data,
+  fixed.var = FALSE)
 }
 \arguments{
 \item{meas}{Effect meassure. Input as c() of columnnames, use dput().}
 
 \item{vars}{variables in model. Input as c() of columnnames, use dput().}
 
+\item{string}{variables to test. Input as c() of columnnames, use dput().}
+
 \item{ci}{flag to get results as OR with 95% confidence interval.}
 
+\item{data}{data frame to pull variables from.}
+
 \item{fixed.var}{flag to set "vars" as fixed in the model. When FALSE, then true bivariate logistic regression is performed.}
-
-\item{str}{variables to test. Input as c() of columnnames, use dput().}
-
-\item{dta}{data frame to pull variables from.}
 }
 \description{
 For bivariate analyses. The confint() function is rather slow, causing the whole function to hang when including many predictors and calculating the ORs with CI.

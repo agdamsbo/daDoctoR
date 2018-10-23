@@ -12,7 +12,7 @@
 #' @examples
 #' rep_lm()
 
-rep_lm<-function(meas,vars,string,ci=FALSE,data,fixed.var=FALSE){
+rep_lm<-function(meas,vars=NULL,string,ci=FALSE,data,fixed.var=FALSE){
 
   require(broom)
   y<-data[,c(meas)]

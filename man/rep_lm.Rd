@@ -4,7 +4,8 @@
 \alias{rep_lm}
 \title{A repeated linear regression function}
 \usage{
-rep_lm(meas, vars, string, ci = FALSE, data, fixed.var = FALSE)
+rep_lm(meas, vars = NULL, string, ci = FALSE, data,
+  fixed.var = FALSE)
 }
 \arguments{
 \item{meas}{Effect meassure. Input as c() of columnnames, use dput().}
