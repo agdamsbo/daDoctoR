@@ -1,21 +1,28 @@
 #' Forrest plot from ordinal logistic regression
 #'
 #' Heavily inspired by https://www.r-bloggers.com/plotting-odds-ratios-aka-a-forrestplot-with-ggplot2/
-#' @param x ordinal logistic regression model.
+#' @param x input data.
 #' @param title plot title
 #' @param dec decimals for labels
 #' @param lbls labels for variable names. Carefull, as the right order is not checked automatically!
 #' @param short flag to half number of ticks on horizontal axis.
+#' @param input can be either "model", which is a olr model (polr()), or "df", which is a dataframe whith three columns for OR, lower CI and upper CI-
 #' @keywords forestplot
 #' @export
 #' @examples
 #' plot_ord_odds()
 
-plot_ord_odds<-function(x, title = NULL,dec=3,lbls=NULL,short=FALSE){
+plot_ord_odds<-function(x, title = NULL,dec=3,lbls=NULL,short=FALSE,input="model"){
 
   require(ggplot2)
 
-  odds<-data.frame(cbind(exp(coef(x)), exp(confint(x))))
+  if (input=="model"){
+    odds<-data.frame(cbind(exp(coef(x)), exp(confint(x))))
+  }
+
+  if (input=="df"){
+    odds<-x
+  }
   names(odds)<-c("or", "lo", "up")
   rodds<-round(odds,digits = dec)
 

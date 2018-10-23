@@ -4,10 +4,11 @@
 \alias{plot_ord_odds}
 \title{Forrest plot from ordinal logistic regression}
 \usage{
-plot_ord_odds(x, title = NULL, dec = 3, lbls = NULL, short = FALSE)
+plot_ord_odds(x, title = NULL, dec = 3, lbls = NULL, short = FALSE,
+  input = "model")
 }
 \arguments{
-\item{x}{ordinal logistic regression model.}
+\item{x}{input data.}
 
 \item{title}{plot title}
 
@@ -16,6 +17,8 @@ plot_ord_odds(x, title = NULL, dec = 3, lbls = NULL, short = FALSE)
 \item{lbls}{labels for variable names. Carefull, as the right order is not checked automatically!}
 
 \item{short}{flag to half number of ticks on horizontal axis.}
+
+\item{input}{can be either "model", which is a olr model (polr()), or "df", which is a dataframe whith three columns for OR, lower CI and upper CI-}
 }
 \description{
 Heavily inspired by https://www.r-bloggers.com/plotting-odds-ratios-aka-a-forrestplot-with-ggplot2/
