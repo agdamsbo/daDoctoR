@@ -7,9 +7,9 @@
 rep_epi_tests(gold, test, data)
 }
 \arguments{
-\item{gold}{the test or meassure used as "golden standard". Format as dichotomised factor.}
+\item{gold}{the test or meassure used as "golden standard". Format as list of variable names to include. All variables should be formated as dichotomised factor.}
 
-\item{test}{possible predictive tests to evaluate. Format as dichotomised factor.}
+\item{test}{possible predictive tests to evaluate. Format as list of variable names to include. All variables should be formated as dichotomised factor.}
 
 \item{data}{dataframe to draw variables from.}
 }

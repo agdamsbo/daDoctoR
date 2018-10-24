@@ -2,8 +2,8 @@
 #'
 #' Repeats the epi.tests from the epiR package. Either gs or test should be of length 1.
 #' @description For bivariate analyses. The confint() function is rather slow, causing the whole function to hang when including many predictors and calculating the ORs with CI.
-#' @param gold the test or meassure used as "golden standard". Format as dichotomised factor.
-#' @param test possible predictive tests to evaluate. Format as dichotomised factor.
+#' @param gold the test or meassure used as "golden standard". Format as list of variable names to include. All variables should be formated as dichotomised factor.
+#' @param test possible predictive tests to evaluate. Format as list of variable names to include. All variables should be formated as dichotomised factor.
 #' @param data dataframe to draw variables from.
 #' @keywords ppv npv sensitivity specificity
 #' @export

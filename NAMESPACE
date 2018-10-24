@@ -3,6 +3,7 @@
 export(age_calc)
 export(col_fact)
 export(col_num)
+export(comb_olr)
 export(cpr_check)
 export(cpr_sex)
 export(date_convert)
