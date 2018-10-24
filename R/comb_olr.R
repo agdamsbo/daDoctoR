@@ -18,6 +18,6 @@ comb_olr<-function(meas,vars,data){
     d2<-d[,c(meas,ad)]
     names(d2)[1]<-"meas"
     x<-polr(meas~.,data = d2,Hess = TRUE)
-    mat<-rbind(mat,c(exp(coef(x)), exp(confint(x))))
+    mat<-cbind(c(exp(coef(x)), exp(confint(x))))
   return(data.frame(mat,stringsAsFactors = FALSE))
 }
