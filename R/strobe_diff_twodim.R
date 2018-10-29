@@ -67,16 +67,16 @@ strobe_diff_twodim<-function(meas,group,adj,data,dec=2){
     di<-dat
 
     mod<-glm(m~g,family=binomial(),data=di)
-    ci<-confint(mod)
-    co<-round(coef(mod)[-1],dec)
+    ci<-exp(confint(mod))
+    co<-round(exp(coef(mod))[-1],dec)
     lo<-round(ci[-1,1],dec)
     up<-round(ci[-1,2],dec)
 
     or_ci<-c("REF",paste0(co," (",lo," to ",up,")"))
 
     amod<-glm(m~.,family=binomial(),data=di)
-    aci<-confint(amod)
-    aco<-round(coef(amod)[2:length(levels(g))],dec)
+    aci<-exp(confint(amod))
+    aco<-round(exp(coef(amod))[2:length(levels(g))],dec)
     alo<-round(aci[2:length(levels(g)),1],dec)
     aup<-round(aci[2:length(levels(g)),2],dec)
 

@@ -4,14 +4,12 @@
 \alias{strobe_olr}
 \title{Print regression results according to STROBE}
 \usage{
-strobe_olr(meas, var, adj, data, dec = 2)
+strobe_olr(meas, vars, data, dec = 2)
 }
 \arguments{
 \item{meas}{outcome meassure variable name in data-data.frame as a string. Can be numeric or factor. Result is calculated accordingly.}
 
-\item{var}{exposure variable to compare against (active vs placebo). As string.}
-
-\item{adj}{variables to adjust for, as string.}
+\item{vars}{variables to compare against. As vector of columnnames.}
 
 \item{data}{dataframe of data.}
 
