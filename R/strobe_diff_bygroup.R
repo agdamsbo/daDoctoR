@@ -13,6 +13,10 @@
 #' strobe_diff_bygroup()
 
 strobe_diff_bygroup<-function(meas,var,group,adj,data,dec=2){
+  ## Wishlist:
+  ## -fix confint()
+
+
   ## meas: sdmt
   ## var: rtreat
   ## group: genotype
