@@ -15,7 +15,7 @@ strobe_diff_bygroup(meas, var, group, adj, data, dec = 2)
 
 \item{data}{dataframe of data.}
 
-\item{dec}{decimals for results, standard is set to 2. Mean and sd is dec-1.}
+\item{dec}{decimals for results, standard is set to 2. Mean and sd is dec-1. pval has 3 decimals.}
 
 \item{groups}{groups to compare, as string.}
 }

@@ -1,7 +1,7 @@
 Package: daDoctoR
 Type: Package
 Title: FUNCTIONS FOR HEALTH RESEARCH
-Version: 0.1.0.9019
+Version: 0.1.0.9020
 Author@R: c(person("Andreas", "Gammelgaard Damsbo", email = "agdamsbo@pm.me", role = c("cre", "aut")))
 Maintainer: Andreas Gammelgaard Damsbo <agdamsbo@pm.me>
 Description: I am a Danish medical doctor involved in neuropsychiatric research. 
@@ -15,4 +15,4 @@ Imports: broom,
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.0.9000
+RoxygenNote: 6.1.1
