@@ -9,17 +9,7 @@
 #' @param fixed.var flag to set "vars" as fixed in the model. When FALSE, then true bivariate logistic regression is performed.
 #' @keywords logistic
 #' @export
-#' @examples
-#'   l<-50
-#'   y<-factor(rep(c("a","b"),l))
-#'   x<-rnorm(length(y), mean=50, sd=10)
-#'   v1<-factor(rep(c("r","s"),length(y)/2))
-#'   v2<-sample(1:100, length(y), replace=FALSE)
-#'   v3<-as.numeric(1:length(y))
-#'   d<-data.frame(y,x,v1,v2,v3)
-#'   preds<-c("v1","v2","x")
-#'   rep_glm(meas="y",vars="v3",string=preds,ci=F,data=d)
-
+#'
 
 rep_glm<-function(meas,vars=NULL,string,ci=FALSE,data,fixed.var=FALSE){
 
