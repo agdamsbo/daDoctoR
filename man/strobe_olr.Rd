@@ -18,7 +18,4 @@ strobe_olr(meas, vars, data, dec = 2)
 \description{
 Printable table of logistic regression analysis oaccording to STROBE.
 }
-\examples{
-strobe_olr()
-}
 \keyword{olr}

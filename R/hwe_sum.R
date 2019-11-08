@@ -6,8 +6,6 @@
 #' @param f factor for grouping.
 #' @keywords hardy-weinberg-equllibrium
 #' @export
-#' @examples
-#' hwe_sum()
 
 hwe_sum<-function (a1, a2, f) {
   require(daDoctoR)

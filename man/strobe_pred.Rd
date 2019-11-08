@@ -20,7 +20,4 @@ strobe_pred(meas, adj, data, dec = 2, n.by.adj = FALSE)
 \description{
 Printable table of logistic regression analysis according to STROBE.
 }
-\examples{
-strobe_pred()
-}
 \keyword{logistic}

@@ -2,16 +2,12 @@ Package: daDoctoR
 Type: Package
 Title: FUNCTIONS FOR HEALTH RESEARCH
 Version: 0.1.0.9023
-Author@R: c(person("Andreas", "Gammelgaard Damsbo", email = "agdamsbo@pm.me", role = c("cre", "aut")))
+Author: c(person("Andreas", "Gammelgaard Damsbo", email = "agdamsbo@pm.me", role = c("cre", "aut")))
 Maintainer: Andreas Gammelgaard Damsbo <agdamsbo@pm.me>
 Description: I am a Danish medical doctor involved in neuropsychiatric research. 
    Here I have collected functions I use for my data analysis. You are very 
    welcome to get inspired or to use my work.
-Imports: broom,
-   dplyr,
-   epiR,
-   ggplot2,
-   MASS
+Imports: broom, dplyr, epiR, ggplot2, MASS
 Suggest: shiny
 License: GPL (>= 2)
 Encoding: UTF-8

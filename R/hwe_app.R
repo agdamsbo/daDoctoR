@@ -3,6 +3,7 @@
 #' App to easily calculate and visualize the HWE.
 #'
 #' @export
+
 hwe_app <- function() {
   appDir <- system.file("shiny-examples", "hwe_calc", package = "daDoctoR")
   if (appDir == "") {

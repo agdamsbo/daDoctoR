@@ -20,7 +20,4 @@ strobe_log(meas, var, adj, data, dec = 2)
 \description{
 Printable table of logistic regression analysis according to STROBE.
 }
-\examples{
-strobe_log()
-}
 \keyword{logistic}

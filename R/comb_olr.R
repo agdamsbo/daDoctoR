@@ -3,12 +3,9 @@
 #' Should be combined with "rep_olr()". The confint() function is rather slow, causing the whole function to hang when including many predictors and calculating the ORs with CI.
 #' @param meas primary outcome (factor with >2 levels).
 #' @param vars variables in model. Input as c() of columnnames, use dput().
-#' @param dta data frame to pull variables from.
+#' @param data data frame to pull variables from.
 #' @keywords olr
 #' @export
-#' @examples
-#' comb_olr()
-
 
 comb_olr<-function(meas,vars,data){
   require(MASS)

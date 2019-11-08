@@ -7,8 +7,6 @@
 #' @param dec decimals for results, standard is set to 2. Mean and sd is dec-1.
 #' @keywords olr
 #' @export
-#' @examples
-#' strobe_olr()
 
 strobe_olr<-function(meas,vars,data,dec=2){
 

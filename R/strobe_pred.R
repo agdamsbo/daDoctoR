@@ -8,8 +8,6 @@
 #' @param n.by.adj flag to indicate wether to count number of patients in adjusted model or overall for outcome meassure not NA.
 #' @keywords logistic
 #' @export
-#' @examples
-#' strobe_pred()
 
 strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE){
   ## Ønskeliste:

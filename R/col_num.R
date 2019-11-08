@@ -5,8 +5,6 @@
 #' @param data Dataframe
 #' @keywords numeric
 #' @export
-#' @examples
-#' col_num()
 
 col_num<-function(string,data){
 ## Defining factors for columns containing string (can be vector of multiple strings), based on dplyr

@@ -12,7 +12,4 @@ hwe_geno(mm, mn, nn, mo, no, oo, alleles = 2)
 \description{
 For easy calculation.
 }
-\examples{
-hwe_geno()
-}
 \keyword{hardy-weinberg-equllibrium}

@@ -8,8 +8,6 @@
 #' @param dec decimals for results, standard is set to 2. Mean and sd is dec-1.
 #' @keywords strobe
 #' @export
-#' @examples
-#' strobe_diff_twodim()
 
 strobe_diff_twodim<-function(meas,group,adj,data,dec=2){
   ## meas: sdmt

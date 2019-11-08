@@ -9,8 +9,6 @@
 #' @param cut cut value for gating if including or dropping the tested variable. As suggested bu S. Greenland (1989).
 #' @keywords estimate-in-estimate
 #' @export
-#' @examples
-#' rep_reg_cie()
 
 rep_reg_cie<-function(meas,vars,string,data,cut=0.1){
 

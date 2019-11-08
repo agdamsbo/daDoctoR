@@ -8,8 +8,6 @@
 #' @param dec decimals for results, standard is set to 2. Mean and sd is dec-1.
 #' @keywords logistic
 #' @export
-#' @examples
-#' strobe_log()
 
 strobe_log<-function(meas,var,adj,data,dec=2){
   ## Ønskeliste:

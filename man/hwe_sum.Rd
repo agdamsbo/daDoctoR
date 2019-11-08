@@ -16,7 +16,4 @@ hwe_sum(a1, a2, f)
 \description{
 For easy printing.
 }
-\examples{
-hwe_sum()
-}
 \keyword{hardy-weinberg-equllibrium}

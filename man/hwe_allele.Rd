@@ -14,7 +14,4 @@ hwe_allele(x, y)
 \description{
 For easy calculation.
 }
-\examples{
-hwe_allele()
-}
 \keyword{hardy-weinberg-equllibrium}

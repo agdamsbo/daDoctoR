@@ -9,8 +9,6 @@
 #' @param dec decimals for results, standard is set to 2. Mean and sd is dec-1.
 #' @keywords strobe
 #' @export
-#' @examples
-#' strobe_diff_byvar()
 
 strobe_diff_byvar<-function(meas,var,group,adj,data,dec=2){
 

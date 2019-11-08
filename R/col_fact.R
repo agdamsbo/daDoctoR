@@ -7,9 +7,6 @@
 #' @param labels labels for all selected columns
 #' @keywords factor
 #' @export
-#' @examples
-#' col_fact()
-
 
 col_fact<-function(string,data,levels=NULL,labels=NULL){
 ## Defining factors for columns containing string (can be vector of multiple strings), based on dplyr.

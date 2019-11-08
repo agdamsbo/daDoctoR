@@ -5,12 +5,10 @@
 #' @param vars variables in model. Input as c() of columnnames, use dput().
 #' @param string variables to test. Input as c() of columnnames, use dput().
 #' @param ci flag to get results as OR with 95% confidence interval.
-#' @param fixed.var flag to set "vars" as fixed in the model. When FALSE, then true bivariate linear regression is performed.
 #' @param data data frame to pull variables from.
-#' @keywords linear
+#' @param fixed.var flag to set "vars" as fixed in the model. When FALSE, then true bivariate linear regression is performed.
+#' @keywords linear regression
 #' @export
-#' @examples
-#' rep_lm()
 
 rep_lm<-function(meas,vars=NULL,string,ci=FALSE,data,fixed.var=FALSE){
 

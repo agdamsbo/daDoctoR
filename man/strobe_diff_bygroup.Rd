@@ -22,7 +22,4 @@ strobe_diff_bygroup(meas, var, group, adj, data, dec = 2)
 \description{
 Printable table of three dimensional regression analysis of group vs var for meas. By group.
 }
-\examples{
-strobe_diff_bygroup()
-}
 \keyword{strobe}

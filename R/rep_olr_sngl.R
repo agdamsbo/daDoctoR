@@ -6,9 +6,6 @@
 #' @param dta data frame to pull variables from.
 #' @keywords olr
 #' @export
-#' @examples
-#' rep_olr_sngl()
-
 
 rep_olr_sngl<-function(meas,vars,data){
   require(MASS)

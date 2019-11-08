@@ -12,7 +12,4 @@ date_convert(x)
 \description{
 Input format as dd/mm/yyyy, output is standard yyyy-mm-dd
 }
-\examples{
-date_convert()
-}
 \keyword{date}

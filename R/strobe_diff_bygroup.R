@@ -9,8 +9,6 @@
 #' @param dec decimals for results, standard is set to 2. Mean and sd is dec-1. pval has 3 decimals.
 #' @keywords strobe
 #' @export
-#' @examples
-#' strobe_diff_bygroup()
 
 strobe_diff_bygroup<-function(meas,var,group,adj,data,dec=2){
 

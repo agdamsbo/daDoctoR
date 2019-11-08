@@ -14,7 +14,4 @@ col_num(string, data)
 \description{
 Depending on dply's contains()-function.
 }
-\examples{
-col_num()
-}
 \keyword{numeric}

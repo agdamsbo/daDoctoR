@@ -22,7 +22,4 @@ rep_reg_cie(meas, vars, string, data, cut = 0.1)
 \description{
 For bivariate analyses, binary logistic or linear regression. From "Modeling and variable selection in epidemiologic analysis." - S. Greenland, 1989.
 }
-\examples{
-rep_reg_cie()
-}
 \keyword{estimate-in-estimate}

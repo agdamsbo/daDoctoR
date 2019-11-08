@@ -11,12 +11,9 @@ comb_olr(meas, vars, data)
 
 \item{vars}{variables in model. Input as c() of columnnames, use dput().}
 
-\item{dta}{data frame to pull variables from.}
+\item{data}{data frame to pull variables from.}
 }
 \description{
 Should be combined with "rep_olr()". The confint() function is rather slow, causing the whole function to hang when including many predictors and calculating the ORs with CI.
-}
-\examples{
-comb_olr()
 }
 \keyword{olr}

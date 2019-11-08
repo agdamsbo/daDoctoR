@@ -7,9 +7,6 @@
 #' @param data dataframe to draw variables from.
 #' @keywords ppv npv sensitivity specificity
 #' @export
-#' @examples
-#' rep_epi_tests()
-
 
 rep_epi_tests<-function(gold,test,data){
   require(epiR)

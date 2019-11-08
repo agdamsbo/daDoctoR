@@ -16,14 +16,11 @@ rep_glm(meas, vars = NULL, string, ci = FALSE, data,
 
 \item{ci}{flag to get results as OR with 95% confidence interval.}
 
-\item{data}{data frame to pull variables from.}
+\item{data}{dataframe to pull variables from.}
 
 \item{fixed.var}{flag to set "vars" as fixed in the model. When FALSE, then true bivariate logistic regression is performed.}
 }
 \description{
 For bivariate analyses. The confint() function is rather slow, causing the whole function to hang when including many predictors and calculating the ORs with CI.
-}
-\examples{
-rep_glm()
 }
 \keyword{logistic}

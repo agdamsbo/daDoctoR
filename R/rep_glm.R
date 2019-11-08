@@ -5,20 +5,19 @@
 #' @param vars variables in model. Input as c() of columnnames, use dput().
 #' @param string variables to test. Input as c() of columnnames, use dput().
 #' @param ci flag to get results as OR with 95% confidence interval.
-#' @param data data frame to pull variables from.
+#' @param data dataframe to pull variables from.
 #' @param fixed.var flag to set "vars" as fixed in the model. When FALSE, then true bivariate logistic regression is performed.
 #' @keywords logistic
 #' @export
-#' @examples
-#' rep_glm()
 
-rep_glm<-function(meas,vars=NULL,string,ci=FALSE,data,fixed.var=FALSE){
-
+rep_glm<-function(meas,vars=NULL,string,ci=FALSE,data,fixed.var=FALSE)
+  {
+  ## Intro and definitions
   require(broom)
   y<-data[,c(meas)]
-
+  ## Factor check
   if(!is.factor(y)){stop("y is not a factor")}
-
+  ## Running "true" bivariate analysis
   if (fixed.var==FALSE){
     d<-data
     x<-data.frame(d[,c(vars,string)])
@@ -85,7 +84,7 @@ rep_glm<-function(meas,vars=NULL,string,ci=FALSE,data,fixed.var=FALSE){
     r<-data.frame(df[,1:2],pa,t)[-1,]
   }
 
-
+  ## Running multivariate analyses (eg "bivariate" analyses with fixed variables)
   if (fixed.var==TRUE){
     d<-data
     x<-data.frame(d[,c(string)])

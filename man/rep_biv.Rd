@@ -23,8 +23,5 @@ rep_biv(y, v1, string, data, method = "pval", logistic = FALSE,
 \description{
 For bivariate analyses, for gating by p-value or change-in-estimate.
 }
-\examples{
-rep_biv()
-}
 \keyword{logistic}
 \keyword{regression}

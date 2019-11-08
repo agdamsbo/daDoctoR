@@ -9,8 +9,6 @@
 #' @param logistic flag for logistic binomial regression or not (linear is then selected).
 #' @keywords logistic regression
 #' @export
-#' @examples
-#' rep_biv()
 
 rep_biv<-function(y,v1,string,data,method="pval",logistic=FALSE,ci=FALSE,cut=0.1,v2=NULL,v3=NULL){
 

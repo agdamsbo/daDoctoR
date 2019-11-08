@@ -23,7 +23,5 @@ rep_lm(meas, vars = NULL, string, ci = FALSE, data,
 \description{
 For bivariate analyses, to determine which variables to include in adjusted model.
 }
-\examples{
-rep_lm()
-}
 \keyword{linear}
+\keyword{regression}

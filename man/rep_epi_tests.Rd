@@ -19,9 +19,6 @@ For bivariate analyses. The confint() function is rather slow, causing the whole
 \details{
 Repeats the epi.tests from the epiR package. Either gs or test should be of length 1.
 }
-\examples{
-rep_epi_tests()
-}
 \keyword{npv}
 \keyword{ppv}
 \keyword{sensitivity}

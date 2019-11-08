@@ -28,7 +28,4 @@ plot_ord_odds(x, title = NULL, dec = 3, lbls = NULL,
 \description{
 Heavily inspired by https://www.r-bloggers.com/plotting-odds-ratios-aka-a-forrestplot-with-ggplot2/
 }
-\examples{
-plot_ord_odds()
-}
 \keyword{forestplot}

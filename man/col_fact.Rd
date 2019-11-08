@@ -18,7 +18,4 @@ col_fact(string, data, levels = NULL, labels = NULL)
 \description{
 Depending on dply's contains()-function.
 }
-\examples{
-col_fact()
-}
 \keyword{factor}
