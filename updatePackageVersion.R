@@ -32,3 +32,4 @@ updatePackageVersion <- function(packageLocation ="."){
   ## Return the updated version number to screen
   return(vFinal)
 }
+

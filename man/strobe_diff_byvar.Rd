@@ -20,7 +20,7 @@ strobe_diff_byvar(meas, var, group, adj, data, dec = 2)
 \item{groups}{groups to compare, as string.}
 }
 \description{
-Printable table of three dimensional regression analysis of group vs var for meas. By var.
+Printable table of three dimensional regression analysis of group vs var for meas. By var. Includes p-values.
 }
 \examples{
 strobe_diff_byvar()

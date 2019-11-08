@@ -4,7 +4,8 @@
 \alias{plot_ord_odds}
 \title{Forrest plot from ordinal logistic regression}
 \usage{
-plot_ord_odds(x, title = NULL, dec = 3, lbls = NULL, short = FALSE,
+plot_ord_odds(x, title = NULL, dec = 3, lbls = NULL,
+  hori = "OR (95 \% CI)", vert = "Variables", short = FALSE,
   input = "model")
 }
 \arguments{
@@ -15,6 +16,10 @@ plot_ord_odds(x, title = NULL, dec = 3, lbls = NULL, short = FALSE,
 \item{dec}{decimals for labels}
 
 \item{lbls}{labels for variable names. Carefull, as the right order is not checked automatically!}
+
+\item{hori}{labels the horizontal axis (this i the y axis as the plot is rotated)}
+
+\item{vert}{labels the horizontal axis (this i the x axis as the plot is rotated)}
 
 \item{short}{flag to half number of ticks on horizontal axis.}
 
