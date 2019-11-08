@@ -23,4 +23,7 @@ rep_glm(meas, vars = NULL, string, ci = FALSE, data,
 \description{
 For bivariate analyses. The confint() function is rather slow, causing the whole function to hang when including many predictors and calculating the ORs with CI.
 }
+\examples{
+rep_glm()
+}
 \keyword{logistic}

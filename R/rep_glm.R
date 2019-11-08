@@ -9,7 +9,8 @@
 #' @param fixed.var flag to set "vars" as fixed in the model. When FALSE, then true bivariate logistic regression is performed.
 #' @keywords logistic
 #' @export
-#'
+#' @examples
+#' rep_glm()
 
 rep_glm<-function(meas,vars=NULL,string,ci=FALSE,data,fixed.var=FALSE){
 
@@ -155,7 +156,3 @@ rep_glm<-function(meas,vars=NULL,string,ci=FALSE,data,fixed.var=FALSE){
   }
   return(r)
 }
-
-
-
-
