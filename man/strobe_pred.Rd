@@ -2,7 +2,7 @@
 % Please edit documentation in R/strobe_pred.R
 \name{strobe_pred}
 \alias{strobe_pred}
-\title{Logistic regression of predictors according to STROBE}
+\title{Regression model of predictors according to STROBE, bi- and multivariate.}
 \usage{
 strobe_pred(meas, adj, data, dec = 2, n.by.adj = FALSE)
 }
@@ -18,6 +18,6 @@ strobe_pred(meas, adj, data, dec = 2, n.by.adj = FALSE)
 \item{n.by.adj}{flag to indicate wether to count number of patients in adjusted model or overall for outcome meassure not NA.}
 }
 \description{
-Printable table of logistic regression analysis according to STROBE.
+Printable table of regression model according to STROBE. Includes borth bivariate and multivariate in the same table. Output is a list, with the first item being the main "output" as a dataframe. Automatically uses logistic regression model for dichotomous outcome variable and linear regression model for continous outcome variable.
 }
 \keyword{logistic}
