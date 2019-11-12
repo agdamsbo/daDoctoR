@@ -1,6 +1,6 @@
-#' Print regression results according to STROBE
+#' Print ordinal logistic regression results according to STROBE
 #'
-#' Printable table of logistic regression analysis oaccording to STROBE.
+#' Printable table of ordinal logistic regression analysis oaccording to STROBE. Uses polr() funtion of the MASS-package.
 #' @param meas outcome meassure variable name in data-data.frame as a string. Can be numeric or factor. Result is calculated accordingly.
 #' @param vars variables to compare against. As vector of columnnames.
 #' @param data dataframe of data.

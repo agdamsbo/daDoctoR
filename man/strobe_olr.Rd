@@ -2,7 +2,7 @@
 % Please edit documentation in R/strobe_olr.R
 \name{strobe_olr}
 \alias{strobe_olr}
-\title{Print regression results according to STROBE}
+\title{Print ordinal logistic regression results according to STROBE}
 \usage{
 strobe_olr(meas, vars, data, dec = 2)
 }
@@ -16,6 +16,6 @@ strobe_olr(meas, vars, data, dec = 2)
 \item{dec}{decimals for results, standard is set to 2. Mean and sd is dec-1.}
 }
 \description{
-Printable table of logistic regression analysis oaccording to STROBE.
+Printable table of ordinal logistic regression analysis oaccording to STROBE. Uses polr() funtion of the MASS-package.
 }
 \keyword{olr}

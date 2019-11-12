@@ -3,7 +3,7 @@
 #' Printable table of three dimensional regression analysis of group vs var for meas. By group.
 #' @param meas outcome meassure variable name in data-data.frame as a string. Can be numeric or factor. Result is calculated accordingly.
 #' @param var binary exposure variable to compare against (active vs placebo). As string.
-#' @param groups groups to compare, as string.
+#' @param group group to compare, as string.
 #' @param adj variables to adjust for, as string.
 #' @param data dataframe of data.
 #' @param dec decimals for results, standard is set to 2. Mean and sd is dec-1. pval has 3 decimals.

@@ -1,15 +1,16 @@
 #' Regression model of predictors according to STROBE, bi- and multivariate.
 #'
-#' Printable table of regression model according to STROBE. Includes borth bivariate and multivariate in the same table. Output is a list, with the first item being the main "output" as a dataframe. Automatically uses logistic regression model for dichotomous outcome variable and linear regression model for continous outcome variable.
+#' Printable table of regression model according to STROBE. Includes borth bivariate and multivariate in the same table. Output is a list, with the first item being the main "output" as a dataframe. Automatically uses logistic regression model for dichotomous outcome variable and linear regression model for continous outcome variable. Linear regression will give estimated adjusted true mean in list.
 #' @param meas binary outcome meassure variable, column name in data.frame as a string. Can be numeric or factor. Result is calculated accordingly.
 #' @param adj variables to adjust for, as string.
 #' @param data dataframe of data.
 #' @param dec decimals for results, standard is set to 2. Mean and sd is dec-1.
 #' @param n.by.adj flag to indicate wether to count number of patients in adjusted model or overall for outcome meassure not NA.
+#' @param p.val flag to include p-values in linear regression for now, set to FALSE as standard.
 #' @keywords logistic
 #' @export
 
-strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE){
+strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
   ## Ønskeliste:
   ##
   ## - Tæl selv antal a NA'er
@@ -178,7 +179,7 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE){
     ads<-d[,c(adj)]
 
     dfcr<-data.frame(matrix(NA,ncol = 3))
-    names(dfcr)<-c("pred","mean_ci","pv")
+    names(dfcr)<-c("pred","dif_ci","pv")
     n.mn<-c()
 
     nref<-c()
@@ -192,9 +193,13 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE){
       suppressMessages(ci<-confint(mn))
       l<-round(ci[-1,1],dec)
       u<-round(ci[-1,2],dec)
-      mean<-round(coef(mn)[-1],dec)
-      mean_ci<-paste0(mean," (",l," to ",u,")")
+      dif<-round(coef(mn)[-1],dec)
+      dif_ci<-paste0(dif," (",l," to ",u,")")
       pv<-round(tidy(mn)$p.value[-1],dec+1)
+      pv<-ifelse(pv<0.001,"<0.001",round(pv,3))
+      pv <- ifelse(pv<=0.05|pv=="<0.001",paste0("*",pv),
+                   ifelse(pv>0.05&pv<=0.1,paste0(".",pv),pv))
+
       x1<-ads[,i]
 
       if (is.factor(x1)){
@@ -205,7 +210,7 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE){
         pred<-names(ads)[i]
       }
 
-      dfcr<-rbind(dfcr,cbind(pred,mean_ci,pv))
+      dfcr<-rbind(dfcr,cbind(pred,dif_ci,pv))
     }
 
     ## Mutually adjusted  ORs
@@ -213,6 +218,7 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE){
     dat<-data.frame(m=m,ads)
     ma <- lm(m ~ ., data = dat)
     miss<-length(ma$na.action)
+
 
     actable <- coef(summary(ma))
     pa <- actable[,4]
@@ -227,6 +233,8 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE){
     alo<-aci[,1]
     aup<-aci[,2]
     amean_ci<-paste0(aco," (",alo," to ",aup,")")
+
+    mean_est<-amean_ci[[1]]
 
 
     nq<-c()
@@ -312,12 +320,19 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE){
 
     suppressWarnings(re<-left_join(df,dfcr,by="names"))
 
-    ref<-data.frame(re[,1],re[,2],re[,5],re[,3])
+    if (p.val==TRUE){
+      ref<-data.frame(re[,1],re[,2],re[,5],re[,6],re[,3],re[,4])
 
-    names(ref)<-c("Variable",paste0("N=",n.meas),"Crude OR (95 % CI)","Mutually adjusted OR (95 % CI)")
+      names(ref)<-c("Variable",paste0("N=",n.meas),"Difference (95 % CI)","p-value","Mutually adjusted difference (95 % CI)","A p-value")
+    }
+    else{
+      ref<-data.frame(re[,1],re[,2],re[,5],re[,3])
 
-    ls<-list(tbl=ref,miss,n.meas,nrow(d))
-    names(ls)<-c("Printable table","Deleted due to missingness in adjusted analysis","Number of outcome observations","Length of dataframe")
+      names(ref)<-c("Variable",paste0("N=",n.meas),"Difference (95 % CI)","Mutually adjusted difference (95 % CI)")
+    }
+
+    ls<-list(tbl=ref,miss,n.meas,nrow(d),mean_est)
+    names(ls)<-c("Printable table","Deleted due to missingness in adjusted analysis","Number of outcome observations","Length of dataframe","Estimated true mean (95 % CI) in adjusted analysis")
 
   }
 

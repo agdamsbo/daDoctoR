@@ -11,13 +11,13 @@ strobe_diff_byvar(meas, var, group, adj, data, dec = 2)
 
 \item{var}{binary exposure variable to compare against (active vs placebo). As string.}
 
+\item{group}{groups to compare, as string.}
+
 \item{adj}{variables to adjust for, as string.}
 
 \item{data}{dataframe of data.}
 
 \item{dec}{decimals for results, standard is set to 2. Mean and sd is dec-1.}
-
-\item{groups}{groups to compare, as string.}
 }
 \description{
 Printable table of three dimensional regression analysis of group vs var for meas. By var. Includes p-values.

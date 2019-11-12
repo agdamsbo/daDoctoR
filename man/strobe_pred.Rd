@@ -4,7 +4,8 @@
 \alias{strobe_pred}
 \title{Regression model of predictors according to STROBE, bi- and multivariate.}
 \usage{
-strobe_pred(meas, adj, data, dec = 2, n.by.adj = FALSE)
+strobe_pred(meas, adj, data, dec = 2, n.by.adj = FALSE,
+  p.val = FALSE)
 }
 \arguments{
 \item{meas}{binary outcome meassure variable, column name in data.frame as a string. Can be numeric or factor. Result is calculated accordingly.}
@@ -16,8 +17,10 @@ strobe_pred(meas, adj, data, dec = 2, n.by.adj = FALSE)
 \item{dec}{decimals for results, standard is set to 2. Mean and sd is dec-1.}
 
 \item{n.by.adj}{flag to indicate wether to count number of patients in adjusted model or overall for outcome meassure not NA.}
+
+\item{p.val}{flag to include p-values in linear regression for now, set to FALSE as standard.}
 }
 \description{
-Printable table of regression model according to STROBE. Includes borth bivariate and multivariate in the same table. Output is a list, with the first item being the main "output" as a dataframe. Automatically uses logistic regression model for dichotomous outcome variable and linear regression model for continous outcome variable.
+Printable table of regression model according to STROBE. Includes borth bivariate and multivariate in the same table. Output is a list, with the first item being the main "output" as a dataframe. Automatically uses logistic regression model for dichotomous outcome variable and linear regression model for continous outcome variable. Linear regression will give estimated adjusted true mean in list.
 }
 \keyword{logistic}
