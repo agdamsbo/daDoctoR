@@ -164,11 +164,11 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
   rona<-c()
   for (i in 1:length(ads)){
     if (is.factor(ads[,i])){
-      rona<-c(rona,names(ads[i]),levels(ads[,i]))
+      rona<-c(rona,names(ads[i]),levels(ads[,i]))}
       if (!is.factor(ads[,i])){
         rona<-c(rona,names(ads[i]),"Per unit increase")
       }
-    }}
+    }
 
   if (p.val==TRUE){
     ref<-data.frame(c(NA,rona),re[,2],re[,5],re[,6],re[,3],re[,4])
@@ -331,11 +331,11 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
     rona<-c()
     for (i in 1:length(ads)){
       if (is.factor(ads[,i])){
-        rona<-c(rona,names(ads[i]),levels(ads[,i]))
+        rona<-c(rona,names(ads[i]),levels(ads[,i]))}
         if (!is.factor(ads[,i])){
           rona<-c(rona,names(ads[i]),"Per unit increase")
         }
-      }}
+      }
 
     if (p.val==TRUE){
       ref<-data.frame(c(NA,rona),re[,2],re[,5],re[,6],re[,3],re[,4])
