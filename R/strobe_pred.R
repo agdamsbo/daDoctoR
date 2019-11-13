@@ -161,13 +161,22 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
 
   suppressWarnings(re<-left_join(df,dfcr,by="names"))
 
+  rona<-c()
+  for (i in 1:length(ads)){
+    if (is.factor(ads[,i])){
+      rona<-c(rona,names(ads[i]),levels(ads[,i]))
+      if (!is.factor(ads[,i])){
+        rona<-c(rona,names(ads[i]),"Per unit increase")
+      }
+    }}
+
   if (p.val==TRUE){
-    ref<-data.frame(re[,1],re[,2],re[,5],re[,6],re[,3],re[,4])
+    ref<-data.frame(c(NA,rona),re[,2],re[,5],re[,6],re[,3],re[,4])
 
     names(ref)<-c("Variable",paste0("N=",n.meas),"Crude OR (95 % CI)","p-value","Mutually adjusted OR (95 % CI)","A p-value")
   }
   else{
-    ref<-data.frame(re[,1],re[,2],re[,5],re[,3])
+    ref<-data.frame(c(NA,rona),re[,2],re[,5],re[,3])
 
     names(ref)<-c("Variable",paste0("N=",n.meas),"Crude OR (95 % CI)","Mutually adjusted OR (95 % CI)")
   }
@@ -319,13 +328,22 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
 
     suppressWarnings(re<-left_join(df,dfcr,by="names"))
 
+    rona<-c()
+    for (i in 1:length(ads)){
+      if (is.factor(ads[,i])){
+        rona<-c(rona,names(ads[i]),levels(ads[,i]))
+        if (!is.factor(ads[,i])){
+          rona<-c(rona,names(ads[i]),"Per unit increase")
+        }
+      }}
+
     if (p.val==TRUE){
-      ref<-data.frame(re[,1],re[,2],re[,5],re[,6],re[,3],re[,4])
+      ref<-data.frame(c(NA,rona),re[,2],re[,5],re[,6],re[,3],re[,4])
 
       names(ref)<-c("Variable",paste0("N=",n.meas),"Difference (95 % CI)","p-value","Mutually adjusted difference (95 % CI)","A p-value")
     }
     else{
-      ref<-data.frame(re[,1],re[,2],re[,5],re[,3])
+      ref<-data.frame(c(NA,rona),re[,2],re[,5],re[,3])
 
       names(ref)<-c("Variable",paste0("N=",n.meas),"Difference (95 % CI)","Mutually adjusted difference (95 % CI)")
     }
