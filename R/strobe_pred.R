@@ -135,15 +135,13 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
         nq<-rbind(nq,cbind(nl,rt))
       }}}
 
-
   rnames<-c()
-
-  for (i in 1:length(ads)){
-    if (is.factor(ads[,i])){
-      rnames<-c(rnames,names(ads[i]),levels(ads[,i]))
+  for (i in 1:ncol(dat2)){
+    if (is.factor(dat2[,i])){
+      rnames<-c(rnames,names(dat2)[i],paste0(names(dat2)[i],levels(dat2[,i])))
     }
-    if (!is.factor(ads[,i])){
-      rnames<-c(rnames,names(ads[i]),"Per unit increase")
+    if (!is.factor(dat2[,i])){
+      rnames<-c(rnames,paste0(names(dat2)[i],".all"),names(dat2)[i])
     }
   }
   res<-cbind(aor_ci,apv)
@@ -296,13 +294,12 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
 
 
     rnames<-c()
-
-    for (i in 1:length(ads)){
-      if (is.factor(ads[,i])){
-        rnames<-c(rnames,names(ads[i]),levels(ads[,i]))
+    for (i in 1:ncol(dat2)){
+      if (is.factor(dat2[,i])){
+        rnames<-c(rnames,names(dat2)[i],paste0(names(dat2)[i],levels(dat2[,i])))
       }
-      if (!is.factor(ads[,i])){
-        rnames<-c(rnames,names(ads[i]),"Per unit increase")
+      if (!is.factor(dat2[,i])){
+        rnames<-c(rnames,paste0(names(dat2)[i],".all"),names(dat2)[i])
       }
     }
     res<-cbind(amean_ci,apv)
