@@ -138,12 +138,12 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
 
   rnames<-c()
 
-  for (i in 1:ncol(dat2)){
-    if (is.factor(dat2[,i])){
-      rnames<-c(rnames,names(dat2)[i],levels(dat2[,i]))
+  for (i in 1:length(ads)){
+    if (is.factor(ads[,i])){
+      rnames<-c(rnames,names(ads[i]),levels(ads[,i]))
     }
-    if (!is.factor(dat2[,i])){
-      rnames<-c(rnames,names(dat2[i]),"Per unit increase")
+    if (!is.factor(ads[,i])){
+      rnames<-c(rnames,names(ads[i]),"Per unit increase")
     }
   }
   res<-cbind(aor_ci,apv)
@@ -179,11 +179,6 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
   }
 
   if(!is.factor(m)){
-
-    d<-dta
-    m<-d[,c(meas)]
-
-    ads<-d[,c(adj)]
 
     dfcr<-data.frame(matrix(NA,ncol = 3))
     names(dfcr)<-c("pred","dif_ci","pv")
@@ -302,12 +297,12 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
 
     rnames<-c()
 
-    for (i in 1:ncol(dat2)){
-      if (is.factor(dat2[,i])){
-        rnames<-c(rnames,names(dat2)[i],levels(dat2[,i]))
+    for (i in 1:length(ads)){
+      if (is.factor(ads[,i])){
+        rnames<-c(rnames,names(ads[i]),levels(ads[,i]))
       }
-      if (!is.factor(dat2[,i])){
-        rnames<-c(rnames,names(dat2[i]),"Per unit increase")
+      if (!is.factor(ads[,i])){
+        rnames<-c(rnames,names(ads[i]),"Per unit increase")
       }
     }
     res<-cbind(amean_ci,apv)
