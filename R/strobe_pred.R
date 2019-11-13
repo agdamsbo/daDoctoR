@@ -1,6 +1,9 @@
 #' Regression model of predictors according to STROBE, bi- and multivariate.
 #'
-#' Printable table of regression model according to STROBE. Includes borth bivariate and multivariate in the same table. Output is a list, with the first item being the main "output" as a dataframe. Automatically uses logistic regression model for dichotomous outcome variable and linear regression model for continous outcome variable. Linear regression will give estimated adjusted true mean in list.
+#' Printable table of regression model according to STROBE for linear or binary outcome-variables.
+#' Includes borth bivariate and multivariate in the same table.
+#' Output is a list, with the first item being the main "output" as a dataframe.
+#' Automatically uses logistic regression model for dichotomous outcome variable and linear regression model for continous outcome variable. Linear regression will give estimated adjusted true mean in list.
 #' @param meas binary outcome meassure variable, column name in data.frame as a string. Can be numeric or factor. Result is calculated accordingly.
 #' @param adj variables to adjust for, as string.
 #' @param data dataframe of data.
@@ -152,7 +155,7 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
 
   coll<-left_join(left_join(namt,numb,by="names"),rest,by="names")
 
-  header<-data.frame(matrix("Adjusted",ncol = ncol(coll)),stringsAsFactors = F)
+  header<-data.frame(matrix(paste0("Chance of ",meas," is ",levels(m)[-1]),ncol = ncol(coll)),stringsAsFactors = F)
   names(header)<-names(coll)
 
   df<-data.frame(rbind(header,coll),stringsAsFactors = F)

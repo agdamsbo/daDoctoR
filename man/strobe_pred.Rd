@@ -21,6 +21,9 @@ strobe_pred(meas, adj, data, dec = 2, n.by.adj = FALSE,
 \item{p.val}{flag to include p-values in table, set to FALSE as standard.}
 }
 \description{
-Printable table of regression model according to STROBE. Includes borth bivariate and multivariate in the same table. Output is a list, with the first item being the main "output" as a dataframe. Automatically uses logistic regression model for dichotomous outcome variable and linear regression model for continous outcome variable. Linear regression will give estimated adjusted true mean in list.
+Printable table of regression model according to STROBE for linear or binary outcome-variables.
+Includes borth bivariate and multivariate in the same table.
+Output is a list, with the first item being the main "output" as a dataframe.
+Automatically uses logistic regression model for dichotomous outcome variable and linear regression model for continous outcome variable. Linear regression will give estimated adjusted true mean in list.
 }
 \keyword{logistic}
