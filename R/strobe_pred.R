@@ -6,7 +6,7 @@
 #' @param data dataframe of data.
 #' @param dec decimals for results, standard is set to 2. Mean and sd is dec-1.
 #' @param n.by.adj flag to indicate wether to count number of patients in adjusted model or overall for outcome meassure not NA.
-#' @param p.val flag to include p-values in linear regression for now, set to FALSE as standard.
+#' @param p.val flag to include p-values in table, set to FALSE as standard.
 #' @keywords logistic
 #' @export
 
@@ -140,10 +140,10 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
 
   for (i in 1:ncol(dat2)){
     if (is.factor(dat2[,i])){
-      rnames<-c(rnames,names(dat2)[i],paste0(names(dat2)[i],levels(dat2[,i])))
+      rnames<-c(rnames,names(dat2)[i],levels(dat2[,i]))
     }
     if (!is.factor(dat2[,i])){
-      rnames<-c(rnames,paste0(names(dat2)[i],".all"),names(dat2)[i])
+      rnames<-c(rnames,names(dat2[i]),"Per unit increase")
     }
   }
   res<-cbind(aor_ci,apv)
@@ -163,9 +163,16 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
 
   suppressWarnings(re<-left_join(df,dfcr,by="names"))
 
-  ref<-data.frame(re[,1],re[,2],re[,5],re[,3])
+  if (p.val==TRUE){
+    ref<-data.frame(re[,1],re[,2],re[,5],re[,6],re[,3],re[,4])
 
-  names(ref)<-c("Variable",paste0("N=",n.meas),"Crude OR (95 % CI)","Mutually adjusted OR (95 % CI)")
+    names(ref)<-c("Variable",paste0("N=",n.meas),"Crude OR (95 % CI)","p-value","Mutually adjusted OR (95 % CI)","A p-value")
+  }
+  else{
+    ref<-data.frame(re[,1],re[,2],re[,5],re[,3])
+
+    names(ref)<-c("Variable",paste0("N=",n.meas),"Crude OR (95 % CI)","Mutually adjusted OR (95 % CI)")
+  }
 
   ls<-list(tbl=ref,miss,n.meas,nrow(d))
   names(ls)<-c("Printable table","Deleted due to missingness in adjusted analysis","Number of outcome observations","Length of dataframe")
@@ -297,10 +304,10 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
 
     for (i in 1:ncol(dat2)){
       if (is.factor(dat2[,i])){
-        rnames<-c(rnames,names(dat2)[i],paste0(names(dat2)[i],levels(dat2[,i])))
+        rnames<-c(rnames,names(dat2)[i],levels(dat2[,i]))
       }
       if (!is.factor(dat2[,i])){
-        rnames<-c(rnames,paste0(names(dat2)[i],".all"),names(dat2)[i])
+        rnames<-c(rnames,names(dat2[i]),"Per unit increase")
       }
     }
     res<-cbind(amean_ci,apv)

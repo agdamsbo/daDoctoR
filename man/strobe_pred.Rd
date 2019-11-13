@@ -18,7 +18,7 @@ strobe_pred(meas, adj, data, dec = 2, n.by.adj = FALSE,
 
 \item{n.by.adj}{flag to indicate wether to count number of patients in adjusted model or overall for outcome meassure not NA.}
 
-\item{p.val}{flag to include p-values in linear regression for now, set to FALSE as standard.}
+\item{p.val}{flag to include p-values in table, set to FALSE as standard.}
 }
 \description{
 Printable table of regression model according to STROBE. Includes borth bivariate and multivariate in the same table. Output is a list, with the first item being the main "output" as a dataframe. Automatically uses logistic regression model for dichotomous outcome variable and linear regression model for continous outcome variable. Linear regression will give estimated adjusted true mean in list.
