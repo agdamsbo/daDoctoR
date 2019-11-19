@@ -7,12 +7,11 @@
 calculate_overlap(x)
 }
 \arguments{
-\item{x}{Date of birth.}
+\item{x}{list of variables included. Has to be vectors of identifier numbers.}
 }
 \description{
+To use with eulerr package for creating Euler/Venn-diagrams.
 Ex for creating euler diagram using the euler() function of the eulerr package.
-}
-\examples{
-
+Up to five (5) dimensions.
 }
 \keyword{overlap}

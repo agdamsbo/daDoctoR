@@ -1,20 +1,23 @@
-#' Calculating overlap from list of identifier numbers
+#' Creates Euler model from list of identifier numbers.
 #'
-#' To use with eulerr package for creating Euler/Venn-diagrams.
-#' Ex for creating euler diagram using the euler() function of the eulerr package.
-#' Up to five (5) dimensions.
+#' Calculates overlaps and uses eulerr package to create Euler/Venn-diagrams. Use plot() to create diagram.
+#' Combined with an evolved calculate.overlap() from the VennDiagram library.
+#' Up to five (5) dimensions. Limit set by the complexity of combinations. euler() supports more.
 #' @param x list of variables included. Has to be vectors of identifier numbers.
+#' @param shape same as for euler(). These includes c("circle","ellipse").
 #' @keywords overlap
 #' @export
 
-calculate_overlap<-function (x)
+euler_plot<-function (x,shape)
 {
-  ## Based on the calculate.overlap() function from the VennDiagram package, and extended for direct use with the euler() funtion from the eulerr package.
+  library(eulerr)
+  sh<-shape
+
   if (1 == length(x)) {
-    overlap <- x
+    overlap <- list("A"=x)
   }
   else if (2 == length(x)) {
-    overlap <- list(a1 = x[[1]], a2 = x[[2]], a3 = intersect(x[[1]],
+    overlap <- list("A" = x[[1]], "B" = x[[2]], "A&B" = intersect(x[[1]],
                                                              x[[2]]))
   }
   else if (3 == length(x)) {
@@ -32,8 +35,13 @@ calculate_overlap<-function (x)
     a1 = A[which(!A %in% c(a2, a4, a5))]
     a3 = B[which(!B %in% c(a2, a5, a6))]
     a7 = C[which(!C %in% c(a4, a5, a6))]
-    overlap <- list(a5 = a5, a2 = a2, a4 = a4, a6 = a6,
-                    a1 = a1, a3 = a3, a7 = a7,A=A,B=B,C=C)
+    overlap <- list("A" = a1,
+                    "B" = a3,
+                    "C" = a7,
+                    "A&B" = a2,
+                    "B&C" = a6,
+                    "A&C" = a4,
+                    "A&B&C" = a5)
   }
   else if (4 == length(x)) {
     A <- x[[1]]
@@ -66,7 +74,22 @@ calculate_overlap<-function (x)
     a14 = B[which(!B %in% c(a6, a7, a8, a11, a12, a13, a15))]
     a1 = C[which(!C %in% c(a2, a4, a5, a6, a7, a12, a13))]
     a3 = D[which(!D %in% c(a2, a5, a6, a7, a8, a10, a11))]
-    overlap <- list(a6 = a6, a12 = a12, a11 = a11, a5 = a5,
+    overlap <- list("A" = a9,
+                    "B" = a14,
+                    "C" = a1,
+                    "D" = a3,
+                    "A&B" = a15,
+                    "A&C" = a4,
+                    "A&D" = a10,
+                    "B&C" = a13,
+                    "B&D" = a8,
+                    "C&D" = a2,
+                    "A&B&C" = a12,
+                    "A&B&D" = a11,
+                    "A&C&D" = a5,
+                    "B&C&D" = a7,
+                    "A&B&C&D"= a6,
+                    a6 = a6, a12 = a12, a11 = a11, a5 = a5,
                     a7 = a7, a15 = a15, a4 = a4, a10 = a10, a13 = a13,
                     a8 = a8, a2 = a2, a9 = a9, a14 = a14, a1 = a1, a3 = a3,A=A,B=B,C=C,D=D)
   }
@@ -148,18 +171,43 @@ calculate_overlap<-function (x)
                            a28, a29, a31, a22, a30, a26, a25, a24, a14))]
     a1 = A[which(!A %in% c(a7, a8, a18, a17, a19, a9, a27,
                            a28, a31, a20, a30, a29, a22, a23, a12))]
-    overlap <- list(a31 = a31, a30 = a30, a29 = a29, a28 = a28,
-                    a27 = a27, a26 = a26, a25 = a25, a24 = a24, a23 = a23,
-                    a22 = a22, a21 = a21, a20 = a20, a19 = a19, a18 = a18,
-                    a17 = a17, a16 = a16, a15 = a15, a14 = a14, a13 = a13,
-                    a12 = a12, a11 = a11, a10 = a10, a9 = a9, a8 = a8,
-                    a7 = a7, a6 = a6, a5 = a5, a4 = a4, a3 = a3, a2 = a2,
-                    a1 = a1,A=A,B=B,C=C,D=D,E=E)
+    overlap <- list("A" = a1,
+                    "B" = a2,
+                    "C" = a3,
+                    "D" = a4,
+                    "E" = a5,
+                    "A&B" = a9,
+                    "A&C" = a12,
+                    "A&D" = a8,
+                    "A&E" = a7,
+                    "B&C" = a11,
+                    "B&D" = a14,
+                    "B&E" = a10,
+                    "C&D" = a13,
+                    "C&E" = a6,
+                    "D&E" = a15,
+                    "A&B&C" = a22,
+                    "A&B&D" = a19,
+                    "A&B&E" = a20,
+                    "A&C&D" = a23,
+                    "A&C&E" = a17,
+                    "A&D&E" = a18,
+                    "B&C&D" = a24,
+                    "B&C&E" = a21,
+                    "B&D&E" = a25,
+                    "C&D&E" = a16,
+                    "A&B&C&D"= a30,
+                    "A&B&C&E"= a29,
+                    "A&B&D&E"= a28,
+                    "A&C&D&E"= a27,
+                    "B&C&D&E"= a26,
+                    "A&B&C&D&E"= a31)
   }
   else {
     flog.error("Invalid size of input object", name = "VennDiagramLogger")
     stop("Invalid size of input object")
   }
-  return(overlap)
+  eul <- euler(unlist(overlap, use.names=T),shape = sh)
+  return(eul)
 }
 
