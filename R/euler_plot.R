@@ -3,13 +3,16 @@
 #' Calculates relative overlaps and uses eulerr package to create Euler/Venn-diagrams. Use plot() to create diagram.
 #' Combined with an evolved calculate.overlap() from the VennDiagram library.
 #' Up to five (5) dimensions. Limit set by the complexity of combinations. euler() supports more.
+#' Output is a list. First element is euler model for plotting. Others are for easy labeling.
 #' @param x list of variables included. Has to be vectors of identifier numbers.
 #' @param total data.frame, vector or integer to calculate or use as total number of participants for percentage calculation.
+#' @param dec number of decimals for labels in plot. Standard set to 1.
+#' @param label labels for easy creation of legend in plot().
 #' @param shape same as for euler(). These includes c("circle","ellipse").
 #' @keywords overlap
 #' @export
 
-euler_plot<-function (x,total,shape="ellipse")
+euler_plot<-function (x,total,dec=1,label=as.character(c(1:5)),shape="ellipse")
 {
   library(eulerr)
   sh<-shape
@@ -17,10 +20,13 @@ euler_plot<-function (x,total,shape="ellipse")
 
   if (1 == length(x)) {
     overlap <- list("A"=x)
+    labels<-list("a"=x)
   }
   else if (2 == length(x)) {
     overlap <- list("A" = x[[1]], "B" = x[[2]], "A&B" = intersect(x[[1]],
                                                                   x[[2]]))
+    labels<-list("a"=x[[1]],
+                 "b"=x[[2]])
   }
   else if (3 == length(x)) {
     A <- x[[1]]
@@ -44,6 +50,9 @@ euler_plot<-function (x,total,shape="ellipse")
                     "B&C" = a6,
                     "A&C" = a4,
                     "A&B&C" = a5)
+    labels<-list("a"=A,
+                 "b"=B,
+                 "c"=C)
   }
   else if (4 == length(x)) {
     A <- x[[1]]
@@ -94,6 +103,10 @@ euler_plot<-function (x,total,shape="ellipse")
                     a6 = a6, a12 = a12, a11 = a11, a5 = a5,
                     a7 = a7, a15 = a15, a4 = a4, a10 = a10, a13 = a13,
                     a8 = a8, a2 = a2, a9 = a9, a14 = a14, a1 = a1, a3 = a3,A=A,B=B,C=C,D=D)
+    labels<-list("a"=A,
+                 "b"=B,
+                 "c"=C,
+                 "d"=D)
   }
   else if (5 == length(x)) {
     A <- x[[1]]
@@ -204,6 +217,11 @@ euler_plot<-function (x,total,shape="ellipse")
                     "A&C&D&E"= a27,
                     "B&C&D&E"= a26,
                     "A&B&C&D&E"= a31)
+    labels<-list("a"=A,
+                 "b"=B,
+                 "c"=C,
+                 "d"=D,
+                 "e"=E)
   }
   else {
     flog.error("Invalid size of input object", name = "LazyOverlapCalculater")
@@ -216,10 +234,18 @@ euler_plot<-function (x,total,shape="ellipse")
   else if (class(tot)=="data.frame"){
     n_all<-nrow(tot)
   }
-  ov<-lapply(overlap,function(x,all=n_all,dec=1){
-    round(length(x)/all*100,dec)
-  })
-  eul <- euler(unlist(ov, use.names=T),shape = sh)
-  return(eul)
-}
 
+  frac<-function(x,all,dec){round(length(x)/all*100,dec)}
+
+  ov<-lapply(overlap,frac,all=n_all,dec=dec)
+
+  lb<-lapply(labels,frac,all=n_all,dec=dec)
+
+  lbs<-c()
+  for (i in 1:length(x)){
+    lbs<-c(lbs,paste0(label[i],", ",lb[[i]],"%"))
+  }
+
+  eul <- euler(unlist(ov, use.names=T),shape = sh)
+  return(list(eul,lb,lbs))
+}
