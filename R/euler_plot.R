@@ -1,24 +1,26 @@
 #' Creates Euler model from list of identifier numbers.
 #'
-#' Calculates overlaps and uses eulerr package to create Euler/Venn-diagrams. Use plot() to create diagram.
+#' Calculates relative overlaps and uses eulerr package to create Euler/Venn-diagrams. Use plot() to create diagram.
 #' Combined with an evolved calculate.overlap() from the VennDiagram library.
 #' Up to five (5) dimensions. Limit set by the complexity of combinations. euler() supports more.
 #' @param x list of variables included. Has to be vectors of identifier numbers.
+#' @param total data.frame, vector or integer to calculate or use as total number of participants for percentage calculation.
 #' @param shape same as for euler(). These includes c("circle","ellipse").
 #' @keywords overlap
 #' @export
 
-euler_plot<-function (x,shape)
+euler_plot<-function (x,total,shape="ellipse")
 {
   library(eulerr)
   sh<-shape
+  tot<-total
 
   if (1 == length(x)) {
     overlap <- list("A"=x)
   }
   else if (2 == length(x)) {
     overlap <- list("A" = x[[1]], "B" = x[[2]], "A&B" = intersect(x[[1]],
-                                                             x[[2]]))
+                                                                  x[[2]]))
   }
   else if (3 == length(x)) {
     A <- x[[1]]
@@ -204,10 +206,20 @@ euler_plot<-function (x,shape)
                     "A&B&C&D&E"= a31)
   }
   else {
-    flog.error("Invalid size of input object", name = "VennDiagramLogger")
+    flog.error("Invalid size of input object", name = "LazyOverlapCalculater")
     stop("Invalid size of input object")
   }
-  eul <- euler(unlist(overlap, use.names=T),shape = sh)
+  if (class(tot)=="vector"){
+    n_all<-length(tot)}
+  else if ((class(tot)=="integer"|class(tot)=="numeric")&length(tot)==1) {
+    n_all<-tot}
+  else if (class(tot)=="data.frame"){
+    n_all<-nrow(tot)
+  }
+  ov<-lapply(overlap,function(x,all=n_all,dec=1){
+    round(length(x)/all*100,dec)
+  })
+  eul <- euler(unlist(ov, use.names=T),shape = sh)
   return(eul)
 }
 

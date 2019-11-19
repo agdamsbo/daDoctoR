@@ -4,15 +4,17 @@
 \alias{euler_plot}
 \title{Creates Euler model from list of identifier numbers.}
 \usage{
-euler_plot(x, shape)
+euler_plot(x, total, shape = "ellipse")
 }
 \arguments{
 \item{x}{list of variables included. Has to be vectors of identifier numbers.}
 
+\item{total}{data.frame, vector or integer to calculate or use as total number of participants for percentage calculation.}
+
 \item{shape}{same as for euler(). These includes c("circle","ellipse").}
 }
 \description{
-Calculates overlaps and uses eulerr package to create Euler/Venn-diagrams. Use plot() to create diagram.
+Calculates relative overlaps and uses eulerr package to create Euler/Venn-diagrams. Use plot() to create diagram.
 Combined with an evolved calculate.overlap() from the VennDiagram library.
 Up to five (5) dimensions. Limit set by the complexity of combinations. euler() supports more.
 }
