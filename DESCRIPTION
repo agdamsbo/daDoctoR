@@ -1,7 +1,7 @@
 Package: daDoctoR
 Type: Package
 Title: FUNCTIONS FOR HEALTH RESEARCH
-Version: 0.1.0.9035
+Version: 0.1.0.9036
 Author: c(person("Andreas", "Gammelgaard Damsbo", email = "agdamsbo@pm.me", role = c("cre", "aut")))
 Maintainer: Andreas Gammelgaard Damsbo <agdamsbo@pm.me>
 Description: I am a Danish medical doctor involved in neuropsychiatric research. 
