@@ -4,8 +4,8 @@
 #' @param meas Effect meassure. Input as c() of columnnames, use dput().
 #' @param vars variables in model. Input as c() of columnnames, use dput().
 #' @param string variables to test. Input as c() of columnnames, use dput().
-#' @param ci flag to get results as OR with 95% confidence interval.
-#' @param data data frame to pull variables from.
+#' @param ci flag to get results as OR with 95 percent confidence interval.
+#' @param data data.frame to pull variables from.
 #' @keywords olr
 #' @export
 

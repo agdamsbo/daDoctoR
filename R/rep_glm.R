@@ -4,7 +4,7 @@
 #' @param meas Effect meassure. Input as c() of columnnames, use dput().
 #' @param vars variables in model. Input as c() of columnnames, use dput().
 #' @param string variables to test. Input as c() of columnnames, use dput().
-#' @param ci flag to get results as OR with 95% confidence interval.
+#' @param ci flag to get results as OR with 95 percent confidence interval.
 #' @param data dataframe to pull variables from.
 #' @param fixed.var flag to set "vars" as fixed in the model. When FALSE, then true bivariate logistic regression is performed.
 #' @keywords logistic

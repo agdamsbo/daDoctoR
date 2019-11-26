@@ -14,7 +14,7 @@ rep_glm(meas, vars = NULL, string, ci = FALSE, data,
 
 \item{string}{variables to test. Input as c() of columnnames, use dput().}
 
-\item{ci}{flag to get results as OR with 95% confidence interval.}
+\item{ci}{flag to get results as OR with 95 percent confidence interval.}
 
 \item{data}{dataframe to pull variables from.}
 
