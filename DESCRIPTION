@@ -1,9 +1,8 @@
 Package: daDoctoR
-Type: Package
-Title: Functions For Health Research.
-Version: 0.1.0.9037
+Title: Functions For Health Research
+Version: 0.19.3
 Year: 2019
-Author: person("Andreas", "Gammelgaard Damsbo", email = "agdamsbo@pm.me", role = c("cre", "aut"))
+Author: Andreas Gammelgaard Damsbo <agdamsbo@pm.me>
 Maintainer: Andreas Gammelgaard Damsbo <agdamsbo@pm.me>
 Description: R functions for convenient data management an danalysis in health research.
 Imports: broom, dplyr, epiR, ggplot2, MASS, carData, eulerr
