@@ -12,6 +12,7 @@
 #' @export
 
 strobe_olr<-function(meas,vars,data,dec=2,n.by.adj=FALSE){
+## For calculation of p-value from t-value see rep_olr()
 
   require(MASS)
   require(dplyr)
