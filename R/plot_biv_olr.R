@@ -37,7 +37,7 @@ plot_biv_olr<-function(meas,vars,data, title = NULL,dec=3,lbls=NULL,hori="OR (95
       odd <- data.frame(mat)
       odds<-rbind(odds,odd)
     }
-
+odds<-odds[-1,]
   }
 
   if (analysis=="multi"){
