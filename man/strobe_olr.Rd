@@ -4,18 +4,22 @@
 \alias{strobe_olr}
 \title{Print ordinal logistic regression results according to STROBE}
 \usage{
-strobe_olr(meas, vars, data, dec = 2)
+strobe_olr(meas, vars, data, dec = 2, n.by.adj = FALSE)
 }
 \arguments{
-\item{meas}{outcome meassure variable name in data-data.frame as a string. Can be numeric or factor. Result is calculated accordingly.}
+\item{meas}{outcome meassure variable name or response in data-data.frame as a string. Should be factor, preferably ordered.}
 
 \item{vars}{variables to compare against. As vector of columnnames.}
 
 \item{data}{dataframe of data.}
 
 \item{dec}{decimals for results, standard is set to 2. Mean and sd is dec-1.}
+
+\item{n.by.adj}{flag to indicate wether to count number of patients in adjusted model or overall for outcome meassure not NA.}
 }
 \description{
-Printable table of ordinal logistic regression analysis oaccording to STROBE. Uses polr() funtion of the MASS-package.
+Printable table of ordinal logistic regression with bivariate and multivariate analyses.
+Table according to STROBE. Uses polr() funtion of the MASS-package.
+Formula analysed is the most simple m~v1+v2+vn. The is no significance test. Results are point estimates with 95 percent CI.
 }
 \keyword{olr}
