@@ -21,10 +21,9 @@ plot_biv_olr<-function(meas,vars,data, title = NULL,dec=3,lbls=NULL,hori="OR (95
   d <- data
   x <- data.frame(d[, c(ad)])
   y <- d[, c(meas)]
+  dt <- cbind(y, x)
 
   if (analysis=="biv"){
-
-    dt <- cbind(y, x)
     odds<-c(matrix(ncol = 3))
     nms<-c("or","lo","hi")
     for (i in 1:ncol(x)) {
@@ -41,8 +40,7 @@ odds<-odds[-1,]
   }
 
   if (analysis=="multi"){
-
-    m<-polr(y~.,data = dta2,Hess = TRUE)
+    m<-polr(y~.,data = dt,Hess = TRUE)
     odds<-data.frame(cbind(exp(coef(m)), exp(confint(m))))
   }
   names(odds)<-c("or", "lo", "up")
