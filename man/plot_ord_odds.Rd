@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_ord_odds.R
 \name{plot_ord_odds}
 \alias{plot_ord_odds}
-\title{Forrest plot from ordinal logistic regression}
+\title{Forrest plot from ordinal logistic regression.}
 \usage{
 plot_ord_odds(x, title = NULL, dec = 3, lbls = NULL,
   hori = "OR (95 \% CI)", vert = "Variables", short = FALSE,

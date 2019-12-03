@@ -1,4 +1,4 @@
-#' Forrest plot from ordinal logistic regression, version2.
+#' Forrest plot from ordinal logistic regression, version2 of plot_ord_ords().
 #'
 #' Heavily inspired by https://www.r-bloggers.com/plotting-odds-ratios-aka-a-forrestplot-with-ggplot2/
 #' @param meas outcome meassure variable name or response in data-data.frame as a string. Should be factor, preferably ordered.
@@ -14,7 +14,7 @@
 #' @keywords forestplot
 #' @export
 
-plot_ord_odds_v2<-function(meas,vars,data, title = NULL,dec=3,lbls=NULL,hori="OR (95 % CI)",vert="Variables",short=FALSE,analysis=c("biv","multi")){
+plot_biv_olr<-function(meas,vars,data, title = NULL,dec=3,lbls=NULL,hori="OR (95 % CI)",vert="Variables",short=FALSE,analysis=c("biv","multi")){
 
   require(ggplot2)
 

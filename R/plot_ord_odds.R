@@ -1,4 +1,4 @@
-#' Forrest plot from ordinal logistic regression
+#' Forrest plot from ordinal logistic regression.
 #'
 #' Heavily inspired by https://www.r-bloggers.com/plotting-odds-ratios-aka-a-forrestplot-with-ggplot2/
 #' @param x input data.
