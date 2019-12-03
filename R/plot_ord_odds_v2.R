@@ -14,7 +14,7 @@
 #' @keywords forestplot
 #' @export
 
-plot_ord_odds2<-function(meas,vars,data, title = NULL,dec=3,lbls=NULL,hori="OR (95 % CI)",vert="Variables",short=FALSE,analysis=c("biv","multi")){
+plot_ord_odds_v2<-function(meas,vars,data, title = NULL,dec=3,lbls=NULL,hori="OR (95 % CI)",vert="Variables",short=FALSE,analysis=c("biv","multi")){
 
   require(ggplot2)
 
