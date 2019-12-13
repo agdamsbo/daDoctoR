@@ -25,5 +25,6 @@ Printable table of regression model according to STROBE for linear or binary out
 Includes borth bivariate and multivariate in the same table.
 Output is a list, with the first item being the main "output" as a dataframe.
 Automatically uses logistic regression model for dichotomous outcome variable and linear regression model for continous outcome variable. Linear regression will give estimated adjusted true mean in list.
+For logistic regression gives count of outcome variable pr variable level.
 }
 \keyword{logistic}

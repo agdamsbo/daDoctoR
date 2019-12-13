@@ -4,6 +4,7 @@
 #' Includes borth bivariate and multivariate in the same table.
 #' Output is a list, with the first item being the main "output" as a dataframe.
 #' Automatically uses logistic regression model for dichotomous outcome variable and linear regression model for continous outcome variable. Linear regression will give estimated adjusted true mean in list.
+#' For logistic regression gives count of outcome variable pr variable level.
 #' @param meas binary outcome meassure variable, column name in data.frame as a string. Can be numeric or factor. Result is calculated accordingly.
 #' @param adj variables to adjust for, as string.
 #' @param data dataframe of data.
@@ -14,9 +15,6 @@
 #' @export
 
 strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
-  ## Ønskeliste:
-  ##
-  ## - Tæl selv antal a NA'er
 
   require(dplyr)
 
@@ -87,44 +85,58 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
     nall<-length(!is.na(dat[,1]))
 
     if (n.by.adj==TRUE){
-      dat2<-ma$model[,-1]
+      dat2<-ma$model
       # nalt<-nrow(dat2)
-      for (i in 1:ncol(dat2)){
-        if (is.factor(dat2[,i])){
-          vec<-dat2[,i]
-          ns<-names(dat2)[i]
-          for (r in 1:length(levels(vec))){
-            vr<-levels(vec)[r]
-            n<-length(vec[vec==vr&!is.na(vec)])
-            rt<-paste0(n," (",round(n/nall*100,0),"%)")
-            nq<-rbind(nq,cbind(paste0(ns,levels(vec)[r]),rt))
-          }}
-        if (!is.factor(dat2[,i])){
-          num<-dat2[,i]
-          n<-as.numeric(length(num[!is.na(num)]))
-          rt<-paste0(n," (",round(n/nall*100,0),"%)")
-          nq<-rbind(nq,cbind(names(dat2)[i],rt))
-        }}
-    }
-
-    else {
-      dat2<-dat[!is.na(dat[,1]),][,-1]
-      for (i in 1:ncol(dat2)) {
+      for (i in 2:ncol(dat2)) {
         if (is.factor(dat2[, i])) {
           vec <- dat2[, i]
           ns <- names(dat2)[i]
           for (r in 1:length(levels(vec))) {
             vr <- levels(vec)[r]
+            ## Counting all included in analysis
             n <- length(vec[vec == vr & !is.na(vec)])
             rt <- paste0(n, " (", round(n/nall * 100, 0), "%)")
-            nq <- rbind(nq, cbind(paste0(ns, levels(vec)[r]), rt))
+            ## Counting all included in analysis with outcome
+            lvl<-levels(dat2[,1])[2]
+            no <- length(vec[vec == vr & dat2[,1]==lvl & !is.na(vec)])
+            ro <- paste0(no, " (", round(no/n * 100, 0), "%)")
+            ## Combining
+            nq <- rbind(nq, cbind(paste0(ns, levels(vec)[r]), rt,ro))
           }
         }
         if (!is.factor(dat2[, i])) {
           num <- dat2[, i]
           n <- length(num[!is.na(num)])
           rt <- paste0(n, " (", round(n/nall * 100, 0), "%)")
-          nq <- rbind(nq, cbind(names(dat2)[i], rt))
+          nq <- rbind(nq, cbind(names(dat2)[i], rt,ro="-"))
+        }
+      }
+    }
+
+    else {
+      dat2<-dat[!is.na(dat[,1]),]
+      for (i in 2:ncol(dat2)) {
+        if (is.factor(dat2[, i])) {
+          vec <- dat2[, i]
+          ns <- names(dat2)[i]
+          for (r in 1:length(levels(vec))) {
+            vr <- levels(vec)[r]
+            ## Counting all included in analysis
+            n <- length(vec[vec == vr & !is.na(vec)])
+            rt <- paste0(n, " (", round(n/nall * 100, 0), "%)")
+            ## Counting all included in analysis with outcome
+            lvl<-levels(dat2[,1])[2]
+            no <- length(vec[vec == vr & dat2[,1]==lvl & !is.na(vec)])
+            ro <- paste0(no, " (", round(no/n * 100, 0), "%)")
+            ## Combining
+            nq <- rbind(nq, cbind(paste0(ns, levels(vec)[r]), rt,ro))
+          }
+        }
+        if (!is.factor(dat2[, i])) {
+          num <- dat2[, i]
+          n <- length(num[!is.na(num)])
+          rt <- paste0(n, " (", round(n/nall * 100, 0), "%)")
+          nq <- rbind(nq, cbind(names(dat2)[i], rt,ro="-"))
         }
       }
     }
@@ -141,12 +153,12 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
     res<-cbind(aor_ci,apv)
     rest<-data.frame(names=row.names(res),res,stringsAsFactors = F)
 
-    numb<-data.frame(names=nq[,1],N=nq[,2],stringsAsFactors = F)
-    namt<-data.frame(names=rnames,stringsAsFactors = F)
+    numb<-data.frame(names=nq[,1],N=nq[,2],N.out=nq[,3],stringsAsFactors = F)
+    namt<-data.frame(names=tail(rnames,-3),stringsAsFactors = F)
 
     coll<-left_join(left_join(namt,numb,by="names"),rest,by="names")
 
-    header<-data.frame(matrix(paste0("Chance of ",meas," is ",levels(m)[-1]),ncol = ncol(coll)),stringsAsFactors = F)
+    header<-data.frame(matrix(paste0("Chance of ",meas," is ",levels(m)[2]),ncol = ncol(coll)),stringsAsFactors = F)
     names(header)<-names(coll)
 
     df<-data.frame(rbind(header,coll),stringsAsFactors = F)
@@ -165,14 +177,14 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
     }
 
     if (p.val==TRUE){
-      ref<-data.frame(c(NA,rona),re[,2],re[,5],re[,6],re[,3],re[,4])
+      ref<-data.frame(c(NA,rona),re[,"N"],re[,"N.out"],re[,"or_ci"],re[,"pv"],re[,"aor_ci"],re[,"apv"])
 
-      names(ref)<-c("Variable",paste0("N=",nall),"Crude OR (95 % CI)","p-value","Mutually adjusted OR (95 % CI)","A p-value")
+      names(ref)<-c("Variable",paste0("N=",nall),paste0("N, ",meas," is ",levels(m)[2]),"Crude OR (95 % CI)","p-value","Mutually adjusted OR (95 % CI)","A p-value")
     }
     else{
-      ref<-data.frame(c(NA,rona),re[,2],re[,5],re[,3])
+      ref<-data.frame(c(NA,rona),re[,"N"],re[,"N.out"],re[,"or_ci"],re[,"aor_ci"])
 
-      names(ref)<-c("Variable",paste0("N=",nall),"Crude OR (95 % CI)","Mutually adjusted OR (95 % CI)")
+      names(ref)<-c("Variable",paste0("N=",nall),paste0("N, ",meas," is ",levels(m)[2]),"Crude OR (95 % CI)","Mutually adjusted OR (95 % CI)")
     }
 
     ls<-list(tbl=ref,miss,nall,nrow(d))
