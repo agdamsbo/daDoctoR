@@ -27,165 +27,156 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
 
   if(is.factor(m)){
 
-  ## Crude ORs
+    ## Crude ORs
 
-  dfcr<-data.frame(matrix(NA,ncol = 3))
-  names(dfcr)<-c("pred","or_ci","pv")
-  n.mn<-c()
+    dfcr<-data.frame(matrix(NA,ncol = 3))
+    names(dfcr)<-c("pred","or_ci","pv")
+    n.mn<-c()
 
-  nref<-c()
+    nref<-c()
 
-  for(i in 1:ncol(ads)){
-    dat<-data.frame(m=m,ads[,i])
-    names(dat)<-c("m",names(ads)[i])
-    mn<-glm(m~.,family = binomial(),data=dat)
-    n.mn<-c(n.mn,nrow(mn$model))
+    for(i in 1:ncol(ads)){
+      dat<-data.frame(m=m,ads[,i])
+      names(dat)<-c("m",names(ads)[i])
+      mn<-glm(m~.,family = binomial(),data=dat)
+      n.mn<-c(n.mn,nrow(mn$model))
 
-    suppressMessages(ci<-exp(confint(mn)))
-    l<-round(ci[-1,1],dec)
-    u<-round(ci[-1,2],dec)
-    or<-round(exp(coef(mn))[-1],dec)
-    or_ci<-paste0(or," (",l," to ",u,")")
-    pv<-round(tidy(mn)$p.value[-1],dec+1)
-    x1<-ads[,i]
+      suppressMessages(ci<-exp(confint(mn)))
+      l<-round(ci[-1,1],dec)
+      u<-round(ci[-1,2],dec)
+      or<-round(exp(coef(mn))[-1],dec)
+      or_ci<-paste0(or," (",l," to ",u,")")
+      pv<-round(tidy(mn)$p.value[-1],dec+1)
+      x1<-ads[,i]
 
-    if (is.factor(x1)){
-      pred<-paste0(names(ads)[i],levels(x1)[-1])
+      if (is.factor(x1)){
+        pred<-paste0(names(ads)[i],levels(x1)[-1])
+      }
+
+      else {
+        pred<-names(ads)[i]
+      }
+
+      dfcr<-rbind(dfcr,cbind(pred,or_ci,pv))
+    }
+
+
+    ## Mutually adjusted  ORs
+
+    dat<-data.frame(m=m,ads)
+    ma <- glm(m ~ .,family = binomial(), data = dat)
+    miss<-length(ma$na.action)
+
+    actable <- coef(summary(ma))
+    pa <- actable[,4]
+    pa<-ifelse(pa<0.001,"<0.001",round(pa,3))
+    pa <- ifelse(pa<=0.05|pa=="<0.001",paste0("*",pa),
+                 ifelse(pa>0.05&pa<=0.1,paste0(".",pa),pa))
+
+    apv<-pa[1:length(coef(ma))]
+
+    aco<-round(exp(coef(ma)),dec)
+    suppressMessages(aci<-round(exp(confint(ma)),dec))
+    alo<-aci[,1]
+    aup<-aci[,2]
+    aor_ci<-paste0(aco," (",alo," to ",aup,")")
+
+    # names(dat2)<-c(var,names(ads))
+
+    nq<-c()
+    nall<-length(!is.na(dat[,1]))
+
+    if (n.by.adj==TRUE){
+      dat2<-ma$model[,-1]
+      # nalt<-nrow(dat2)
+      for (i in 1:ncol(dat2)){
+        if (is.factor(dat2[,i])){
+          vec<-dat2[,i]
+          ns<-names(dat2)[i]
+          for (r in 1:length(levels(vec))){
+            vr<-levels(vec)[r]
+            n<-length(vec[vec==vr&!is.na(vec)])
+            rt<-paste0(n," (",round(n/nall*100,0),"%)")
+            nq<-rbind(nq,cbind(paste0(ns,levels(vec)[r]),rt))
+          }}
+        if (!is.factor(dat2[,i])){
+          num<-dat2[,i]
+          n<-as.numeric(length(num[!is.na(num)]))
+          rt<-paste0(n," (",round(n/nall*100,0),"%)")
+          nq<-rbind(nq,cbind(names(dat2)[i],rt))
+        }}
     }
 
     else {
-      pred<-names(ads)[i]
+      dat2<-dat[!is.na(dat[,1]),][,-1]
+      for (i in 1:ncol(dat2)) {
+        if (is.factor(dat2[, i])) {
+          vec <- dat2[, i]
+          ns <- names(dat2)[i]
+          for (r in 1:length(levels(vec))) {
+            vr <- levels(vec)[r]
+            n <- length(vec[vec == vr & !is.na(vec)])
+            rt <- paste0(n, " (", round(n/nall * 100, 0), "%)")
+            nq <- rbind(nq, cbind(paste0(ns, levels(vec)[r]), rt))
+          }
+        }
+        if (!is.factor(dat2[, i])) {
+          num <- dat2[, i]
+          n <- length(num[!is.na(num)])
+          rt <- paste0(n, " (", round(n/nall * 100, 0), "%)")
+          nq <- rbind(nq, cbind(names(dat2)[i], rt))
+        }
+      }
     }
 
-    dfcr<-rbind(dfcr,cbind(pred,or_ci,pv))
-  }
-
-
-  ## Mutually adjusted  ORs
-
-  dat<-data.frame(m=m,ads)
-  ma <- glm(m ~ .,family = binomial(), data = dat)
-  miss<-length(ma$na.action)
-
-  actable <- coef(summary(ma))
-  pa <- actable[,4]
-  pa<-ifelse(pa<0.001,"<0.001",round(pa,3))
-  pa <- ifelse(pa<=0.05|pa=="<0.001",paste0("*",pa),
-               ifelse(pa>0.05&pa<=0.1,paste0(".",pa),pa))
-
-  apv<-pa[1:length(coef(ma))]
-
-  aco<-round(exp(coef(ma)),dec)
-  suppressMessages(aci<-round(exp(confint(ma)),dec))
-  alo<-aci[,1]
-  aup<-aci[,2]
-  aor_ci<-paste0(aco," (",alo," to ",aup,")")
-
-  # names(dat2)<-c(var,names(ads))
-
-  nq<-c()
-
-  if (n.by.adj==TRUE){
-    dat2<-ma$model[,-1]
+    rnames<-c()
     for (i in 1:ncol(dat2)){
       if (is.factor(dat2[,i])){
-        vec<-dat2[,i]
-        ns<-names(dat2)[i]
-        for (r in 1:length(levels(vec))){
-          vr<-levels(vec)[r]
-          n<-as.numeric(length(vec[vec==vr&!is.na(vec)]))
-          nall<-as.numeric(length(dat2[,c(ns)]))
-          n.meas<-nall
-          nl<-paste0(ns,levels(vec)[r])
-          pro<-round(n/nall*100,0)
-          rt<-paste0(n," (",pro,"%)")
-          nq<-rbind(nq,cbind(nl,rt))
-        }}
+        rnames<-c(rnames,names(dat2)[i],paste0(names(dat2)[i],levels(dat2[,i])))
+      }
       if (!is.factor(dat2[,i])){
-        num<-dat2[,i]
-        nl<-names(dat2)[i]
-        n<-as.numeric(length(num[!is.na(num)]))
-        nall<-as.numeric(nrow(dat2))
-        n.meas<-nall
-        pro<-round(n/nall*100,0)
-        rt<-paste0(n," (",pro,"%)")
-        nq<-rbind(nq,cbind(nl,rt))
-      }}}
-
-  else {
-    dat2<-dat[!is.na(dat[,1]),][,-1]
-    n.meas<-nrow(dat2)
-    for (i in 1:ncol(dat2)){
-      if (is.factor(dat2[,i])){
-        vec<-dat2[,i]
-        ns<-names(dat2)[i]
-        for (r in 1:length(levels(vec))){
-          vr<-levels(vec)[r]
-          n<-as.numeric(length(vec[vec==vr&!is.na(vec)]))
-          nall<-as.numeric(n.mn[i])
-          nl<-paste0(ns,levels(vec)[r])
-          pro<-round(n/nall*100,0)
-          rt<-paste0(n," (",pro,"%)")
-          nq<-rbind(nq,cbind(nl,rt))
-        }}
-      if (!is.factor(dat2[,i])){
-        num<-dat2[,i]
-        nl<-names(dat2)[i]
-        n<-as.numeric(length(num[!is.na(num)]))
-        nall<-as.numeric(n.meas)
-        pro<-round(n/nall*100,0)
-        rt<-paste0(n," (",pro,"%)")
-        nq<-rbind(nq,cbind(nl,rt))
-      }}}
-
-  rnames<-c()
-  for (i in 1:ncol(dat2)){
-    if (is.factor(dat2[,i])){
-      rnames<-c(rnames,names(dat2)[i],paste0(names(dat2)[i],levels(dat2[,i])))
+        rnames<-c(rnames,paste0(names(dat2)[i],".all"),names(dat2)[i])
+      }
     }
-    if (!is.factor(dat2[,i])){
-      rnames<-c(rnames,paste0(names(dat2)[i],".all"),names(dat2)[i])
-    }
-  }
-  res<-cbind(aor_ci,apv)
-  rest<-data.frame(names=row.names(res),res,stringsAsFactors = F)
+    res<-cbind(aor_ci,apv)
+    rest<-data.frame(names=row.names(res),res,stringsAsFactors = F)
 
-  numb<-data.frame(names=nq[,c("nl")],N=nq[,c("rt")],stringsAsFactors = F)
-  namt<-data.frame(names=rnames,stringsAsFactors = F)
+    numb<-data.frame(names=nq[,1],N=nq[,2],stringsAsFactors = F)
+    namt<-data.frame(names=rnames,stringsAsFactors = F)
 
-  coll<-left_join(left_join(namt,numb,by="names"),rest,by="names")
+    coll<-left_join(left_join(namt,numb,by="names"),rest,by="names")
 
-  header<-data.frame(matrix(paste0("Chance of ",meas," is ",levels(m)[-1]),ncol = ncol(coll)),stringsAsFactors = F)
-  names(header)<-names(coll)
+    header<-data.frame(matrix(paste0("Chance of ",meas," is ",levels(m)[-1]),ncol = ncol(coll)),stringsAsFactors = F)
+    names(header)<-names(coll)
 
-  df<-data.frame(rbind(header,coll),stringsAsFactors = F)
+    df<-data.frame(rbind(header,coll),stringsAsFactors = F)
 
-  names(dfcr)[1]<-c("names")
+    names(dfcr)[1]<-c("names")
 
-  suppressWarnings(re<-left_join(df,dfcr,by="names"))
+    suppressWarnings(re<-left_join(df,dfcr,by="names"))
 
-  rona<-c()
-  for (i in 1:length(ads)){
-    if (is.factor(ads[,i])){
-      rona<-c(rona,names(ads[i]),levels(ads[,i]))}
+    rona<-c()
+    for (i in 1:length(ads)){
+      if (is.factor(ads[,i])){
+        rona<-c(rona,names(ads[i]),levels(ads[,i]))}
       if (!is.factor(ads[,i])){
         rona<-c(rona,names(ads[i]),"Per unit increase")
       }
     }
 
-  if (p.val==TRUE){
-    ref<-data.frame(c(NA,rona),re[,2],re[,5],re[,6],re[,3],re[,4])
+    if (p.val==TRUE){
+      ref<-data.frame(c(NA,rona),re[,2],re[,5],re[,6],re[,3],re[,4])
 
-    names(ref)<-c("Variable",paste0("N=",n.meas),"Crude OR (95 % CI)","p-value","Mutually adjusted OR (95 % CI)","A p-value")
-  }
-  else{
-    ref<-data.frame(c(NA,rona),re[,2],re[,5],re[,3])
+      names(ref)<-c("Variable",paste0("N=",nall),"Crude OR (95 % CI)","p-value","Mutually adjusted OR (95 % CI)","A p-value")
+    }
+    else{
+      ref<-data.frame(c(NA,rona),re[,2],re[,5],re[,3])
 
-    names(ref)<-c("Variable",paste0("N=",n.meas),"Crude OR (95 % CI)","Mutually adjusted OR (95 % CI)")
-  }
+      names(ref)<-c("Variable",paste0("N=",nall),"Crude OR (95 % CI)","Mutually adjusted OR (95 % CI)")
+    }
 
-  ls<-list(tbl=ref,miss,n.meas,nrow(d))
-  names(ls)<-c("Printable table","Deleted due to missingness in adjusted analysis","Number of outcome observations","Length of dataframe")
+    ls<-list(tbl=ref,miss,nall,nrow(d))
+    names(ls)<-c("Printable table","Deleted due to missingness in adjusted analysis","Number of outcome observations","Length of dataframe")
   }
 
   if(!is.factor(m)){
@@ -250,59 +241,50 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
 
 
     nq<-c()
+    nall<-length(!is.na(dat[,1]))
 
     if (n.by.adj==TRUE){
       dat2<-ma$model[,-1]
+      # nalt<-nrow(dat2)
       for (i in 1:ncol(dat2)){
         if (is.factor(dat2[,i])){
           vec<-dat2[,i]
           ns<-names(dat2)[i]
           for (r in 1:length(levels(vec))){
             vr<-levels(vec)[r]
-            n<-as.numeric(length(vec[vec==vr&!is.na(vec)]))
-            nall<-as.numeric(length(dat2[,c(ns)]))
-            n.meas<-nall
-            nl<-paste0(ns,levels(vec)[r])
-            pro<-round(n/nall*100,0)
-            rt<-paste0(n," (",pro,"%)")
-            nq<-rbind(nq,cbind(nl,rt))
+            n<-length(vec[vec==vr&!is.na(vec)])
+            rt<-paste0(n," (",round(n/nall*100,0),"%)")
+            nq<-rbind(nq,cbind(paste0(ns,levels(vec)[r]),rt))
           }}
         if (!is.factor(dat2[,i])){
           num<-dat2[,i]
-          nl<-names(dat2)[i]
           n<-as.numeric(length(num[!is.na(num)]))
-          nall<-as.numeric(nrow(dat2))
-          n.meas<-nall
-          pro<-round(n/nall*100,0)
-          rt<-paste0(n," (",pro,"%)")
-          nq<-rbind(nq,cbind(nl,rt))
-        }}}
+          rt<-paste0(n," (",round(n/nall*100,0),"%)")
+          nq<-rbind(nq,cbind(names(dat2)[i],rt))
+        }}
+    }
 
     else {
       dat2<-dat[!is.na(dat[,1]),][,-1]
-      n.meas<-nrow(dat2)
-      for (i in 1:ncol(dat2)){
-        if (is.factor(dat2[,i])){
-          vec<-dat2[,i]
-          ns<-names(dat2)[i]
-          for (r in 1:length(levels(vec))){
-            vr<-levels(vec)[r]
-            n<-as.numeric(length(vec[vec==vr&!is.na(vec)]))
-            nall<-as.numeric(n.mn[i])
-            nl<-paste0(ns,levels(vec)[r])
-            pro<-round(n/nall*100,0)
-            rt<-paste0(n," (",pro,"%)")
-            nq<-rbind(nq,cbind(nl,rt))
-          }}
-        if (!is.factor(dat2[,i])){
-          num<-dat2[,i]
-          nl<-names(dat2)[i]
-          n<-as.numeric(length(num[!is.na(num)]))
-          nall<-as.numeric(n.meas)
-          pro<-round(n/nall*100,0)
-          rt<-paste0(n," (",pro,"%)")
-          nq<-rbind(nq,cbind(nl,rt))
-        }}}
+      for (i in 1:ncol(dat2)) {
+        if (is.factor(dat2[, i])) {
+          vec <- dat2[, i]
+          ns <- names(dat2)[i]
+          for (r in 1:length(levels(vec))) {
+            vr <- levels(vec)[r]
+            n <- length(vec[vec == vr & !is.na(vec)])
+            rt <- paste0(n, " (", round(n/nall * 100, 0), "%)")
+            nq <- rbind(nq, cbind(paste0(ns, levels(vec)[r]), rt))
+          }
+        }
+        if (!is.factor(dat2[, i])) {
+          num <- dat2[, i]
+          n <- length(num[!is.na(num)])
+          rt <- paste0(n, " (", round(n/nall * 100, 0), "%)")
+          nq <- rbind(nq, cbind(names(dat2)[i], rt))
+        }
+      }
+    }
 
 
     rnames<-c()
@@ -317,7 +299,7 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
     res<-cbind(amean_ci,apv)
     rest<-data.frame(names=row.names(res),res,stringsAsFactors = F)
 
-    numb<-data.frame(names=nq[,c("nl")],N=nq[,c("rt")],stringsAsFactors = F)
+    numb<-data.frame(names=nq[,1],N=nq[,2],stringsAsFactors = F)
     namt<-data.frame(names=rnames,stringsAsFactors = F)
 
     coll<-left_join(left_join(namt,numb,by="names"),rest,by="names")
@@ -335,23 +317,23 @@ strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
     for (i in 1:length(ads)){
       if (is.factor(ads[,i])){
         rona<-c(rona,names(ads[i]),levels(ads[,i]))}
-        if (!is.factor(ads[,i])){
-          rona<-c(rona,names(ads[i]),"Per unit increase")
-        }
+      if (!is.factor(ads[,i])){
+        rona<-c(rona,names(ads[i]),"Per unit increase")
       }
+    }
 
     if (p.val==TRUE){
       ref<-data.frame(c(NA,rona),re[,2],re[,5],re[,6],re[,3],re[,4])
 
-      names(ref)<-c("Variable",paste0("N=",n.meas),"Difference (95 % CI)","p-value","Mutually adjusted difference (95 % CI)","A p-value")
+      names(ref)<-c("Variable",paste0("N=",nall),"Difference (95 % CI)","p-value","Mutually adjusted difference (95 % CI)","A p-value")
     }
     else{
       ref<-data.frame(c(NA,rona),re[,2],re[,5],re[,3])
 
-      names(ref)<-c("Variable",paste0("N=",n.meas),"Difference (95 % CI)","Mutually adjusted difference (95 % CI)")
+      names(ref)<-c("Variable",paste0("N=",nall),"Difference (95 % CI)","Mutually adjusted difference (95 % CI)")
     }
 
-    ls<-list(tbl=ref,miss,n.meas,nrow(d),mean_est)
+    ls<-list(tbl=ref,miss,nall,nrow(d),mean_est)
     names(ls)<-c("Printable table","Deleted due to missingness in adjusted analysis","Number of outcome observations","Length of dataframe","Estimated true mean (95 % CI) in adjusted analysis")
 
   }
