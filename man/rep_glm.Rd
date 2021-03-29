@@ -4,8 +4,7 @@
 \alias{rep_glm}
 \title{A repeated logistic regression function}
 \usage{
-rep_glm(meas, vars = NULL, string, ci = FALSE, data,
-  fixed.var = FALSE)
+rep_glm(meas, vars = NULL, string, ci = FALSE, data, fixed.var = FALSE)
 }
 \arguments{
 \item{meas}{Effect meassure. Input as c() of columnnames, use dput().}

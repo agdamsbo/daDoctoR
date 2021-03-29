@@ -7,19 +7,26 @@
 strobe_diff_bygroup(meas, var, group, adj, data, dec = 2)
 }
 \arguments{
-\item{meas}{outcome meassure variable name in data-data.frame as a string. Can be numeric or factor. Result is calculated accordingly.}
+\item{meas}{outcome measure variable name in data-data.frame as a string. Can be numeric or factor. Result is calculated accordingly.}
 
 \item{var}{binary exposure variable to compare against (active vs placebo). As string.}
 
-\item{group}{group to compare, as string.}
+\item{group}{binary group to compare, as string.}
 
 \item{adj}{variables to adjust for, as string.}
 
-\item{data}{dataframe of data.}
+\item{data}{dataframe to subset from.}
 
 \item{dec}{decimals for results, standard is set to 2. Mean and sd is dec-1. pval has 3 decimals.}
 }
 \description{
-Printable table of three dimensional regression analysis of group vs var for meas. By group.
+Printable table of two dimensional regression analysis of group vs variable for outcome measure. By group. Includes p-value
+Group and variable has to be dichotomous factor.
+}
+\examples{
+  data('mtcars')
+  mtcars$vs<-factor(mtcars$vs)
+  mtcars$am<-factor(mtcars$am)
+  strobe_diff_bygroup(meas="mpg",var="vs",group = "am",adj=c("disp","wt"),data=mtcars)
 }
 \keyword{strobe}

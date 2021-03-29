@@ -1,14 +1,20 @@
 #' Print regression results according to STROBE
 #'
-#' Printable table of three dimensional regression analysis of group vs var for meas. By group.
-#' @param meas outcome meassure variable name in data-data.frame as a string. Can be numeric or factor. Result is calculated accordingly.
+#' Printable table of two dimensional regression analysis of group vs variable for outcome measure. By group. Includes p-value
+#' Group and variable has to be dichotomous factor.
+#' @param meas outcome measure variable name in data-data.frame as a string. Can be numeric or factor. Result is calculated accordingly.
 #' @param var binary exposure variable to compare against (active vs placebo). As string.
-#' @param group group to compare, as string.
+#' @param group binary group to compare, as string.
 #' @param adj variables to adjust for, as string.
-#' @param data dataframe of data.
+#' @param data dataframe to subset from.
 #' @param dec decimals for results, standard is set to 2. Mean and sd is dec-1. pval has 3 decimals.
 #' @keywords strobe
 #' @export
+#' @examples
+#'   data('mtcars')
+#'   mtcars$vs<-factor(mtcars$vs)
+#'   mtcars$am<-factor(mtcars$am)
+#'   strobe_diff_bygroup(meas="mpg",var="vs",group = "am",adj=c("disp","wt"),data=mtcars)
 
 strobe_diff_bygroup<-function(meas,var,group,adj,data,dec=2){
 

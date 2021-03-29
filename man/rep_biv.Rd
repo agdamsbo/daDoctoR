@@ -4,8 +4,18 @@
 \alias{rep_biv}
 \title{A repeated function for bivariate analyses}
 \usage{
-rep_biv(y, v1, string, data, method = "pval", logistic = FALSE,
-  ci = FALSE, cut = 0.1, v2 = NULL, v3 = NULL)
+rep_biv(
+  y,
+  v1,
+  string,
+  data,
+  method = "pval",
+  logistic = FALSE,
+  ci = FALSE,
+  cut = 0.1,
+  v2 = NULL,
+  v3 = NULL
+)
 }
 \arguments{
 \item{y}{Effect meassure.}

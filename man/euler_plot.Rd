@@ -4,8 +4,7 @@
 \alias{euler_plot}
 \title{Creates Euler model from list of identifier numbers.}
 \usage{
-euler_plot(x, total, dec = 1, label = as.character(c(1:5)),
-  shape = "ellipse")
+euler_plot(x, total, dec = 1, label = as.character(c(1:5)), shape = "ellipse")
 }
 \arguments{
 \item{x}{list of variables included. Has to be vectors of identifier numbers.}

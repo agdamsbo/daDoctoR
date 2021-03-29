@@ -4,9 +4,16 @@
 \alias{plot_ord_odds}
 \title{Forrest plot from ordinal logistic regression.}
 \usage{
-plot_ord_odds(x, title = NULL, dec = 3, lbls = NULL,
-  hori = "OR (95 \% CI)", vert = "Variables", short = FALSE,
-  input = c("model", "df"))
+plot_ord_odds(
+  x,
+  title = NULL,
+  dec = 3,
+  lbls = NULL,
+  hori = "OR (95 \% CI)",
+  vert = "Variables",
+  short = FALSE,
+  input = c("model", "df")
+)
 }
 \arguments{
 \item{x}{input data.}

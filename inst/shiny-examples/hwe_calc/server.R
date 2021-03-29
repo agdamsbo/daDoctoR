@@ -15,6 +15,9 @@ library(shiny)
 library(ggplot2)
 source("https://raw.githubusercontent.com/agdamsbo/daDoctoR/master/R/hwe_geno.R")
 
+# source("https://raw.githubusercontent.com/agdamsbo/daDoctoR/master/inst/shiny-examples/hwe_calc/ui.R")
+# source(list.files(system.file("shiny-examples", "hwe_calc", package = "daDoctoR"), pattern="ui.R", full.names=TRUE))
+
 # Define server logic required to draw a histogram
 
 server <- function(input, output, session) {
@@ -88,5 +91,6 @@ server <- function(input, output, session) {
 }
 
 # Run the application
+
 shinyApp(ui = ui, server = server)
 

@@ -4,8 +4,7 @@
 \alias{strobe_pred}
 \title{Regression model of predictors according to STROBE, bi- and multivariate.}
 \usage{
-strobe_pred(meas, adj, data, dec = 2, n.by.adj = FALSE,
-  p.val = FALSE)
+strobe_pred(meas, adj, data, dec = 2, n.by.adj = FALSE, p.val = FALSE)
 }
 \arguments{
 \item{meas}{binary outcome meassure variable, column name in data.frame as a string. Can be numeric or factor. Result is calculated accordingly.}

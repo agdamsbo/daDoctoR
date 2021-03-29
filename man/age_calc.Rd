@@ -15,9 +15,9 @@ age_calc(dob, enddate = Sys.Date(), units = "years", precise = TRUE)
 For age calculations.
 }
 \examples{
-  ##Kim Larsen
+  ##Kim Larsen (cpr is known from album)
   dob<-dob_extract_cpr("231045-0637")
-  date<-as.Date("2018-09-29")
+  date<-as.Date("2018-09-30")
   trunc(age_calc(dob,date))
 }
 \keyword{age}

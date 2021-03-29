@@ -4,9 +4,18 @@
 \alias{plot_biv_olr}
 \title{Forrest plot from ordinal logistic regression, version2 of plot_ord_ords().}
 \usage{
-plot_biv_olr(meas, vars, data, title = NULL, dec = 3, lbls = NULL,
-  hori = "OR (95 \% CI)", vert = "Variables", short = FALSE,
-  analysis = c("biv", "multi"))
+plot_biv_olr(
+  meas,
+  vars,
+  data,
+  title = NULL,
+  dec = 3,
+  lbls = NULL,
+  hori = "OR (95 \% CI)",
+  vert = "Variables",
+  short = FALSE,
+  analysis = c("biv", "multi")
+)
 }
 \arguments{
 \item{meas}{outcome meassure variable name or response in data-data.frame as a string. Should be factor, preferably ordered.}
