@@ -1,3 +1,5 @@
+#' REWRITE UNDERWAY
+#'
 #' Print regression results according to STROBE
 #'
 #' Printable table of two dimensional regression analysis of group vs variable for outcome measure. By group. Includes p-value

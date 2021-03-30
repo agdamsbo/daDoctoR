@@ -1,8 +1,10 @@
 #' Calculating age from date of birth
 #'
 #' For age calculations.
-#' @param dob Date of birth.
-#' @param enddate Date to calculate age at.
+#' @param dob Date of birth. Data format follows standard POSIX layout. Format is yyyy-mm-dd.
+#' @param enddate Date to calculate age at. Format is yyyy-mm-dd.
+#' @param units Default is "years". Can be changed to "days".
+#' @param precise Default is TRUE. Flag set whether to include calculations of spring years. Only of matter if using units = "days".
 #' @keywords age
 #' @export
 #' @examples
@@ -12,7 +14,7 @@
 #'   trunc(age_calc(dob,date))
 
 age_calc<-function (dob, enddate = Sys.Date(), units = "years", precise = TRUE)
-## Build upon the work of Jason P. Becker, as part of tihe eeptools
+## Build upon the work of Jason P. Becker, as part of the eeptools
   {
   if (!inherits(dob, "Date") | !inherits(enddate, "Date")) {
     stop("Both dob and enddate must be Date class objects")

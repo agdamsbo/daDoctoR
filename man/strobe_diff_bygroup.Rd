@@ -2,7 +2,7 @@
 % Please edit documentation in R/strobe_diff_bygroup.R
 \name{strobe_diff_bygroup}
 \alias{strobe_diff_bygroup}
-\title{Print regression results according to STROBE}
+\title{REWRITE UNDERWAY}
 \usage{
 strobe_diff_bygroup(meas, var, group, adj, data, dec = 2)
 }
@@ -20,6 +20,9 @@ strobe_diff_bygroup(meas, var, group, adj, data, dec = 2)
 \item{dec}{decimals for results, standard is set to 2. Mean and sd is dec-1. pval has 3 decimals.}
 }
 \description{
+Print regression results according to STROBE
+}
+\details{
 Printable table of two dimensional regression analysis of group vs variable for outcome measure. By group. Includes p-value
 Group and variable has to be dichotomous factor.
 }

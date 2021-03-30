@@ -7,9 +7,13 @@
 age_calc(dob, enddate = Sys.Date(), units = "years", precise = TRUE)
 }
 \arguments{
-\item{dob}{Date of birth.}
+\item{dob}{Date of birth. Data format follows standard POSIX layout. Format is yyyy-mm-dd.}
 
-\item{enddate}{Date to calculate age at.}
+\item{enddate}{Date to calculate age at. Format is yyyy-mm-dd.}
+
+\item{units}{Default is "years". Can be changed to "days".}
+
+\item{precise}{Default is TRUE. Flag set whether to include calculations of spring years. Only of matter if using units = "days".}
 }
 \description{
 For age calculations.

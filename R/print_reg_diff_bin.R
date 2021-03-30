@@ -1,12 +1,12 @@
-#' OBSOLETE - USE print_reg_diff_bin
+#' SHOULD BE COMBINED WITH strobe_pred (try transfer the REF) - or keep as a fast/slim version??
 #'
-#' Print regression results according to STROBE
+#' Print-friendly regression results for easy export to text editor
 #'
-#' Printable table of regression analysis by group for meas. Detects wether to perform logistic or linear regression.
+#' Printable table of regression analysis by group for outcome measure. Detects whether to perform logistic or linear regression.
 #' output is list of
-#' @param meas outcome meassure variable name in data-data.frame as a string. Can be numeric or factor. Result is calculated accordingly.
+#' @param meas outcome measure variable name in data-data.frame as a string. Can be numeric or factor. Result is calculated accordingly.
 #' @param group groups to compare, as string.
-#' @param var Default is NULL
+#' @param var Default is NULL.
 #' @param adj variables to adjust for, as string.
 #' @param data dataframe of data.
 #' @param dec decimals for results, standard is set to 2. Mean and sd is dec-1.
@@ -16,13 +16,9 @@
 #'   data('mtcars')
 #'   mtcars$vs<-factor(mtcars$vs)
 #'   mtcars$am<-factor(mtcars$am)
-#'   strobe_diff_twodim(meas="am",group="vs",adj=c("disp","wt"),data=mtcars)
+#'   print_reg_diff_bin(meas="am",group="vs",adj=c("disp","wt"),data=mtcars)
 
-strobe_diff_twodim<-function(meas,group,var=NULL,adj,data,dec=2){
-  ## meas: sdmt
-  ## var: rtreat
-  ## group: genotype
-  ## for dichotome exposure variable (var)
+print_reg_diff_bin<-function(meas,group,var=NULL,adj,data,dec=2){
 
   d<-data
   m<-d[,c(meas)]

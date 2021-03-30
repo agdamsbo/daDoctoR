@@ -1,3 +1,5 @@
+#' REWRITE UNDERWAY
+#'
 #' Print regression results according to STROBE
 #'
 #' Printable table of three dimensional regression analysis of group vs var for meas. By var. Includes p-values.
@@ -9,6 +11,11 @@
 #' @param dec decimals for results, standard is set to 2. Mean and sd is dec-1.
 #' @keywords strobe
 #' @export
+#' @examples
+#'   data('mtcars')
+#'   mtcars$vs<-factor(mtcars$vs)
+#'   mtcars$am<-factor(mtcars$am)
+#'   strobe_diff_byvar(meas="mpg",var="vs",group = "am",adj=c("disp","wt","hp"),data=mtcars)
 
 strobe_diff_byvar<-function(meas,var,group,adj,data,dec=2){
 

@@ -2,22 +2,34 @@
 % Please edit documentation in R/strobe_diff_twodim.R
 \name{strobe_diff_twodim}
 \alias{strobe_diff_twodim}
-\title{Print regression results according to STROBE}
+\title{OBSOLETE - USE print_reg_diff_bin}
 \usage{
-strobe_diff_twodim(meas, group, adj, data, dec = 2)
+strobe_diff_twodim(meas, group, var = NULL, adj, data, dec = 2)
 }
 \arguments{
 \item{meas}{outcome meassure variable name in data-data.frame as a string. Can be numeric or factor. Result is calculated accordingly.}
+
+\item{group}{groups to compare, as string.}
+
+\item{var}{Default is NULL}
 
 \item{adj}{variables to adjust for, as string.}
 
 \item{data}{dataframe of data.}
 
 \item{dec}{decimals for results, standard is set to 2. Mean and sd is dec-1.}
-
-\item{groups}{groups to compare, as string.}
 }
 \description{
+Print regression results according to STROBE
+}
+\details{
 Printable table of regression analysis by group for meas. Detects wether to perform logistic or linear regression.
+output is list of
+}
+\examples{
+  data('mtcars')
+  mtcars$vs<-factor(mtcars$vs)
+  mtcars$am<-factor(mtcars$am)
+  strobe_diff_twodim(meas="am",group="vs",adj=c("disp","wt"),data=mtcars)
 }
 \keyword{strobe}

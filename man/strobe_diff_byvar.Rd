@@ -2,7 +2,7 @@
 % Please edit documentation in R/strobe_diff_byvar.R
 \name{strobe_diff_byvar}
 \alias{strobe_diff_byvar}
-\title{Print regression results according to STROBE}
+\title{REWRITE UNDERWAY}
 \usage{
 strobe_diff_byvar(meas, var, group, adj, data, dec = 2)
 }
@@ -20,6 +20,15 @@ strobe_diff_byvar(meas, var, group, adj, data, dec = 2)
 \item{dec}{decimals for results, standard is set to 2. Mean and sd is dec-1.}
 }
 \description{
+Print regression results according to STROBE
+}
+\details{
 Printable table of three dimensional regression analysis of group vs var for meas. By var. Includes p-values.
+}
+\examples{
+  data('mtcars')
+  mtcars$vs<-factor(mtcars$vs)
+  mtcars$am<-factor(mtcars$am)
+  strobe_diff_byvar(meas="mpg",var="vs",group = "am",adj=c("disp","wt","hp"),data=mtcars)
 }
 \keyword{strobe}

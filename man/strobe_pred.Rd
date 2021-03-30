@@ -2,12 +2,12 @@
 % Please edit documentation in R/strobe_pred.R
 \name{strobe_pred}
 \alias{strobe_pred}
-\title{Regression model of predictors according to STROBE, bi- and multivariate.}
+\title{Regression model of predictors according to STROBE, bi- and multivariable.}
 \usage{
 strobe_pred(meas, adj, data, dec = 2, n.by.adj = FALSE, p.val = FALSE)
 }
 \arguments{
-\item{meas}{binary outcome meassure variable, column name in data.frame as a string. Can be numeric or factor. Result is calculated accordingly.}
+\item{meas}{binary outcome measure variable, column name in data.frame as a string. Can be numeric or factor. Result is calculated accordingly.}
 
 \item{adj}{variables to adjust for, as string.}
 
@@ -15,15 +15,15 @@ strobe_pred(meas, adj, data, dec = 2, n.by.adj = FALSE, p.val = FALSE)
 
 \item{dec}{decimals for results, standard is set to 2. Mean and sd is dec-1.}
 
-\item{n.by.adj}{flag to indicate wether to count number of patients in adjusted model or overall for outcome meassure not NA.}
+\item{n.by.adj}{flag to indicate whether to count number of patients in adjusted model or overall for outcome measure not NA.}
 
 \item{p.val}{flag to include p-values in table, set to FALSE as standard.}
 }
 \description{
 Printable table of regression model according to STROBE for linear or binary outcome-variables.
-Includes borth bivariate and multivariate in the same table.
+Includes both bivariate and multivariate in the same table.
 Output is a list, with the first item being the main "output" as a dataframe.
-Automatically uses logistic regression model for dichotomous outcome variable and linear regression model for continous outcome variable. Linear regression will give estimated adjusted true mean in list.
+Automatically uses logistic regression model for dichotomous outcome variable and linear regression model for continuous outcome variable. Linear regression will give estimated adjusted true mean in list.
 For logistic regression gives count of outcome variable pr variable level.
 }
 \keyword{logistic}
