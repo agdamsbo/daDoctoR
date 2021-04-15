@@ -4,12 +4,21 @@
 \alias{quantile_cut}
 \title{Easy function for splitting numeric variable in quantiles}
 \usage{
-quantile_cut(x, groups, na.rm = TRUE, group.names = NULL, ordered.f = FALSE)
+quantile_cut(
+  x,
+  groups,
+  y = NULL,
+  na.rm = TRUE,
+  group.names = NULL,
+  ordered.f = FALSE
+)
 }
 \arguments{
 \item{x}{Variable to cut.}
 
 \item{groups}{Number of groups.}
+
+\item{y}{alternative vector to draw quantile cuts from. Limits has to be within x. Default is NULL.}
 
 \item{na.rm}{Remove NA's. Default is TRUE.}
 
