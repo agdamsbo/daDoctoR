@@ -1,7 +1,7 @@
-#' Print ordinal logistic regression results according to STROBE
+#' Print ordinal logistic regression results in table
 #'
 #' Printable table of ordinal logistic regression with bivariate and multivariate analyses.
-#' Table according to STROBE. Uses polr() funtion of the MASS-package.
+#' Uses polr() funtion of the MASS-package. Prints table.
 #' Formula analysed is the most simple m~v1+v2+vn. The is no significance test. Results are point estimates with 95 percent CI.
 #' @param meas outcome meassure variable name or response in data-data.frame as a string. Should be factor, preferably ordered.
 #' @param vars variables to compare against. As vector of columnnames.
@@ -11,11 +11,7 @@
 #' @keywords olr
 #' @export
 
-<<<<<<< HEAD
 print_olr<-function(meas,vars,data,dec=2,n.by.adj=FALSE){
-=======
-strobe_olr<-function(meas,vars,data,dec=2,n.by.adj=FALSE){
->>>>>>> d8ffa3dc7b67e43a846bbd58e055a141a010b304
 ## For calculation of p-value from t-value see rep_olr()
 
   require(MASS)

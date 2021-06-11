@@ -2,7 +2,7 @@
 % Please edit documentation in R/print_diff_bygroup.R
 \name{print_diff_bygroup}
 \alias{print_diff_bygroup}
-\title{REWRITE UNDERWAY}
+\title{Print regression results in table}
 \usage{
 print_diff_bygroup(meas, var, group, adj, data, dec = 2)
 }
@@ -20,7 +20,7 @@ print_diff_bygroup(meas, var, group, adj, data, dec = 2)
 \item{dec}{decimals for results, standard is set to 2. Mean and sd is dec-1. pval has 3 decimals.}
 }
 \description{
-Print regression results according to STROBE
+New function ready for revision / rewrite
 }
 \details{
 Printable table of two dimensional regression analysis of group vs variable for outcome measure. By group. Includes p-value
@@ -30,6 +30,6 @@ Group and variable has to be dichotomous factor.
   data('mtcars')
   mtcars$vs<-factor(mtcars$vs)
   mtcars$am<-factor(mtcars$am)
-  strobe_diff_bygroup(meas="mpg",var="vs",group = "am",adj=c("disp","wt"),data=mtcars)
+  print_diff_bygroup(meas="mpg",var="vs",group = "am",adj=c("disp","wt"),data=mtcars)
 }
 \keyword{strobe}

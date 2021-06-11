@@ -2,7 +2,7 @@
 % Please edit documentation in R/print_pred.R
 \name{print_pred}
 \alias{print_pred}
-\title{Regression model of predictors according to STROBE, bi- and multivariable.}
+\title{Regression model of predictors according to STROBE, bi- and multivariable. Printable result.}
 \usage{
 print_pred(meas, adj, data, dec = 2, n.by.adj = FALSE, p.val = FALSE)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/print_log.R
 \name{print_log}
 \alias{print_log}
-\title{Print regression results according to STROBE}
+\title{Print regression results in table}
 \usage{
 print_log(meas, var, adj, data, dec = 2)
 }
@@ -18,6 +18,9 @@ print_log(meas, var, adj, data, dec = 2)
 \item{dec}{decimals for results, standard is set to 2. Mean and sd is dec-1.}
 }
 \description{
-Printable table of logistic regression analysis according to STROBE.
+New function ready for revision
+}
+\details{
+Printable table of logistic regression analysis. Leaves out other variables from results.
 }
 \keyword{logistic}

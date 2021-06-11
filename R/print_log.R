@@ -1,6 +1,8 @@
-#' Print regression results according to STROBE
+#' Print regression results in table
 #'
-#' Printable table of logistic regression analysis according to STROBE.
+#' New function ready for revision
+#'
+#' Printable table of logistic regression analysis. Leaves out other variables from results.
 #' @param meas outcome meassure variable name in data-data.frame as a string. Can be numeric or factor. Result is calculated accordingly.
 #' @param var exposure variable to compare against (active vs placebo). As string.
 #' @param adj variables to adjust for, as string.
@@ -9,11 +11,7 @@
 #' @keywords logistic
 #' @export
 
-<<<<<<< HEAD
 print_log<-function(meas,var,adj,data,dec=2){
-=======
-strobe_log<-function(meas,var,adj,data,dec=2){
->>>>>>> d8ffa3dc7b67e43a846bbd58e055a141a010b304
   ## Ønskeliste:
   ##
   ## - Sum af alle, der indgår (Overall N)

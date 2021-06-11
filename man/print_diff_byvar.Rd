@@ -2,7 +2,7 @@
 % Please edit documentation in R/print_diff_byvar.R
 \name{print_diff_byvar}
 \alias{print_diff_byvar}
-\title{REWRITE UNDERWAY}
+\title{Printable table of three dimensional regression analysis}
 \usage{
 print_diff_byvar(meas, var, group, adj, data, dec = 2)
 }
@@ -20,7 +20,7 @@ print_diff_byvar(meas, var, group, adj, data, dec = 2)
 \item{dec}{decimals for results, standard is set to 2. Mean and sd is dec-1.}
 }
 \description{
-Print regression results according to STROBE
+New function ready for revision
 }
 \details{
 Printable table of three dimensional regression analysis of group vs var for meas. By var. Includes p-values.
@@ -29,6 +29,6 @@ Printable table of three dimensional regression analysis of group vs var for mea
   data('mtcars')
   mtcars$vs<-factor(mtcars$vs)
   mtcars$am<-factor(mtcars$am)
-  strobe_diff_byvar(meas="mpg",var="vs",group = "am",adj=c("disp","wt","hp"),data=mtcars)
+  print_diff_byvar(meas="mpg",var="vs",group = "am",adj=c("disp","wt","hp"),data=mtcars)
 }
-\keyword{strobe}
+\keyword{table}

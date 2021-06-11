@@ -2,7 +2,7 @@
 % Please edit documentation in R/print_olr.R
 \name{print_olr}
 \alias{print_olr}
-\title{Print ordinal logistic regression results according to STROBE}
+\title{Print ordinal logistic regression results in table}
 \usage{
 print_olr(meas, vars, data, dec = 2, n.by.adj = FALSE)
 }
@@ -19,7 +19,7 @@ print_olr(meas, vars, data, dec = 2, n.by.adj = FALSE)
 }
 \description{
 Printable table of ordinal logistic regression with bivariate and multivariate analyses.
-Table according to STROBE. Uses polr() funtion of the MASS-package.
+Uses polr() funtion of the MASS-package. Prints table.
 Formula analysed is the most simple m~v1+v2+vn. The is no significance test. Results are point estimates with 95 percent CI.
 }
 \keyword{olr}

@@ -1,6 +1,6 @@
-#' REWRITE UNDERWAY
+#' Printable table of three dimensional regression analysis
 #'
-#' Print regression results according to STROBE
+#' New function ready for revision
 #'
 #' Printable table of three dimensional regression analysis of group vs var for meas. By var. Includes p-values.
 #' @param meas outcome meassure variable name in data-data.frame as a string. Can be numeric or factor. Result is calculated accordingly.
@@ -9,20 +9,15 @@
 #' @param adj variables to adjust for, as string.
 #' @param data dataframe of data.
 #' @param dec decimals for results, standard is set to 2. Mean and sd is dec-1.
-#' @keywords strobe
+#' @keywords table
 #' @export
 #' @examples
 #'   data('mtcars')
 #'   mtcars$vs<-factor(mtcars$vs)
 #'   mtcars$am<-factor(mtcars$am)
-#'   strobe_diff_byvar(meas="mpg",var="vs",group = "am",adj=c("disp","wt","hp"),data=mtcars)
+#'   print_diff_byvar(meas="mpg",var="vs",group = "am",adj=c("disp","wt","hp"),data=mtcars)
 
-<<<<<<< HEAD
 print_diff_byvar<-function(meas,var,group,adj,data,dec=2){
-=======
-strobe_diff_byvar<-function(meas,var,group,adj,data,dec=2){
->>>>>>> d8ffa3dc7b67e43a846bbd58e055a141a010b304
-
   ## meas: sdmt
   ## var: rtreat
   ## group: genotype
