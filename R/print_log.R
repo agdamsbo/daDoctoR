@@ -1,5 +1,3 @@
-#' OBSOLETE - use 'print_log'
-#'
 #' Print regression results according to STROBE
 #'
 #' Printable table of logistic regression analysis according to STROBE.
@@ -11,7 +9,7 @@
 #' @keywords logistic
 #' @export
 
-strobe_log<-function(meas,var,adj,data,dec=2){
+print_log<-function(meas,var,adj,data,dec=2){
   ## Ønskeliste:
   ##
   ## - Sum af alle, der indgår (Overall N)

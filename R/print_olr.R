@@ -1,5 +1,3 @@
-#' OBSOLETE - use 'print_olr'
-#'
 #' Print ordinal logistic regression results according to STROBE
 #'
 #' Printable table of ordinal logistic regression with bivariate and multivariate analyses.
@@ -13,7 +11,7 @@
 #' @keywords olr
 #' @export
 
-strobe_olr<-function(meas,vars,data,dec=2,n.by.adj=FALSE){
+print_olr<-function(meas,vars,data,dec=2,n.by.adj=FALSE){
 ## For calculation of p-value from t-value see rep_olr()
 
   require(MASS)

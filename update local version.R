@@ -5,7 +5,7 @@
 remove.packages("daDoctoR")
 .rs.restartR()
 
-# setwd("/Users/andreas/")
+setwd("/Users")
 
 devtools::install_github('agdamsbo/daDoctoR')
 

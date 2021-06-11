@@ -1,5 +1,3 @@
-#' OBSOLETE - use 'print_pred'
-#'
 #' Regression model of predictors according to STROBE, bi- and multivariable.
 #'
 #' Printable table of regression model according to STROBE for linear or binary outcome-variables.
@@ -16,7 +14,7 @@
 #' @keywords logistic
 #' @export
 
-strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
+print_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
 
 ## Wish list:
   ## - SPEED, maybe flags to include/exclude time consuming tasks
