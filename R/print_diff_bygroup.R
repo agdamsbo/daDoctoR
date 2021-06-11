@@ -18,7 +18,11 @@
 #'   mtcars$am<-factor(mtcars$am)
 #'   strobe_diff_bygroup(meas="mpg",var="vs",group = "am",adj=c("disp","wt"),data=mtcars)
 
+<<<<<<< HEAD
 print_diff_bygroup<-function(meas,var,group,adj,data,dec=2){
+=======
+strobe_diff_bygroup<-function(meas,var,group,adj,data,dec=2){
+>>>>>>> d8ffa3dc7b67e43a846bbd58e055a141a010b304
 
   ## meas: sdmt
   ## var: rtreat

@@ -11,7 +11,11 @@
 #' @keywords olr
 #' @export
 
+<<<<<<< HEAD
 print_olr<-function(meas,vars,data,dec=2,n.by.adj=FALSE){
+=======
+strobe_olr<-function(meas,vars,data,dec=2,n.by.adj=FALSE){
+>>>>>>> d8ffa3dc7b67e43a846bbd58e055a141a010b304
 ## For calculation of p-value from t-value see rep_olr()
 
   require(MASS)

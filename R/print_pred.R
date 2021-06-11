@@ -14,7 +14,11 @@
 #' @keywords logistic
 #' @export
 
+<<<<<<< HEAD
 print_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
+=======
+strobe_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
+>>>>>>> d8ffa3dc7b67e43a846bbd58e055a141a010b304
 
 ## Wish list:
   ## - SPEED, maybe flags to include/exclude time consuming tasks

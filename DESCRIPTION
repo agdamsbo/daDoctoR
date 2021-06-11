@@ -1,6 +1,10 @@
 Package: daDoctoR
 Title: Functions For Health Research
+<<<<<<< HEAD
 Version: 0.21.7
+=======
+Version: 0.21.5
+>>>>>>> d8ffa3dc7b67e43a846bbd58e055a141a010b304
 Year: 2021
 Author: Andreas Gammelgaard Damsbo <agdamsbo@pm.me>
 Maintainer: Andreas Gammelgaard Damsbo <agdamsbo@pm.me>

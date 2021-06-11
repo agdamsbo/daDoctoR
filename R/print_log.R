@@ -9,7 +9,11 @@
 #' @keywords logistic
 #' @export
 
+<<<<<<< HEAD
 print_log<-function(meas,var,adj,data,dec=2){
+=======
+strobe_log<-function(meas,var,adj,data,dec=2){
+>>>>>>> d8ffa3dc7b67e43a846bbd58e055a141a010b304
   ## Ønskeliste:
   ##
   ## - Sum af alle, der indgår (Overall N)
