@@ -1,5 +1,3 @@
-#' OBSOLETE - use 'print_olr'
-#'
 #' Print ordinal logistic regression results according to STROBE
 #'
 #' Printable table of ordinal logistic regression with bivariate and multivariate analyses.

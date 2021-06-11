@@ -1,4 +1,4 @@
-#' REWRITE UNDERWAY - replaced by 'print_diff_byvar'
+#' REWRITE UNDERWAY
 #'
 #' Print regression results according to STROBE
 #'

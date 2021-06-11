@@ -1,5 +1,3 @@
-#' OBSOLETE - use 'print_log'
-#'
 #' Print regression results according to STROBE
 #'
 #' Printable table of logistic regression analysis according to STROBE.

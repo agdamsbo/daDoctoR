@@ -1,5 +1,3 @@
-#' OBSOLETE - use 'print_pred'
-#'
 #' Regression model of predictors according to STROBE, bi- and multivariable.
 #'
 #' Printable table of regression model according to STROBE for linear or binary outcome-variables.
