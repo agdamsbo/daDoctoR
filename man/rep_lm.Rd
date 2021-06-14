@@ -4,7 +4,15 @@
 \alias{rep_lm}
 \title{A repeated linear regression function}
 \usage{
-rep_lm(meas, vars = NULL, string, ci = FALSE, data, fixed.var = FALSE)
+rep_lm(
+  meas,
+  vars = NULL,
+  string,
+  ci = FALSE,
+  data,
+  fixed.var = FALSE,
+  cut.p = 0.1
+)
 }
 \arguments{
 \item{meas}{Effect meassure. Input as c() of columnnames, use dput().}
@@ -21,6 +29,7 @@ rep_lm(meas, vars = NULL, string, ci = FALSE, data, fixed.var = FALSE)
 }
 \description{
 For bivariate analyses, to determine which variables to include in adjusted model.
+Output is a list with two elements: data frame with test results and vector of variable names (from 'string') to include determined by set cutoff ('cut.p').
 }
 \keyword{linear}
 \keyword{regression}

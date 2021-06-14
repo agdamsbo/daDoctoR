@@ -15,6 +15,7 @@ I have used these functions in different ways in my work on publishing rasearch 
 I'm currently working on improving the code to be more universal
 - Include sample data to use with special functions
 - Include coding examples with all functions
+- Add functionality for variable selection to otger 'rep_' functions, like 'rep_lm'.
 
 ## New functions
 - Test for confounders and/or effect modifiers

@@ -1,6 +1,7 @@
 #' A repeated linear regression function
 #'
 #' For bivariate analyses, to determine which variables to include in adjusted model.
+#' Output is a list with two elements: data frame with test results and vector of variable names (from 'string') to include determined by set cutoff ('cut.p').
 #' @param meas Effect meassure. Input as c() of columnnames, use dput().
 #' @param vars variables in model. Input as c() of columnnames, use dput().
 #' @param string variables to test. Input as c() of columnnames, use dput().
@@ -10,7 +11,7 @@
 #' @keywords linear regression
 #' @export
 
-rep_lm<-function(meas,vars=NULL,string,ci=FALSE,data,fixed.var=FALSE){
+rep_lm<-function(meas,vars=NULL,string,ci=FALSE,data,fixed.var=FALSE,cut.p=0.1){
 
   require(broom)
   y<-data[,c(meas)]
@@ -44,7 +45,7 @@ rep_lm<-function(meas,vars=NULL,string,ci=FALSE,data,fixed.var=FALSE){
         x1<-x[,i]
 
         if (is.factor(x1)){
-          pred<-paste(names(x)[i],levels(x1)[-1],sep = "_")
+          pred<-paste(names(x)[i],levels(x1)[-1],sep = ".")
         }
 
         else {pred<-names(x)[i]}
@@ -68,14 +69,14 @@ rep_lm<-function(meas,vars=NULL,string,ci=FALSE,data,fixed.var=FALSE){
         x1<-x[,i]
 
         if (is.factor(x1)){
-          pred<-paste(names(x)[i],levels(x1)[-1],sep = "_")
+          pred<-paste(names(x)[i],levels(x1)[-1],sep = ".")
         }
         else {pred<-names(x)[i]}
         df<-rbind(df,cbind(pred,b,pv))
       }}
 
     pa<-as.numeric(df[,3])
-    t <- ifelse(pa<=0.1,"include","drop")
+    t <- ifelse(pa<=cut.p,"include","drop")
     pa<-ifelse(pa<0.001,"<0.001",pa)
     pa <- ifelse(pa<=0.05|pa=="<0.001",paste0("*",pa),
                  ifelse(pa>0.05&pa<=0.1,paste0(".",pa),pa))
@@ -112,7 +113,7 @@ rep_lm<-function(meas,vars=NULL,string,ci=FALSE,data,fixed.var=FALSE){
         x1<-x[,i]
 
         if (is.factor(x1)){
-          pred<-paste(names(x)[i],levels(x1)[-1],sep = "_")}
+          pred<-paste(names(x)[i],levels(x1)[-1],sep = ".")}
 
         else {pred<-names(x)[i]}
 
@@ -132,19 +133,25 @@ rep_lm<-function(meas,vars=NULL,string,ci=FALSE,data,fixed.var=FALSE){
         x1<-x[,i]
 
         if (is.factor(x1)){
-          pred<-paste(names(x)[i],levels(x1)[-1],sep = "_")
+          pred<-paste(names(x)[i],levels(x1)[-1],sep = ".")
         }
         else {pred<-names(x)[i]}
         df<-rbind(df,cbind(pred,b,pv))
       }}
 
     pa<-as.numeric(df[,3])
-    t <- ifelse(pa<=0.1,"include","drop")
+    t <- ifelse(pa<=cut.p,"include","drop")
     pa<-ifelse(pa<0.001,"<0.001",pa)
     pa <- ifelse(pa<=0.05|pa=="<0.001",paste0("*",pa),
                  ifelse(pa>0.05&pa<=0.1,paste0(".",pa),pa))
 
     r<-data.frame(df[,1:2],pa,t)[-1,]
   }
-  return(r)
+
+  p<-r$pred[r$t=="include"]
+  s<-c()
+  for (i in 1:length(p)){
+    s<-c(s,unlist(strsplit(p[i], "[.]"))[1])
+  }
+  return(list(tests=r,to_include=unique(s)))
 }
