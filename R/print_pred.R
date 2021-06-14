@@ -21,6 +21,7 @@ print_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
   ## - Include ANOVA in output list, flag to include
 
   require(dplyr)
+  require(broom)
 
   d<-data
   m<-d[,c(meas)]

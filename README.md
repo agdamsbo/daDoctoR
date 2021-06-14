@@ -16,3 +16,6 @@ I'm currently working on improving the code to be more universal
 - Include sample data to use with special functions
 - Include coding examples with all functions
 
+## New functions
+- Test for confounders and/or effect modifiers
+- Test for collinearity
