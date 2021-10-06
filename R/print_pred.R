@@ -16,7 +16,7 @@
 
 print_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
 
-## Wish list:
+  ## Wish list:
   ## - SPEED, maybe flags to include/exclude time consuming tasks
   ## - Include ANOVA in output list, flag to include
 
@@ -88,10 +88,11 @@ print_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
 
     nq<-c()
     nall<-length(!is.na(dat[,1]))
+    nalt<-c()
 
     if (n.by.adj==TRUE){
       dat2<-ma$model
-      # nalt<-nrow(dat2)
+      nalt<-nrow(dat2)
       for (i in 2:ncol(dat2)) {
         if (is.factor(dat2[, i])) {
           vec <- dat2[, i]
@@ -120,6 +121,7 @@ print_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
 
     else {
       dat2<-dat[!is.na(dat[,1]),]
+      nalt<-nall
       for (i in 2:ncol(dat2)) {
         if (is.factor(dat2[, i])) {
           vec <- dat2[, i]
@@ -184,12 +186,12 @@ print_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
     if (p.val==TRUE){
       ref<-data.frame(c(NA,rona),re[,"N"],re[,"N.out"],re[,"or_ci"],re[,"pv"],re[,"aor_ci"],re[,"apv"])
 
-      names(ref)<-c("Variable",paste0("N=",nall),paste0("N, ",meas," is ",levels(m)[2]),"Crude OR (95 % CI)","p-value","Mutually adjusted OR (95 % CI)","A p-value")
+      names(ref)<-c("Variable",paste0("N=",nalt),paste0("N, ",meas," is ",levels(m)[2]),"Crude OR (95 % CI)","p-value","Mutually adjusted OR (95 % CI)","A p-value")
     }
     else{
       ref<-data.frame(c(NA,rona),re[,"N"],re[,"N.out"],re[,"or_ci"],re[,"aor_ci"])
 
-      names(ref)<-c("Variable",paste0("N=",nall),paste0("N, ",meas," is ",levels(m)[2]),"Crude OR (95 % CI)","Mutually adjusted OR (95 % CI)")
+      names(ref)<-c("Variable",paste0("N=",nalt),paste0("N, ",meas," is ",levels(m)[2]),"Crude OR (95 % CI)","Mutually adjusted OR (95 % CI)")
     }
 
     ls<-list(tbl=ref,miss,nall,nrow(d))
@@ -259,10 +261,11 @@ print_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
 
     nq<-c()
     nall<-length(!is.na(dat[,1]))
+    nalt<-c()
 
     if (n.by.adj==TRUE){
       dat2<-ma$model[,-1]
-      # nalt<-nrow(dat2)
+      nalt<-nrow(dat2)
       for (i in 1:ncol(dat2)){
         if (is.factor(dat2[,i])){
           vec<-dat2[,i]
@@ -283,6 +286,7 @@ print_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
 
     else {
       dat2<-dat[!is.na(dat[,1]),][,-1]
+      nalt<-nall
       for (i in 1:ncol(dat2)) {
         if (is.factor(dat2[, i])) {
           vec <- dat2[, i]
@@ -342,12 +346,12 @@ print_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
     if (p.val==TRUE){
       ref<-data.frame(c(NA,rona),re[,2],re[,5],re[,6],re[,3],re[,4])
 
-      names(ref)<-c("Variable",paste0("N=",nall),"Difference (95 % CI)","p-value","Mutually adjusted difference (95 % CI)","A p-value")
+      names(ref)<-c("Variable",paste0("N=",nalt),"Difference (95 % CI)","p-value","Mutually adjusted difference (95 % CI)","A p-value")
     }
     else{
       ref<-data.frame(c(NA,rona),re[,2],re[,5],re[,3])
 
-      names(ref)<-c("Variable",paste0("N=",nall),"Difference (95 % CI)","Mutually adjusted difference (95 % CI)")
+      names(ref)<-c("Variable",paste0("N=",nalt),"Difference (95 % CI)","Mutually adjusted difference (95 % CI)")
     }
 
     ls<-list(tbl=ref,miss,nall,nrow(d),mean_est)
@@ -357,3 +361,4 @@ print_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
 
   return(ls)
 }
+

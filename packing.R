@@ -1,6 +1,5 @@
 library(roxygen2, devtools)
 
-setwd("/Users/au301842/daDoctoR")
 source("updatePackageVersion.R")
 
 updatePackageVersion()
