@@ -4,7 +4,15 @@
 \alias{print_pred_stratum}
 \title{Extension to the print_pred function, for by stratum analysis.}
 \usage{
-print_pred_stratum(meas, adj, strat, data, dec, include.stratum = TRUE)
+print_pred_stratum(
+  meas,
+  adj,
+  strat,
+  data,
+  dec = 2,
+  n.by.adj = FALSE,
+  p.val = FALSE
+)
 }
 \arguments{
 \item{meas}{binary outcome measure variable, column name in data.frame as a string. Can be numeric or factor. Result is calculated accordingly.}

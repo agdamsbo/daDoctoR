@@ -16,15 +16,15 @@
 #'   mtcars$am<-factor(mtcars$am)
 #'   print_pred_stratum(meas="mpg",strat="vs",adj=c("disp","wt","am"),data=mtcars,include.stratum=TRUE)
 
-print_pred_stratum<-function(meas,adj,strat,data,dec,include.stratum=TRUE){
+print_pred_stratum<-function(meas,adj,strat,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
   require(daDoctoR)
   require(dplyr)
 
   if (include.stratum==TRUE){
-    ls<-list(all=print_pred(meas = meas,adj=c(strat,adj),data=data))
+    ls<-list(all=print_pred(meas = meas,adj=c(strat,adj),data=data,dec=dec,n.by.adj=n.by.adj,p.val=p.val))
   }
   if (include.stratum==FALSE) {
-    ls<-list(all=print_pred(meas = meas,adj=adj,data=data))
+    ls<-list(all=print_pred(meas = meas,adj=adj,data=data,dec=dec,n.by.adj=n.by.adj,p.val=p.val))
   }
 
   strt<-data[, c(strat)]
