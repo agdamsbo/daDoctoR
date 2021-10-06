@@ -11,7 +11,8 @@ print_pred_stratum(
   data,
   dec = 2,
   n.by.adj = FALSE,
-  p.val = FALSE
+  p.val = FALSE,
+  include.stratum = T
 )
 }
 \arguments{

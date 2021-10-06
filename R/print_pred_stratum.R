@@ -16,7 +16,7 @@
 #'   mtcars$am<-factor(mtcars$am)
 #'   print_pred_stratum(meas="mpg",strat="vs",adj=c("disp","wt","am"),data=mtcars,include.stratum=TRUE)
 
-print_pred_stratum<-function(meas,adj,strat,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
+print_pred_stratum<-function(meas,adj,strat,data,dec=2,n.by.adj=FALSE,p.val=FALSE,include.stratum = T){
   require(daDoctoR)
   require(dplyr)
 
