@@ -5,12 +5,12 @@
 #' Printable table of two dimensional regression analysis of group vs variable for outcome measure. By group. Includes p-value
 #' Group and variable has to be dichotomous factor.
 #' @param meas outcome measure variable name in data-data.frame as a string. Can be numeric or factor. Result is calculated accordingly.
-#' @param var binary exposure variable to compare against (active vs placebo). As string.
-#' @param group binary group to compare, as string.
+#' @param var binary exposure variable to compare against (active vs placebo). As string. Horisontal.
+#' @param group binary stratum to compare, as string. Vertical.
 #' @param adj variables to adjust for, as string.
 #' @param data dataframe to subset from.
 #' @param dec decimals for results, standard is set to 2. Mean and sd is dec-1. pval has 3 decimals.
-#' @keywords strobe
+#' @keywords print stratum
 #' @export
 #' @examples
 #'   data('mtcars')

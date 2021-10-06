@@ -9,9 +9,9 @@ print_diff_bygroup(meas, var, group, adj, data, dec = 2)
 \arguments{
 \item{meas}{outcome measure variable name in data-data.frame as a string. Can be numeric or factor. Result is calculated accordingly.}
 
-\item{var}{binary exposure variable to compare against (active vs placebo). As string.}
+\item{var}{binary exposure variable to compare against (active vs placebo). As string. Horisontal.}
 
-\item{group}{binary group to compare, as string.}
+\item{group}{binary stratum to compare, as string. Vertical.}
 
 \item{adj}{variables to adjust for, as string.}
 
@@ -32,4 +32,5 @@ Group and variable has to be dichotomous factor.
   mtcars$am<-factor(mtcars$am)
   print_diff_bygroup(meas="mpg",var="vs",group = "am",adj=c("disp","wt"),data=mtcars)
 }
-\keyword{strobe}
+\keyword{print}
+\keyword{stratum}

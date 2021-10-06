@@ -23,4 +23,10 @@ New function ready for revision
 \details{
 Printable table of logistic regression analysis. Leaves out other variables from results.
 }
+\examples{
+  ##Example with with sample data
+  sz=100
+  dta<-data.frame(out=factor(sample(c("yes","no"),sz,replace=TRUE)),variable=factor(sample(c("down","up"),sz,replace=TRUE)),sex=factor(sample(c("male","female"),sz,replace=TRUE,prob=c(0.6,0.4))),age=as.numeric(sample(18:80,sz,replace=TRUE)))
+  print_log(meas="out",var="variable",adj=c("sex","age"),data=dta,dec=2)
+}
 \keyword{logistic}

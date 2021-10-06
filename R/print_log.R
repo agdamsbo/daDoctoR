@@ -10,17 +10,23 @@
 #' @param dec decimals for results, standard is set to 2. Mean and sd is dec-1.
 #' @keywords logistic
 #' @export
+#' @examples
+#'   ##Example with with sample data
+#'   sz=100
+#'   dta<-data.frame(out=factor(sample(c("yes","no"),sz,replace=TRUE)),variable=factor(sample(c("down","up"),sz,replace=TRUE)),sex=factor(sample(c("male","female"),sz,replace=TRUE,prob=c(0.6,0.4))),age=as.numeric(sample(18:80,sz,replace=TRUE)))
+#'   print_log(meas="out",var="variable",adj=c("sex","age"),data=dta,dec=2)
+
 
 print_log<-function(meas,var,adj,data,dec=2){
   ## Ønskeliste:
   ##
-  ## - Sum af alle, der indgår (Overall N)
   ## - Ryd op i kode, der der er overflødig %-regning, alternativt, så fiks at NA'er ikke skal regnes med.
   ##
 
   require(dplyr)
 
   d<-data
+
   m<-d[,c(meas)]
   v<-d[,c(var)]
 
@@ -34,7 +40,7 @@ print_log<-function(meas,var,adj,data,dec=2){
   ma <- glm(m ~ .,family = binomial(), data = dat)
 
   ctable <- coef(summary(mn))
-  pa <- ctable[, 4]
+  pa <- ctable[,4]
   pa<-ifelse(pa<0.001,"<0.001",round(pa,3))
   pa <- ifelse(pa<=0.05|pa=="<0.001",paste0("*",pa),
                ifelse(pa>0.05&pa<=0.1,paste0(".",pa),pa))
@@ -42,8 +48,8 @@ print_log<-function(meas,var,adj,data,dec=2){
 
   co<-round(exp(coef(mn)),dec)[-1]
   ci<-round(exp(confint(mn)),dec)[-1,]
-  lo<-ci[,1]
-  up<-ci[,2]
+  lo<-ci[1]
+  up<-ci[2]
 
   or_ci<-c("REF",paste0(co," (",lo," to ",up,")"))
 
@@ -132,10 +138,8 @@ print_log<-function(meas,var,adj,data,dec=2){
 
   ls$adjusted<-data.frame(rbind(header,coll))
 
-  fnames<-c("Variable","N","OR (95 % CI)","p value")
-
-  names(ls$unadjusted)<-fnames
-  names(ls$adjusted)<-fnames
+  names(ls$unadjusted)<-c("Variable",paste0("N (n=",nrow(mn$model),")"),"OR (95 % CI)","p value")
+  names(ls$adjusted)<-c("Variable",paste0("N (n=",nrow(ma$model),")"),"OR (95 % CI)","p value")
 
   return(ls)
 }
