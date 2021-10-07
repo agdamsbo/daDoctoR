@@ -17,7 +17,7 @@
 print_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
 
   ## Wish list:
-  ## - SPEED, maybe flags to include/exclude time consuming tasks
+  ## - SPEED, maybe flags to include/exclude time consuming tasks ??
   ## - Include ANOVA in output list, flag to include
 
   require(dplyr)
@@ -101,7 +101,7 @@ print_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
             vr <- levels(vec)[r]
             ## Counting all included in analysis
             n <- length(vec[vec == vr & !is.na(vec)])
-            rt <- paste0(n, " (", round(n/nall * 100, 0), "%)")
+            rt <- paste0(n, " (", round(n/nalt * 100, 0), "%)")
             ## Counting all included in analysis with outcome
             lvl<-levels(dat2[,1])[2]
             no <- length(vec[vec == vr & dat2[,1]==lvl & !is.na(vec)])
@@ -113,7 +113,7 @@ print_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
         if (!is.factor(dat2[, i])) {
           num <- dat2[, i]
           n <- length(num[!is.na(num)])
-          rt <- paste0(n, " (", round(n/nall * 100, 0), "%)")
+          rt <- paste0(n, " (", round(n/nalt * 100, 0), "%)")
           nq <- rbind(nq, cbind(names(dat2)[i], rt,ro="-"))
         }
       }
@@ -130,7 +130,7 @@ print_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
             vr <- levels(vec)[r]
             ## Counting all included in analysis
             n <- length(vec[vec == vr & !is.na(vec)])
-            rt <- paste0(n, " (", round(n/nall * 100, 0), "%)")
+            rt <- paste0(n, " (", round(n/nalt * 100, 0), "%)")
             ## Counting all included in analysis with outcome
             lvl<-levels(dat2[,1])[2]
             no <- length(vec[vec == vr & dat2[,1]==lvl & !is.na(vec)])
@@ -142,7 +142,7 @@ print_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
         if (!is.factor(dat2[, i])) {
           num <- dat2[, i]
           n <- length(num[!is.na(num)])
-          rt <- paste0(n, " (", round(n/nall * 100, 0), "%)")
+          rt <- paste0(n, " (", round(n/nalt * 100, 0), "%)")
           nq <- rbind(nq, cbind(names(dat2)[i], rt,ro="-"))
         }
       }
@@ -273,13 +273,13 @@ print_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
           for (r in 1:length(levels(vec))){
             vr<-levels(vec)[r]
             n<-length(vec[vec==vr&!is.na(vec)])
-            rt<-paste0(n," (",round(n/nall*100,0),"%)")
+            rt<-paste0(n," (",round(n/nalt*100,0),"%)")
             nq<-rbind(nq,cbind(paste0(ns,levels(vec)[r]),rt))
           }}
         if (!is.factor(dat2[,i])){
           num<-dat2[,i]
           n<-as.numeric(length(num[!is.na(num)]))
-          rt<-paste0(n," (",round(n/nall*100,0),"%)")
+          rt<-paste0(n," (",round(n/nalt*100,0),"%)")
           nq<-rbind(nq,cbind(names(dat2)[i],rt))
         }}
     }
@@ -294,14 +294,14 @@ print_pred<-function(meas,adj,data,dec=2,n.by.adj=FALSE,p.val=FALSE){
           for (r in 1:length(levels(vec))) {
             vr <- levels(vec)[r]
             n <- length(vec[vec == vr & !is.na(vec)])
-            rt <- paste0(n, " (", round(n/nall * 100, 0), "%)")
+            rt <- paste0(n, " (", round(n/nalt * 100, 0), "%)")
             nq <- rbind(nq, cbind(paste0(ns, levels(vec)[r]), rt))
           }
         }
         if (!is.factor(dat2[, i])) {
           num <- dat2[, i]
           n <- length(num[!is.na(num)])
-          rt <- paste0(n, " (", round(n/nall * 100, 0), "%)")
+          rt <- paste0(n, " (", round(n/nalt * 100, 0), "%)")
           nq <- rbind(nq, cbind(names(dat2)[i], rt))
         }
       }
