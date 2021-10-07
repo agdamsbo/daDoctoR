@@ -30,7 +30,7 @@ print_pred_stratum<-function(meas,adj,strat,data,dec=2,n.by.adj=FALSE,p.val=FALS
   strt<-data[, c(strat)]
   for (i in 1:length(levels(factor(strt)))){
     d_str<-data[data[[strat]]==levels(data[[strat]])[i], c(meas,adj)]
-    ls_str<-list(print_pred(meas = meas,adj=adj,data=d_str))
+    ls_str<-list(print_pred(meas = meas,adj=adj,data=d_str,dec=dec,n.by.adj=n.by.adj,p.val=p.val))
     names(ls_str)<-levels(factor(strt))[i]
     ls<-append(ls,ls_str)
   }
