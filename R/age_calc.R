@@ -9,7 +9,7 @@
 #' @export
 #' @examples
 #'   ##Kim Larsen (cpr is known from album)
-#'   dob<-dob_extract_cpr("231045-0637")
+#'   dob<-daDoctoR::dob_extract_cpr("231045-0637")
 #'   date<-as.Date("2018-09-30")
 #'   trunc(age_calc(dob,date))
 
@@ -19,9 +19,15 @@ age_calc<-function (dob, enddate = Sys.Date(), units = "years", precise = TRUE)
   if (!inherits(dob, "Date") | !inherits(enddate, "Date")) {
     stop("Both dob and enddate must be Date class objects")
   }
-  if (enddate < dob) {
+
+  if (length(dob)==1 && enddate < dob) {
     stop("End date must be a date after date of birth")
   }
+
+  if (length(dob)>1 && any(enddate < dob)) {
+    stop("End date must be a date after date of birth")
+  }
+
   start <- as.POSIXlt(dob)
   end <- as.POSIXlt(enddate)
   if (precise) {
@@ -74,6 +80,7 @@ age_calc<-function (dob, enddate = Sys.Date(), units = "years", precise = TRUE)
       result <- years
     }
   }
+
   else {
     stop("Unrecognized units. Please choose years, months, or days.")
   }

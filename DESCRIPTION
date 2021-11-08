@@ -1,6 +1,6 @@
 Package: daDoctoR
 Title: Functions For Health Research
-Version: 0.21.16
+Version: 0.21.17
 Year: 2021
 Author: Andreas Gammelgaard Damsbo <agdamsbo@pm.me>
 Maintainer: Andreas Gammelgaard Damsbo <agdamsbo@pm.me>
@@ -10,4 +10,4 @@ Suggest: shiny
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
