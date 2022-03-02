@@ -16,6 +16,7 @@
 age_calc<-function (dob, enddate = Sys.Date(), units = "years", precise = TRUE)
 ## Build upon the work of Jason P. Becker, as part of the eeptools
   {
+
   if (!inherits(dob, "Date") | !inherits(enddate, "Date")) {
     stop("Both dob and enddate must be Date class objects")
   }
