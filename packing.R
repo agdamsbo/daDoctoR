@@ -12,7 +12,7 @@ devtools::document()
 
 
 # Commit and push
-commit_message<-"age_calc update to handle vector of enddates"
+commit_message<-"updated age_calc to also support cpr format ddmmyyxxxx"
 
 library(git2r)
 library(lubridate)
