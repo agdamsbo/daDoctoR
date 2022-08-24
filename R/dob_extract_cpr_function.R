@@ -16,7 +16,7 @@ dob_extract_cpr<-function(cpr)
 ## cpr <- "2310450637"
   {
 
-  if (substr(cpr,7,7)=="-"){ # test if input is ddmmyy-xxxx, standard format
+  if (any(substr(cpr,7,7)=="-")){ # test if input is ddmmyy-xxxx, standard format
     message("Input er i formatet ddmmyy-xxxx")
     cpr_std<-TRUE
     }

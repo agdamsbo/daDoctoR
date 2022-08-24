@@ -1,5 +1,7 @@
 library(roxygen2, devtools)
 
+setwd("/Users/au301842/daDoctoR/")
+
 source("updatePackageVersion.R")
 
 updatePackageVersion()
@@ -12,7 +14,7 @@ devtools::document()
 
 
 # Commit and push
-commit_message<-"updated age_calc to also support cpr format ddmmyyxxxx"
+commit_message<-"updated dob_extract_cpr to also support cpr format ddmmyyxxxx"
 
 library(git2r)
 library(lubridate)
