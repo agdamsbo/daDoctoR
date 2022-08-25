@@ -1,3 +1,5 @@
+rm(list = ls(pos=-1))
+
 library(roxygen2, devtools)
 
 setwd("/Users/au301842/daDoctoR/")
