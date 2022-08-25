@@ -4,10 +4,10 @@
 \alias{cpr_check}
 \title{CPR check}
 \usage{
-cpr_check(x)
+cpr_check(cpr)
 }
 \arguments{
-\item{x}{cpr as "ddmmyy-xxxx".}
+\item{cpr}{cpr-numbers as ddmmyy[-.]xxxx or ddmmyyxxxx. Also mixed formatting.}
 }
 \description{
 Checking validity of cpr number

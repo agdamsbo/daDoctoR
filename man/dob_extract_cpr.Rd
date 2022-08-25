@@ -7,7 +7,7 @@
 dob_extract_cpr(cpr)
 }
 \arguments{
-\item{cpr}{cpr-numbers in format ddmmyy-xxxx.}
+\item{cpr}{cpr-numbers as ddmmyy[-.]xxxx or ddmmyyxxxx. Also mixed formatting.}
 }
 \description{
 For easy calculation.
