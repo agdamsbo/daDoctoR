@@ -21,8 +21,8 @@ quantile_cut<-function (x, groups,y=NULL, na.rm = TRUE, group.names = NULL, orde
   if (!is.null(y)){
     q<-quantile(y, probs = seq(0, 1, 1/groups), na.rm = na.rm, names = TRUE, type = 7)
     if (inc.outs){ # Setting cut boardes to include outliers in x compared to y.
-      q[1]<-min(x)
-      q[length(q)]<-max(x)
+      q[1]<-min(x,na.rm = TRUE)
+      q[length(q)]<-max(x,na.rm = TRUE)
     }
   }
   if (is.null(y)){

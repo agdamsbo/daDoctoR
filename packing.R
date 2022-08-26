@@ -16,7 +16,7 @@ devtools::document()
 
 
 # Commit and push
-commit_message<-"updated quantile_cut to add flags for including outliers when y!=NULL and flag to give result as detailed list (previous standard)"
+commit_message<-"updated quantile_cut adds na.rm=TRUE to min() and max()"
 
 library(git2r)
 library(lubridate)
