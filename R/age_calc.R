@@ -15,6 +15,7 @@
 
 age_calc<-function (dob, enddate = Sys.Date(), units = "years", precise = TRUE)
 ## Build upon the work of Jason P. Becker, as part of the eeptools
+## Alternative is to just use lubridate::time_length
   {
 
   if (!inherits(dob, "Date") | !inherits(enddate, "Date")) {
@@ -31,6 +32,7 @@ age_calc<-function (dob, enddate = Sys.Date(), units = "years", precise = TRUE)
 
   start <- as.POSIXlt(dob)
   end <- as.POSIXlt(enddate)
+
   if (precise) {
     start_is_leap <- ifelse(start$year%%400 == 0, TRUE, ifelse(start$year%%100 ==
                                                                  0, FALSE, ifelse(start$year%%4 == 0, TRUE, FALSE)))

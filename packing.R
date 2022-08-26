@@ -16,7 +16,7 @@ devtools::document()
 
 
 # Commit and push
-commit_message<-"updated dob_extract_cpr to also support cpr format ddmmyyxxxx"
+commit_message<-"updated quantile_cut to add flags for including outliers when y!=NULL and flag to give result as detailed list (previous standard)"
 
 library(git2r)
 library(lubridate)

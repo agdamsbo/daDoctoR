@@ -10,7 +10,9 @@ quantile_cut(
   y = NULL,
   na.rm = TRUE,
   group.names = NULL,
-  ordered.f = FALSE
+  ordered.f = FALSE,
+  inc.outs = FALSE,
+  detail.lst = TRUE
 )
 }
 \arguments{
@@ -25,12 +27,16 @@ quantile_cut(
 \item{group.names}{Names of groups to split to. Default is NULL, giving intervals as names.}
 
 \item{ordered.f}{Set resulting vector as ordered. Default is FALSE.}
+
+\item{inc.outs}{Flag to include min(x) and max(x) as boarders in case of y!=NULL.}
 }
 \description{
 Using base/stats functions cut() and quantile().
 }
 \examples{
 aa <- as.numeric(sample(1:1000,2000,replace = TRUE))
+x <- 1:450
+y <- 6:750
 summary(quantile_cut(aa,groups=4)) ## Cuts quartiles
 }
 \keyword{quantile}
